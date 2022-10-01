@@ -1,0 +1,123 @@
+<div class="sec-wrapper sec-padding pt-0" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+   [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+   <div class="top-row py-4">
+      <div class="container container-large">
+         <div class="row align-items-center search-row px-4">
+            <div class="col-lg-8">
+
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="container container-large">
+      <div class="row">
+         <div class="col-lg-12 col-md-12">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+               <h3 class="inner-sec-title my-3" *ngIf="!collectionStatus">
+                  <span *ngIf="dealsProduct?.product_variants.length>0">
+                     {{dealsProduct.deal_name | titlecase}} ({{dealsProduct?.product_variants.length}} Products found)
+                  </span>
+               </h3>
+               <h3 class="inner-sec-title my-3" *ngIf="collectionStatus">
+                  <span *ngIf="collectionList.length>0">
+                     Collection ({{collectionList.length}} Collection found)
+                  </span>
+               </h3>
+
+               <div class="d-flex flex-wrap align-items-center" *ngIf="!collectionStatus">
+                  <mat-form-field appearance="fill" class="pt-3">
+                     <mat-label>Sort by specific order</mat-label>
+                     <mat-select [value]="recordsSortBy" (selectionChange)="sortBySelectionChange($event)">
+                        <mat-option value="hstock">Ready Stock - High to Low</mat-option>
+                        <mat-option value="recent">Recent First</mat-option>
+                        <mat-option value="hl">Price - High to Low</mat-option>
+                        <mat-option value="lh">Price - Low to High</mat-option>
+                     </mat-select>
+                  </mat-form-field>
+               </div>
+            </div>
+            <div class="content bg-white py-4 px-4 rounded-0">
+               <div class="text-center " style="color: #F16A2A;" *ngIf="loader">
+                  <div class="spinner-border" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+               <ng-container *ngIf="!loader">
+                  <div class="category-list" *ngIf="!collectionStatus else collection;">
+                     <div class="category-list-detail" *ngFor="let dealsProductList of dealsProduct?.product_variants">
+
+                        <div class="product-category-info product-category-info-search">
+                           <span class="product-thumb-img">
+                              <a style="cursor: pointer;" (click)="productDetailDealsRoute(dealsProductList?.deal_product.deal_id, dealsProductList?.master_product.id, 
+                           dealsProductList.id)">
+                                 <img src="{{dealsProductList.image}}" alt="Product">
+                              </a>
+                           </span>
+                           <div class="category-info-txt">
+                              <!--<h5><a class="text-dark-2 f-15 f-w-600">{{dealsProductList?.master_product.product_name}}</a></h5>
+                           <p><a class="text-dark-2 f-15">{{dealsProductList.variant_name}}</a></p>-->
+                              <h5>
+                                 <a style="cursor: pointer;" (click)="productDetailDealsRoute(dealsProductList?.deal_product.deal_id, dealsProductList?.master_product.id, 
+                              dealsProductList.id)" class="text-dark-2 f-15 f-w-600">
+                                    {{dealsProductList.variant_name}}
+                                 </a>
+                              </h5>
+                              <div *ngIf="dealsProductList.max_retail_price">
+                                <del *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'"> MRP: Rs. {{dealsProductList.max_retail_price | number}} </del>
+                              </div>
+                              <p *ngIf="dealsProductList.ready_stock > 0">
+                                 Ready Stock:
+                                 <span>{{dealsProductList.ready_stock}}</span>
+                              </p>
+                              <p *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'" class="price-label">
+                                 Offer Price: <span>Rs. {{dealsProductList.base_price |
+                                    number}}/-</span>
+                              </p>
+                              
+                              <!--- <p class="price-label price-label-small" *ngIf="dealsProductList.hsn_code">
+                              HSN Code: <span>{{dealsProductList.hsn_code}}</span>
+                           </p>-->
+                    
+                              <!-- <button class="btn btn-red iot-btn-primary view-detail-btn btn-sm"
+                                 *ngIf="this.kycdata && this.gstno && this.gststatus == 'pending'">
+                                 Your Request is Under process
+                              </button> -->
+
+                              <!-- <h2>Rs. {{dealsProductList.max_retail_price | number}}</h2> -->
+
+                              <!-- <button class="btn btn-red iot-btn-primary view-detail-btn btn-sm"
+                                 *ngIf="!this.kycdata || (!this.gstno  && this.gststatus =='pending')"
+                                 (click)="openDialogs()">Unlock Exclusive Price</button> -->
+
+                              <!---  <p class="d-flex align-items-center mt-3 ships-title">
+                              <strong>Dispatch in {{dealsProductList.live_stock_dishpatch_time}} Days</strong>
+                              <span class="material-icons ml-3">
+                                 local_shipping
+                              </span>
+                           </p>
+                        -->
+                     </div>
+                        </div>
+                         <a href="javscript:(void)" (click)="productDetailDealsRoute(dealsProductList?.deal_product.deal_id, dealsProductList?.master_product.id, 
+                        dealsProductList.id)" class="btn btn-red iot-btn-primary view-detail-btn">View Detail</a>
+                     </div>
+                  </div>
+               </ng-container>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<ng-template #collection>
+   <div class="category-list">
+      <div class="row mx-0">
+         <div class="col-lg-4 col-md-6 col-12 my-3" *ngFor="let dealsProductList of collectionList">
+            <mat-card class="example-card" style="cursor: pointer;background-color:#eee;"
+               (click)="Filter(dealsProductList)">
+               <img mat-card-image [src]="dealsProductList.cover_image" alt="collection" class="collectioncard">
+            </mat-card>
+         </div>
+      </div>
+   </div>
+</ng-template>

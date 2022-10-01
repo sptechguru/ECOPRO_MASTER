@@ -1,0 +1,39 @@
+.sec-banner {
+    background-image: url(assets/images/banner-img.jpg);
+    min-height: 200px;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sec-banner h2{
+    color: #fff;
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
+}
+
+.error{
+    color:red;
+    font-size:12px;
+}
+.contact-list li {
+    display: flex;
+    margin: 20px 0;
+    padding: 15px 0;
+}
+span.contact-icon {
+    margin-right: 22px;
+    width: 40px;
+    height: 40px;
+    background: #c40000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    overflow: hidden;
+}
+span.contact-list-txt {
+    flex: 1;
+}

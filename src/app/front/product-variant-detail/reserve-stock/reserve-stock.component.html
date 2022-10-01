@@ -1,0 +1,62 @@
+<div class="modal-body stock-modal">
+    <button class="close" matDialogClose> 
+        <span class="material-icons">
+            close
+        </span>
+    </button>
+    <div class="container-contact2">
+        <h3 class="text-center mt-0 mb-4">Stock Information</h3>
+        <table class="table livestock-table">
+            <thead>
+                <tr>
+                    <th>Stock Category</th>
+                    <th>Total Qty</th>
+                    <th>Minimum Order Qty</th>
+                    <th>Dispatch Time (In Days)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-left">
+                        Ready Stock
+                    </td>
+                    <td class="text-center">
+                        {{quantity}}
+                    </td>
+                    <td class="text-center">
+                        {{minimum_order_quantity}}
+                    </td>
+                    <td class="text-center">
+                        {{live_stock_dishpatch_time}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left">
+                        Made To Order Stock
+                    </td>
+                    <td class="text-center">
+                        {{reserve_stock}}
+                    </td>
+                    <td class="text-center">
+                        {{minimum_quantity_of_reserve_stock}}
+                    </td>
+                    <td class="text-center">
+                        {{delivery_time_in_days}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--<mat-divider></mat-divider>-->
+        <div class="my-3">
+            <strong>
+                Disclaimer: 
+            </strong>
+                Above information is correct as per our knowledge provided by our vendors. 
+                    However the actual timelines and quantity may vary basis factors beyond our control. 
+                    We would request you to get in touch with our executive to cross verify the numbers 
+                    before placing the order.
+        </div>
+       
+      
+    </div>
+</div>

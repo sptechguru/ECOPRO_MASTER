@@ -1,0 +1,191 @@
+<header id="header-main" class="header">
+  <nav class="navbar navbar-expand-lg fixed-top cstm-navbar mb-0 p-10">
+    <div class="container container-large">
+      <a *ngIf="!localStorage.islogin" class="navbar-brand logo-wrap" href [routerLink]="['/home']">
+        <img src="assets/images/ek-matra-logo.png" style="cursor: pointer;" class="img-fluid" alt="Ek Matra Logo">
+      </a>
+      <a *ngIf="localStorage.islogin && BusinessKyc === 'yes' && billing" class="navbar-brand logo-wrap" href
+        [routerLink]="['/prefered-products']">
+        <img src="assets/images/ek-matra-logo.png" style="cursor: pointer;" class="img-fluid" alt="Ek Matra Logo">
+      </a>
+      <a *ngIf="localStorage.islogin && (BusinessKyc != 'yes' || !billing)" class="navbar-brand logo-wrap">
+        <img src="assets/images/ek-matra-logo.png" style="cursor: pointer;" [routerLink]="['/prefered-products']" class="img-fluid" alt="Ek Matra Logo">
+      </a>
+      <div class="d-flex flex-grow-1 align-items-center justify-content-md-end justify-content-center flex-wrap"
+        id="navbarCollapse">
+        <form class="search-form" #searchForm="ngForm" novalidate>
+          <div class="form-group header-search-filed m-0 p-0" *ngIf="localStorage.islogin">
+            <label class="search-label d-block mb-0">
+              <mat-form-field appearance="outline" class="header-mat-search">
+                <span class="search-icon">
+                  <a>
+                    <span class="icon-search"></span>
+                  </a>
+                </span>
+                <mat-label>Search Product</mat-label>
+                <input type="text" placeholder="Search product" aria-label="Number" #searchInput matInput
+                  [formControl]="myControl" #trigger="matAutocompleteTrigger" [matAutocomplete]="auto"
+                  class="searchfield" (focus)="onFocusEvent()" (keydown.enter)="save($event)">
+                <button mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="this.search">
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option disabled class="loading" *ngIf="loader">
+                    <mat-spinner diameter="35" style="margin-left:40%" [color]="color"></mat-spinner>
+                  </mat-option>
+
+                  <ng-container *ngIf="!not_found">
+                    <mat-option *ngFor="let option of options" (click)="getProductDetail($event, option)"
+                      [value]="option.variant_name">
+                      {{option.variant_name}}
+                    </mat-option>
+                  </ng-container>
+
+               <ng-container *ngIf="not_found">
+                    <mat-option>
+                      No product found
+                    </mat-option>
+                  </ng-container>
+                  </mat-autocomplete>
+              </mat-form-field>
+              <!--<input #searchInput type="text" class="form-control" [placeholder]="this.placeholderText"
+                      (change)="trimSearchData($event)" (keyup)="handleQuerying($event, searchInput.value)">-->
+            </label>
+          </div>
+          <!-- advance-search -->
+          <div class="search-options" *ngIf="searchFilters">
+            <div class="row align-items-center">
+
+              <div class="col-lg-4 mb-4">
+                <h5>Categories</h5>
+                <mat-form-field appearance="outline">
+                  <mat-label>Categories</mat-label>
+                  <mat-select [(ngModel)]="category" [ngModelOptions]="{standalone: true}" 
+                  disableOptionCentering="true" 
+                  (selectionChange)="selectCategories($event.value)" multiple>
+                    <mat-option *ngFor="let categoriesList of categories" 
+                    [value]="categoriesList.id">
+                      {{categoriesList.product_category}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!--<div class="col-lg-3 mb-3">
+                <h5>Brands</h5>
+                <mat-form-field appearance="outline">
+                  <mat-label>Brands</mat-label>
+                  <mat-select [formControl]="toppings" disableOptionCentering="true" multiple>
+                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>-->
+
+              <div class="col-lg-4 mb-4">
+                <h5>Price (INR)</h5>
+                <mat-form-field appearance="outline">
+                  <mat-label>Price (INR)</mat-label>
+                  <mat-select [(ngModel)]="price" [ngModelOptions]="{standalone: true}" 
+                  disableOptionCentering="true"
+                  (selectionChange)="selectPrice($event.value)">
+                    <mat-option *ngFor="let price of priceLists" [value]="price.value">
+                      {{price.label}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-4 mb-4">
+                <h5>Stock</h5>
+                <mat-form-field appearance="outline">
+                  <mat-label>Stock</mat-label>
+                  <mat-select [(ngModel)]="stock" [ngModelOptions]="{standalone: true}"  
+                  disableOptionCentering="true"
+                  (selectionChange)="selectStock($event.value)">
+                    <mat-option *ngFor="let stock of stockLists" [value]="stock.value" 
+                    style="color:#c40000;">
+                      {{stock.label}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+              <!--<div class="col-lg-3 mb-3">
+                <h5>Delivery</h5>
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="delivery" [ngModelOptions]="{standalone: true}" 
+                (selectionChange)="handleChange($event.value)">
+                  <mat-radio-button value="1" class="mr-2">Fast Delivery</mat-radio-button>
+                  <mat-radio-button value="2" class="mr-2">Express Delivery</mat-radio-button>
+                </mat-radio-group>
+              </div>-->
+              
+              <div class="col-lg-12 mb-3 d-flex align-items-center flex-wrap">
+                <button mat-raised-button type="button" class="btn btn-bg-red iot-btn-danger mr-2" (click)="searchData()">Search</button>
+                <button mat-raised-button type="button" class="btn iot-btn-danger mr-2" (click)="clearData()">Clear</button>
+                <button mat-raised-button type="button" class="btn iot-btn-danger text-right" 
+                (click)="closeModel()">Cancel</button>
+              </div>
+
+            </div>
+          </div>
+          <!-- advance-search -->
+        </form>
+        
+        <div class="sign-up-colum d-flex align-items-center">
+          <ul  *ngIf="!localStorage.islogin" class="list-unstyled d-flex align-items-center mb-0 nav-links-1">
+              <li>
+                  <a [routerLink]="['/about-us']">About us</a>
+              </li>
+              <li>
+                  <a [routerLink]="['/contact-us']">Contact us</a>
+              </li>
+          </ul>
+          <ul *ngIf="!localStorage.islogin" class="sign-list list-unstyled d-flex align-items-center mb-0">
+            <li> <span class="icon-User"></span> </li>
+            <li><a href="javascript:(void)" (click)="showLogin()"> Login </a> </li>
+            <!-- <li>/</li> -->
+            <li> <a href="javascript:(void)" (click)="showSignup()"> Register </a> </li>
+          </ul>
+          
+          <!-- <button mat-raised-button class="advance-search-btn" (click)="lookingFor()"
+          *ngIf="localStorage.islogin && BusinessKyc === 'yes' && billing">
+            <span class="icon-product-1 advance-icon"></span>
+            Make Your Catalogue
+          </button> -->
+
+          <button mat-raised-button class="advance-search-btn" (click)="lookingFor()"
+          *ngIf="localStorage.islogin">
+            <span class="icon-product-1 advance-icon"></span>
+            Make Your Catalogue
+          </button>
+          
+          <div *ngIf="localStorage.islogin" class="menu-btn flex">
+            <!-- setBilling -->
+            <a *ngIf="BusinessKyc === 'yes' " href="javascript:(void)" class="p1 has-badge" data-count="4"
+              (click)="cart()">
+              <span class="material-icons" data-count="4b">
+                shopping_cart
+                <span *ngIf="cartItem>0" class="added-item-no">{{cartItem}}</span>
+              </span>
+              <span class="cart-text">Cart</span>
+            </a>
+
+            <!--<a *ngIf="BusinessKyc != 'yes' || !billing" href="javascript:(void)" class="p1 has-badge" data-count="4"
+              (click)="emptyCart()">
+              <span class="material-icons" data-count="4b">
+                shopping_cart
+              </span>
+              <span class="cart-text">Cart</span>
+            </a>-->
+          </div>
+
+          <div *ngIf="localStorage.islogin" class="menu-btn">
+            <button type="button" class="ham-menu" mat-button (click)="sideNavbar.toggle();">
+              <span class="icon-hamburger-menu"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

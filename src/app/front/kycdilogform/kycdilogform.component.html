@@ -1,0 +1,269 @@
+
+<div class="row h-100 m-0">
+	
+	<div class="col-lg-4 p-0">
+		<div class="signup-left-col">
+			<!-- <h3>Let's bring your retail business with</h3> -->
+
+		<h2 style="color:black;" >Welcome<br />
+				To
+				
+				<!-- <img src="assets/images/ek-matra-logo.png" alt="Ekmatra Logo" class="img-fluid"> -->
+			</h2>
+			<b><h1 style="letter-spacing: 1px; font-weight: bold; font-size: 40px!important;text-align: center;font-style: italic;"> EK MATRA</h1></b>
+
+			<!-- <p>India's No.1 B2B Reseller platform</p> -->
+			<!-- <h1>Making Business Happier</h1> -->
+			<ul class="list-unstyled sign-up-list mt-4 mb-0">
+				<li>
+					<span class="material-icons">
+						task_alt
+					</span>Handpicked Gifting Products.
+				</li>
+				<li>
+					<span class="material-icons">
+						task_alt
+					</span>1 Min Customizable Catalogue.
+				</li>
+				<li>
+					<span class="material-icons">
+						task_alt
+					</span>Live Stock Check.
+				</li>
+				<li>
+					<span class="material-icons">
+						task_alt
+					</span>Get Sample Before Buying.
+				</li>
+				<li>
+					<span class="material-icons">
+						task_alt
+					</span>Doorstep Delivery.
+				</li>
+				<!-- <li>
+					<span class="material-icons">
+						task_alt
+					</span>Buy Samples at the Bulk Price.
+				</li>
+				<li>
+					<span class="material-icons">
+						task_alt
+					</span>Dedicated Account Manager.
+				</li> -->
+			</ul>
+		</div>
+
+	</div>
+	<div class="col-lg-8 align-self-center p-0">
+		<div id="signup_wrap" class="signup-wrap h-100 p-4">
+         <form [formGroup]="addressForm" (ngSubmit)="handleSubmit()" class="billing-address-form " novalidate>
+            <h5 class="pl-3 pt-4">Purpose?</h5>
+            <div class="form-check pl-3">
+               <!-- <mat-radio-button value="A"  formControlName='user_group' > I am buying for Reselling and Trading purpose</mat-radio-button> <br />
+               <mat-radio-group>
+                  <mat-radio-button value="B" formControlName='user_group'> I am buying for my own company</mat-radio-button>
+               </mat-radio-group> -->
+               <mat-radio-group aria-label="Select an option" formControlName='user_group'>                    
+                  <mat-radio-button value="A" >I am buying for Reselling and Trading purpose</mat-radio-button>
+                  <mat-radio-button value="B" >I am buying for my own company</mat-radio-button>
+                </mat-radio-group>
+            </div> 
+            <hr style="border: 1px solid #ccc;" />
+            <div class="col-md-12 ">
+                        <h4>Enter Business Details</h4>
+                  <div class="row">
+
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="outline" class="mb-4">
+                           <mat-label>GST No. <span style="color:red">*</span></mat-label>
+                           <input matInput type='text' formControlName='gst_no' maxlength="15">
+                           <mat-error
+                              *ngIf="addressForm.get('gst_no').touched && addressForm.get('gst_no').errors?.required">
+                              Please enter GST Number
+                           </mat-error>
+                           <!-- <mat-error
+                              *ngIf="addressForm.get('gst_no').touched && addressForm.get('gst_no').errors?.pattern">
+                              Please enter valid GST Number
+                           </mat-error> -->
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="outline" class="mb-4">
+                           <mat-label>Business Name (as per GST) <span style="color:red">*</span></mat-label>
+                           <input matInput formControlName="business_name">
+                           <mat-error
+                              *ngIf="addressForm.get('business_name').touched && addressForm.get('business_name').errors?.required">
+                              Please enter Business Name
+                           </mat-error>
+                           <mat-error
+                              *ngIf="addressForm.get('business_name').touched && addressForm.get('business_name').errors?.pattern">
+                              Please enter valid Business Name
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-12 col-lg-12 ">
+                        <mat-form-field appearance="outline" class="mb-4">
+                           <mat-label>Person Name <span style="color:red">*</span></mat-label>
+                           <input matInput formControlName="person_name">
+                           <mat-error
+                              *ngIf="addressForm.get('person_name').touched && addressForm.get('person_name').errors?.required">
+                              Please enter Person Name
+                           </mat-error>
+                           <mat-error
+                              *ngIf="addressForm.get('person_name').touched && addressForm.get('person_name').errors?.pattern">
+                              Please enter valid Person Name
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                  </div>
+
+                  <h4 class="mb-3">Enter Billing Address </h4>
+                  <div class="row mb-4">
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="outline" class="mb-4">
+                           <mat-label>Pin code <span style="color:red">*</span></mat-label>
+                           <input matInput type="text" minlength="5" maxlength="6" formControlName="pincode">
+                           <mat-error
+                              *ngIf="addressForm.get('pincode').touched && addressForm.get('pincode').errors?.required">
+                              Please enter Pin Code
+                           </mat-error>
+
+                           <mat-error *ngIf="addressForm.controls['pincode'].errors?.pattern">
+                              Please enter 6 digit Pin Code
+                           </mat-error>
+                           <mat-error *ngIf="addressForm.controls['pincode'].invalid 
+                           && (addressForm.controls['pincode'].dirty 
+                           || addressForm.controls['pincode'].touched)" class="error">
+                           </mat-error>
+
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-12 col-lg-12 ">
+                        <mat-form-field appearance="outline" class="mb-4">
+                           <mat-label>Address <span style="color:red">*</span></mat-label>
+                           <input matInput formControlName="address1">
+                           <mat-error
+                              *ngIf="addressForm.get('address1').touched && addressForm.get('address1').errors?.required">
+                              Please enter Address
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="outline" class="mb-4">
+                           <mat-label>State <span style="color:red">*</span></mat-label>
+                           <mat-select formControlName="state" placeholder="State" readonly
+                              (selectionChange)="stateChange($event)" #singleSelect>
+                              <mat-option appearance="outline">
+                                 <ngx-mat-select-search [formControl]="stateFilterCtrl" readonly
+                                    placeholderLabel="Select State" noEntriesFoundLabel="No matching state found">
+                                 </ngx-mat-select-search>
+                              </mat-option>
+                              <mat-option *ngFor="let state of filteredStates | async" value="{{state.id}}">
+                                 {{state.state}}
+                              </mat-option>
+                           </mat-select>
+                           <mat-error
+                              *ngIf="addressForm.get('state').touched && addressForm.get('state').errors?.required">
+                              Please select State
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="outline" class="mb-4">
+                           <mat-label>City <span style="color:red">*</span></mat-label>
+                           <mat-select formControlName="city" placeholder="City" readonly #singleSelect>
+                              <mat-option appearance="outline">
+                                 <ngx-mat-select-search [formControl]="cityFilterCtrl" readonly
+                                    placeholderLabel="Select City" noEntriesFoundLabel="No matching city found">
+                                 </ngx-mat-select-search>
+                              </mat-option>
+                              <mat-option *ngFor="let city of filteredCities | async" value="{{city.id}}">
+                                 {{city.city}}
+                              </mat-option>
+                           </mat-select>
+                           <mat-error
+                              *ngIf="addressForm.get('city').touched && addressForm.get('city').errors?.required">
+                              Please select City
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                  </div>
+
+
+                                       <!-- Pincode Auto complete  -->
+                  <!-- <div class="row mb-4">
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="fill" class="mb-4">
+                           <mat-label>Pin code <span style="color:red">*</span></mat-label>
+                           <input matInput type="text" minlength="5" maxlength="6" formControlName="pincode"
+                              (keyup)="getAddresses($event)">
+                           <mat-error
+                              *ngIf="addressForm.get('pincode').touched && addressForm.get('pincode').errors?.required">
+                              Please enter Pin Code
+                           </mat-error>
+
+                        <mat-error class="text-danger"
+                           *ngIf="addressForm.get('pincode').hasError('maxlength')">
+                           Please enter 6 digit Pin Code {{addressForm.get('pincode').errors.maxlength.requiredLength}}
+                        </mat-error>
+
+                           <mat-error  *ngIf="addressForm.controls['pincode'].invalid 
+                   && (addressForm.controls['pincode'].dirty 
+                   || addressForm.controls['pincode'].touched)" class="error">
+                  </mat-error >
+
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-12 col-lg-12 ">
+                        <mat-form-field appearance="fill" class="mb-4">
+                           <mat-label>Address <span style="color:red">*</span></mat-label>
+                           <input matInput formControlName="address1">
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="fill" class="mb-4">
+                           <mat-label>City <span style="color:red">*</span></mat-label>
+                           <input matInput formControlName="city">
+                        </mat-form-field>
+                     </div>
+
+                     <div class="col-md-6 col-lg-6 ">
+                        <mat-form-field appearance="fill" class="mb-4">
+                           <mat-label>State <span style="color:red">*</span></mat-label>
+                           <input matInput formControlName="state" >
+                        </mat-form-field>
+                     </div>
+                  </div> -->
+
+                  <!-- Pincode Auto complete  -->
+
+
+                  <!-- <h2>old  Pincode </h2> -->
+
+                  <div class="row">
+                   <div class="col-md-8 mx-5" *ngIf="kycFormData == null">
+                        <button mat-button  [disabled]="addressForm.invalid"
+                           class="btn btn-red iot-btn-primary view-detail-btn btn-md"style="color:white;">Submit</button>
+                     </div>
+<!-- 
+                            close butttons 
+                     <div class="col-md-8 mx-5" *ngIf="kycFormData == null">
+                        <button mat-button mat-dialog-close  [disabled]="addressForm.invalid"
+                           class="btn btn-red iot-btn-primary view-detail-btn btn-md">Submit</button>
+                     </div> -->
+                  </div>
+               </div>
+
+         </form>
+
+		
+		</div>
+	</div>
+</div>

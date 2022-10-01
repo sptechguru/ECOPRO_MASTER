@@ -1,0 +1,94 @@
+
+<mat-dialog-content class="mat-typography">
+
+   <button mat-button mat-dialog-close class="close-btn" *ngIf="showclose=='false'">
+      <span class="material-icons">
+         close
+      </span>
+   </button>
+
+   <div class="dialog-wrap p-3">
+      <div id="login_wrap" class="login-wrap" *ngIf="logins">
+         <app-auth-signin  (redirect)="parentData=$event; completeProfile()"></app-auth-signin>
+      </div>
+
+     
+       <!-- signup-wrap -->
+       <div id="signup_wrap" class="signup-wrap" *ngIf="signupForm">
+         <app-auth-signup (newItemEvent)="onMessageFromChild($event)"></app-auth-signup>
+       </div>
+       
+       
+      <!-- Change-password -->
+      <!--<div id="change_wrap" class="change-wrap" *ngIf="passwordFrom">
+         <h3 class="dialog-title">Change Password</h3>
+         <form action="">
+            <div class="form-group">
+               <mat-form-field appearance="outline" class="">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                     [attr.aria-pressed]="hide">
+                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+               </mat-form-field>
+            </div>
+            <div class="form-group">
+               <mat-form-field appearance="outline" class="">
+                  <mat-label>Confirm Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                     [attr.aria-pressed]="hide">
+                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+               </mat-form-field>
+            </div>
+            <div class="form-group">
+               <a href="javascript:(void)" class="btn iot-btn-secondary w-100">Update Password</a>
+            </div>
+         </form>
+      </div>-->
+      <!-- Change-password -->
+
+
+      <!-- live stock -->
+      <!--<div id="change_wrap" class="change-wrap" *ngIf="livestock">
+         <h3 class="dialog-title">Live Stock</h3>
+         <form action="">
+            <div class="form-group">
+               <mat-form-field appearance="outline" class="">
+                  <mat-label>SKU Code</mat-label>
+
+               </mat-form-field>
+            </div>
+            <div class="form-group">
+               <mat-form-field appearance="outline" class="">
+                  <mat-label>Confirm Password</mat-label>
+
+               </mat-form-field>
+            </div>
+            <div class="form-group">
+               <a href="javascript:(void)" class="btn iot-btn-secondary w-100">Update Password</a>
+            </div>
+         </form>
+      </div>-->
+
+      <!-- verification-wrap -->
+      <!--<div id="verification_wrap" class="verification-wrap" *ngIf="verificationForm">
+         <h3 class="dialog-title">Verify Mobile Number</h3>
+         <p>Enter 6 digit verification code sent to
+            <span class="mo_number">9640808202</span>
+         </p>
+         <form action="">
+            <div class="form-group">
+               <input type="text" value="" placeholder="Verification Code" class="form-control" />
+            </div>
+            <p class="text-center"> <a href="javascript:(void)">Resend OTP</a> </p>
+            <div class="form-group">
+               <a href="javascript:(void)" class="btn iot-btn-secondary w-100">Verify Number</a>
+            </div>
+         </form>
+      </div>-->
+      
+   </div>
+</mat-dialog-content>

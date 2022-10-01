@@ -1,0 +1,71 @@
+<div class="sec-wrapper sec-padding py-0">
+    <!-- <div class="sec-banner">
+        <div class="container">
+            <h2 class="text-center">Blog</h2> -->
+            <!--<nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center bg-transparent">
+                    <li class="breadcrumb-item"><a href="javascript:(void)" routerLink="/home"
+                            class="text-white">Home</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Blog</li>
+                </ol>
+            </nav>-->
+        <!-- </div>
+    </div> -->
+    <div class="blog-list-wrap">
+        <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+            <div class="spinner-border" role="status">
+               <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 mb-4" 
+                *ngFor="let blogs of blogDetail">
+                    <div class="card" *ngIf="!connectLoader">
+                        <div class="blog-home-image">
+                            <a [routerLink]="['/blog-detail', blogs.blog_title_slug]" class="blog-read-more"> 
+                                <img *ngIf="blogs.blog_image" src="{{blogs.blog_image}}" alt="Blog Image" 
+                                class="img-fluid">
+                                <img *ngIf="!blogs.blog_image" src="{{default_image}}" alt="Blog Image" 
+                                class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="blog-home-content">
+                            <div class="blog-title">
+                                <a [routerLink]="['/blog-detail', blogs.blog_title_slug]" class="blog-read-more">
+                                  {{blogs?.title}}  </a>
+                            </div>
+                            <div class="blog-post-detail">
+                                <span class="post-info">
+                                    {{blogs?.created_at | date: 'longDate'}}
+                                </span>
+                            </div>
+                            <div class="blog-detail-txt">
+                                <p [innerHTML]="blogs?.detail" class="desc_length"></p>
+                            </div>
+                            <div>
+                                <a [routerLink]="['/blog-detail', blogs.blog_title_slug]" class="blog-read-more blog-read-more-btn" 
+                                *ngIf="!isHome" >
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-lg-12" *ngIf="!isHome" >
+                        <app-ngb-pagination *ngIf="blogDetail?.length>0"
+                            [collectionSize]="totalQueryableData" [page]="page"
+                            (pageChange)="handlePageChange($event)" [isDisabled]="isListLoading">
+                        </app-ngb-pagination>
+                    </div>
+
+                    <div class="col blog-more" *ngIf="isHome" >
+                        <a [routerLink]="['/blog']" class="blog-read-more blog-read-more-btn">
+                            Read More
+                        </a>
+                    </div>
+                
+        </div>
+    </div>
+</div>

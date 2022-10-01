@@ -1,0 +1,503 @@
+
+<div class="sec-wrapper sec-padding d-flex align-items-center" style="min-height: 400px;" *ngIf="filterStatus">
+   <div class="container">
+      <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+         <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+         </div>
+      </div>
+      <h2 class="sec-title text-center">Products not found</h2>
+   </div>
+</div>
+
+<!---
+<button type="button" (click)="popup = true" class="btn btn-red iot-btn-primary help_btn help_btn_1"
+   data-toggle="tooltip" data-placement="bottom" title="Request Quote">
+   <span class="material-icons">
+      question_answer
+   </span>
+</button>
+-->
+
+<!--- 
+<button type="button" class="btn btn-red iot-btn-primary help_btn help_btn_2" (click)="help_message()"
+   data-toggle="tooltip" data-placement="bottom" title="Help">
+   
+   <span class="material-icons">
+      perm_phone_msg
+   </span>
+</button>
+-->
+
+<div class="overlay" *ngIf="popup">
+   <div class="popup">
+      <h2 class="text-center">Create Request a Call</h2>
+      <a class="close" (click)="popup = false">&times;</a>
+      <div class="content">
+         <form #quoteForm="ngForm" (ngSubmit)="onSubmit(quoteForm)">
+            <div class="row">
+               <div class="col-lg-12">
+                  <label for="title"><b>Title</b></label>
+                  <input type="text" name="title" id="title" placeholder="Enter Title" [(ngModel)]="title"
+                     class="form-control" required>
+               </div>
+               <div class="col-lg-12">
+                  <label for="description"><b>Description</b></label>
+                  <input type="text" name="description" id="description" placeholder="Enter description"
+                     [(ngModel)]="description" class="form-control" required>
+               </div>
+               <div class="col-lg-8">
+                  <div class="form-group">
+                     <label class="label-uploader">
+                        <span class="iot-form-control-wrap file-514">
+                           <input #fileUpload type="file" (change)="onFileChange($event.target.files)">
+                        </span>
+                        <span class="iot-uploader">
+                           <span class="uploader-text"><span class="material-icons mr-2">add_circle_outline</span>
+                              {{fileUpload.files[0]?.name ? fileUpload.files[0]?.name : 'Upload Image'}}</span>
+                           <span class="uploader-btn"> Upload</span>
+                        </span>
+                     </label>
+                  </div>
+               </div>
+               <div class="col-lg-4">
+                  <img *ngIf="imgURL" src="{{imgURL}}" width="100" height="100" />
+               </div>
+            </div>
+            <div class="text-center">
+               <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<!---
+<div (onload)="openDialog()"></div>
+-->
+<section class="bg-white py-3 top-categories-section" *ngIf="!paramId">
+
+   <div class="container-fluid" style="position: absolute;">
+      <div class="px-5">
+         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categoryConfig">
+            <div ngxSlickItem class="slide" *ngFor="let item of sub_items;let key=index;">
+               <div class="dropdown show category-slider-wrap category_dropdown_list text-center">
+                  <a *ngIf="item.product_category" type="button" class="dropdown-toggle" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton-{{ item.id }}">
+                     <div class="top-categories-img">
+                        <img *ngIf="item.product_category_image_150x150" style="cursor:pointer;"
+                           [routerLink]="['/filtered-products',item.id]" src="{{item.product_category_image_150x150}}"
+                           alt="">
+                        <img *ngIf="item.product_category_image_150x150 == ''" style="cursor:pointer;"
+                           [routerLink]="['/filtered-products',item.id]" src="{{default_image}}" alt="">
+                     </div>
+                     <p>{{item.product_category}}</p>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right drop" aria-labelledby="dropdownMenuButton-{{ item.id }}"
+                     *ngIf="item.child.length > 0" style="margin-top: -5px;">
+                     <li *ngFor="let sub_item of item.child"><a class="dropdown-item"
+                           [routerLink]="['/filtered-products',sub_item.id]"> {{sub_item.product_category}} </a></li>
+
+                  </div>
+
+               </div>
+            </div>
+         </ngx-slick-carousel>
+      </div>
+
+   </div>
+   <div style="height: 112px;visibility:hidden;"></div>
+</section>
+
+<!-- top-categories-section -->
+<!---------------------   Preferred products -------------------------->
+<div class="sec-wrapper sec-padding pt-0 top-section_2" *ngIf="!paramId" infinite-scroll
+   [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+   [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown1()" [immediateCheck]="true">
+   <div class="">
+      <ngx-slick-carousel class="carousel banner-top-slider" #slickModal="slick-carousel" [config]="bannerConfig">
+         <div ngxSlickItem class="slide" *ngFor="let slider of sliderImages;">
+            <a target="_blank" href="{{slider.image_url}}">
+               <div class="img-with-text namaste-slide">
+                  <img src="{{slider.cms_files}}" alt="" class="img-fluid">
+                  <div class="text">
+                  </div>
+               </div>
+            </a>
+         </div>
+      </ngx-slick-carousel>
+   </div>
+
+   <!-- welcome-banner -->
+   <div class="welcome-banner-img py-3">
+      <div class="container">
+         <a target="_blank" href="{{imageBarImages1?.image_url}}">
+            <img src="{{imageBarImages1?.cms_files}}" alt="" class="img-fluid">
+         </a>
+      </div>
+   </div>
+   <!-- welcome-banner -->
+
+   <div class=" ">
+      <div class="sec-padding pb-0 pt-0">
+         <div class="container-fluid px-0">
+            <div class="product-sec-wrap">
+               <div class="d-flex flex-wrap align-items-center justify-content-between product-title-wrap">
+                  <h3 class="mb-3 text-capitalize mt-0 sec-title-product" *ngIf="collectionList.length > 0">Collection
+                  </h3>
+                  <button *ngIf="collectionList.length >0" class="d-flex align-items-center view-btn border-0 font-weight-bold"
+                     (click)="viewAll('collection')" style="background: transparent;">
+                     <span class="mr-3" style="color:#704949">View All</span>
+                     <span class="material-icons d-block">east</span>
+                  </button>
+               </div>
+               <div class="product-inner-wrap d-block">
+                  <ngx-slick-carousel class="carousel home-product-slider" #slickModal="slick-carousel"
+                     [config]="productSlider">
+                     <div ngxSlickItem class="slide" *ngFor="let i of collectionList | slice : 0:8">
+                        <div class="product-inner-col">
+                           <div class="product-img-wrap" style="max-width: none;min-height:inherit;margin-bottom: 0px;">
+                              <a href="javscript:(void)" (click)="collectionDetails(i)">
+                                 <img
+                                    [src]="i.cover_image ? i.cover_image : '../../../assets/images/Appliances-HomeKitchen.png'"
+                                    alt="" class="img-fluid"></a>
+                           </div>
+                        </div>
+                     </div>
+                  </ngx-slick-carousel>
+               </div>
+            </div>
+
+            <div class="product-sec-wrap"
+               *ngFor="let dealsNameList of dealsProduct | orderBy : 'id';  let imageindex = index">
+               <div class="d-flex flex-wrap align-items-center justify-content-between product-title-wrap">
+                  <h3 class="mb-3 text-capitalize mt-0 sec-title-product">{{dealsNameList.deal_name}}</h3>
+                  <button class="d-flex align-items-center view-btn border-0 font-weight-bold"
+                     (click)="viewAll(dealsNameList.id)" style="background: transparent;">
+                     <span class="mr-3" style="color:#704949">View All</span>
+                     <span class="material-icons d-block">east</span>
+                  </button>
+               </div>
+               <div class="product-inner-wrap d-block">
+                  <ngx-slick-carousel class="carousel home-product-slider" #slickModal="slick-carousel"
+                     [config]="productSlider">
+                     <div ngxSlickItem class="slide"
+                        *ngFor="let dealsProductList of dealsNameList.product_variants | slice : 0:8">
+                        <div class="product-inner-col">
+                           <div class="product-img-wrap">
+                              <a href="javscript:(void)"
+                                 (click)="productDetailDealsRoute(dealsProductList?.deal_product.deal_id, dealsProductList?.master_product.id, dealsProductList.id)">
+                                 <img src="{{dealsProductList.image}}" alt="" class="img-fluid">
+                              </a>
+                           </div>
+                           <div class="product-detail-txt-wrap">
+                              <a href="javscript:(void)"
+                                 (click)="productDetailDealsRoute(dealsProductList?.deal_product.deal_id, dealsProductList?.master_product.id, dealsProductList.id)">
+                                 <h3>{{dealsProductList.variant_name}}</h3>
+                              </a>
+                              <div class="product-price-wrap">
+                                 <div class="price-detail-txt flex-grow-1">
+                                    <div class="d-flex align-items-center flex-wrap">
+                                       <button  class="btn btn-red iot-btn-primary view-detail-btn btn-sm"
+                                       *ngIf="!this.kycdata || (!this.gstno  && this.gststatus =='pending')"
+                                       (click)="openDialogs()">Unlock Exculsive Price</button>
+                                       <!-- <h4 *ngIf=" this.kycdata && this.gstno && this.gststatus == 'pending'" class="pr-3">Pending Approval</h4> -->
+                                        <h4 *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'" class="pr-3">Rs.{{dealsProductList.base_price | number}}</h4>
+                                       <del *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'">MRP: Rs. {{dealsProductList.max_retail_price | number}}</del>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!--<p class="price-label price-label-small" *ngIf="dealsProductList.hsn_code">HSN Code: <span>{{dealsProductList.hsn_code}}</span></p>
+                              -->
+                              <p *ngIf="dealsProductList.ready_stock > 0">
+                                 Ready Stock:
+                                 <span>{{dealsProductList.ready_stock}}</span>
+                              </p>
+                                                   <!--<p class="d-flex align-items-center mt-3 ships-title">
+                                 <strong>Dispatch in {{dealsProductList.live_stock_dishpatch_time}} Days</strong>
+                                 <span class="material-icons ml-3">local_shipping</span>
+                              </p>-->
+                           </div>
+                        </div>
+                     </div>
+                  </ngx-slick-carousel>
+               </div>
+
+               <div *ngIf="imageindex == 2" class="category-banner-2 electronics-banner">
+                  <a target="_blank" href="{{imageBarImages2?.image_url}}">
+                     <img src="{{imageBarImages2?.cms_files}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+
+               <div *ngIf="imageindex == 5" class="category-banner-2 electronics-banner">
+                  <a target="_blank" href="{{imageBarImages3?.image_url}}">
+                     <img src="{{imageBarImages3?.cms_files}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+
+               <div *ngIf="imageindex == 8" class="category_column category_column2">
+                  <div class="row">
+                     <div class="col-lg-12">
+                        <ngx-slick-carousel class="carousel slider1Config" #slickModal="slick-carousel"
+                           [config]="slider1Config">
+                           <div ngxSlickItem class="slide" *ngIf="slidebar1?.cms_files">
+                              <div class="category-col-2">
+                                 <a target="_blank" href="{{slidebar1?.image_url}}">
+                                    <img src="{{slidebar1?.cms_files}}" class="img-fluid" alt="">
+                                 </a>
+                              </div>
+                           </div>
+                           <div ngxSlickItem class="slide" *ngIf="slidebar2?.cms_files">
+                              <div class="category-col-2">
+                                 <a target="_blank" href="{{slidebar2?.image_url}}">
+                                    <img src="{{slidebar2?.cms_files}}" class="img-fluid" alt="">
+                                 </a>
+                              </div>
+                           </div>
+                           <div ngxSlickItem class="slide" *ngIf="slidebar3?.cms_files">
+                              <div class="category-col-2">
+                                 <a target="_blank" href="{{slidebar3?.image_url}}">
+                                    <img src="{{slidebar3?.cms_files}}" class="img-fluid" alt="">
+                                 </a>
+                              </div>
+                           </div>
+                           <div ngxSlickItem class="slide" *ngIf="slidebar4?.cms_files">
+                              <div class="category-col-2">
+                                 <a target="_blank" href="{{slidebar4?.image_url}}">
+                                    <img src="{{slidebar4?.cms_files}}" class="img-fluid" alt="">
+                                 </a>
+                              </div>
+                           </div>
+                           <div ngxSlickItem class="slide" *ngIf="slidebar5?.cms_files">
+                              <div class="category-col-2">
+                                 <a target="_blank" href="{{slidebar5?.image_url}}">
+                                    <img src="{{slidebar5?.cms_files}}" class="img-fluid" alt="">
+                                 </a>
+                              </div>
+                           </div>
+                        </ngx-slick-carousel>
+                     </div>
+                  </div>
+               </div>
+
+               <div *ngIf="imageindex == 11" class="category-banner-2 electronics-banner">
+                  <a target="_blank" href="{{imageBarImages4?.image_url}}">
+                     <img src="{{imageBarImages4?.cms_files}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+
+               <div *ngIf="imageindex == 14" class="category-banner-2 electronics-banner">
+                  <a target="_blank" href="{{imageBarImages5?.image_url}}">
+                     <img src="{{imageBarImages5?.cms_files}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+
+               <div *ngIf="imageindex == 17" class="category-banner-2 electronics-banner">
+                  <a target="_blank" href="{{imageBarImages6?.image_url}}">
+                     <img src="{{imageBarImages6?.cms_files}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!---------------------   Filtered products -------------------------->
+<mat-drawer-container class="example-container filter-sidebar" hasBackdrop="true">
+   <mat-drawer #drawer mode="side" class="sidebar-drawer">
+      <mat-drawer-content class="sidebar-content">
+         <div class="top-row py-4">
+            <div class="container container-large">
+               <div class="row align-items-center search-row">
+                  <div class="col-lg-12 px-0">
+                     <ul class="list-unstyled sidebarfilter-list filter-list mb-0 position-relative">
+                        <li>
+                           <div class="form-check">
+                              <label class="form-check-label">
+                                 <input class="form-check-input" type="checkbox" [(ngModel)]="price"
+                                    (change)="priceFilterCheckbox($event)">
+                                 Apply price filter
+                                 <span class="form-check-sign">
+                                    <span class="check"></span>
+                                 </span>
+                              </label>
+                           </div>
+                        </li>
+                        <li class="price-range-slider-wrap price-label-cstm">
+                           <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
+                              class="price-range-slider" (userChangeEnd)="filterProductByPrice($event)"></ng5-slider>
+                        </li>
+                        <li class="">
+                           <div class="tree-wrap" style="width: 30%;">
+                              <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="cstm-mat-tree">
+                                 <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                    <mat-checkbox class="checklist-leaf-node"
+                                       [checked]="checklistSelection.isSelected(node)"
+                                       (change)="checklistSelection.toggle(node);getFilterProductByCategory(node, $event);">
+                                       {{node.product_category}}</mat-checkbox>
+                                 </mat-tree-node>
+                                 <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                                    <mat-form-field>
+                                       <input matInput #itemValue placeholder="New item...">
+                                    </mat-form-field>
+                                 </mat-tree-node>
+                                 <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding
+                                    class="parent-tree">
+                                    <button mat-icon-button matTreeNodeToggle
+                                       [attr.aria-label]="'toggle ' + node.filename">
+                                       <mat-icon class="mat-icon-rtl-mirror">{{treeControl.isExpanded(node) ?
+                                          'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
+                                       {{node.product_category}}
+                                    </button>
+                                 </mat-tree-node>
+                              </mat-tree>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </mat-drawer-content>
+   </mat-drawer>
+</mat-drawer-container>
+<div class="sec-wrapper sec-padding pt-0" *ngIf="paramId && !filterStatus" infinite-scroll
+   [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+   [infiniteScrollThrottle]="throttle">
+   <div class="top-row py-4">
+      <div class="container container-large">
+         <div class="row align-items-center search-row px-4">
+            <div class="col-lg-8"></div>
+            <div class="col-lg-4 text-right">
+               <button mat-raised-button (click)="drawer.toggle()"><span
+                     class="material-icons">filter_alt</span>Filters</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="container container-large">
+      <div class="row">
+         <div class="col-lg-12 col-md-12">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+               <h3 class="inner-sec-title my-3">{{categoryDetails?.product_category}}
+                  <span *ngIf="totalArrayLimit>0">{{totalArrayLimit}} Products found of <span
+                        class="search_text_after">{{this.currentCategoryName}}</span></span>
+               </h3>
+               <div class="d-flex flex-wrap align-items-center">
+                  <mat-form-field appearance="fill">
+                     <mat-label>Sort by specific order</mat-label>
+                     <mat-select [value]="recordsSortBy" (selectionChange)="sortBySelectionChange($event)">
+                        <mat-option value="hstock">Ready Stock - High to Low</mat-option>
+                        <mat-option value="recent">Recent First</mat-option>
+                        <mat-option value="hl">Price - High to Low</mat-option>
+                        <mat-option value="lh">Price - Low to High</mat-option>
+                       
+                     </mat-select>
+                  </mat-form-field>
+                  <!--
+                  <button class="sort-btn" (click)="sort('base_price', 'high')" *ngIf="type=='low'">
+                     <strong>Low to High</strong><span class="material-icons">
+                        swap_vert
+                     </span>
+                  </button>
+                  <button class="sort-btn" (click)="sort('base_price', 'low')" *ngIf="type=='high'">
+                     <strong>High to Low</strong><span class="material-icons">
+                        swap_vert
+                     </span>
+                  </button>
+                  -->
+               </div>
+            </div>
+            <div class="content bg-white py-4 px-4 rounded-0">
+               <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+                  <div class="spinner-border" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+
+               <div class="category-list" *ngIf="!connectLoader">
+                  <div class="justify-content-between d-flex" *ngIf="login_status">
+                     <div>
+                        <mat-checkbox class="example-margin" (change)="setAllCheckbox($event)">Select All</mat-checkbox>
+                     </div>
+                     <div *ngIf="this.productCheckedList.length > 0 && count > 0">
+                        <a href="javscript:void(0)" class="btn btn-red iot-btn-primary view-detail-btn"
+                           (click)="AddCatalogue()">Add Catalogue</a>
+                     </div>
+                  </div>
+
+                  <div class="category-list-detail" *ngFor="let item of preferedProductList">
+                     <div *ngIf="login_status">
+                        <mat-checkbox class="example-margin pr-2" (change)="setSingleCheckbox($event,item.id)"
+                           [checked]="this.checkedAll"></mat-checkbox>
+                     </div>
+                     <div class="product-category-info product-category-info-search">
+                        <span class="product-thumb-img">
+                           <a style="cursor: pointer;"
+                              (click)="productDetailDealsRoute2(this.paramId, item?.ids, item?.product_variants.id)">
+                              <img *ngIf="item.featured_image" src="{{item.featured_image}}" alt="Product">
+                           </a>
+                        </span>
+                        <div class="category-info-txt">
+                           <h5>
+                              <a class="text-dark-2 f-15 f-w-600" style="cursor: pointer;"
+                                 (click)="productDetailDealsRoute2(this.paramId, item?.ids, item?.product_variants.id)">
+                                 {{item.product_variants.variant_name}}
+                              </a>
+                           </h5>
+                    
+                           <p class="price-label price-label-small" *ngIf="item.product_variants.max_retail_price">
+                              MRP: <del *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending' || this.gststatus !== 'reject'">Rs. {{item.product_variants.max_retail_price | number}}</del>
+                           </p>
+
+                           <!--- <p class="price-label price-label-small" *ngIf="item.product_variants.hsn_code">
+                              HSN Code: <span>{{item.product_variants.hsn_code}}</span>
+                           </p>
+                        -->
+                      
+                              <p *ngIf="item.product_variants.ready_stock > 0">
+                                 Ready Stock:
+                                 <span>{{item.product_variants.ready_stock }}</span>
+                              </p>
+
+                        <p *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'" class="price-label">Offer Price: <span>Rs.
+                              {{item.product_variants.base_price | number}}/-</span>
+                        </p>
+
+
+                        <!-- <button  class="btn btn-red iot-btn-primary view-detail-btn btn-sm"
+                         *ngIf="this.kycdata && this.gstno && this.gststatus == 'pending'">
+                           Your Request is Under process
+                          </button> -->
+                           <!-- <h2>Rs. {{dealsProductList.max_retail_price | number}}</h2> -->
+                           
+                           <button class="btn btn-red iot-btn-primary view-detail-btn btn-sm"
+                           *ngIf="login_status && !this.kycdata || (!this.gstno  && this.gststatus =='pending')"
+                            (click)="openDialogs()" >Unlock Exclusive Price</button>
+                           
+                           <!--<p class="d-flex align-items-center mt-3 ships-title">
+                              <strong>Dispatch in {{item.product_variants.live_stock_dishpatch_time}} Days</strong>
+                              <span class="material-icons ml-3">local_shipping</span>
+                           </p>-->
+                        </div>
+                     </div>
+                 
+                  <a href="javscript:(void)" [routerLink]="['/categories', this.paramId, item.ids, item.id]"
+                     class="btn btn-red iot-btn-primary view-detail-btn">View Detail</a>
+               </div>
+               <!-- <app-ngb-pagination *ngIf="preferedProductList.length>0" 
+                     [collectionSize]="totalQueryableData" [page]="page" 
+                     (pageChange)="handlePageChange($event)" [isDisabled]="isListLoading">
+                  </app-ngb-pagination> -->
+               <app-ngb-pagination [collectionSize]="totalQueryableData" [page]="page"
+                  (pageChange)="handlePageChange($event)" [isDisabled]="isListLoading">
+               </app-ngb-pagination>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+<div *ngIf="showcustomerdetails==true">
+   <app-auth-signup (newItemEvent)="onMessageFromChild($event)"></app-auth-signup>
+</div>

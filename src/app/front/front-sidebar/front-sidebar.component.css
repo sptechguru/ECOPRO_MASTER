@@ -1,0 +1,31 @@
+.sidebar-top {
+    padding: 1rem 1.8rem;
+    background: #c40000;
+}
+
+.profile-img img {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+}
+/* sidebar */
+.sidebar-list li{
+    flex: 0 0 100%;
+    max-width: 100%;
+    -webkit-flex: 100%;
+    /* padding: 10px 30px; */
+    border-bottom: 1px solid #7070708c;
+}
+.sidebar-list li a{
+    display: flex;
+    align-items: center;
+    color: #3B3B3B;
+    font-size: 16px;
+    padding: 10px 30px;
+}
+.sidebar-list li a span {
+    color: #A99DA3;
+    font-size: 30px;
+    margin-right: 15px;
+}
+ 

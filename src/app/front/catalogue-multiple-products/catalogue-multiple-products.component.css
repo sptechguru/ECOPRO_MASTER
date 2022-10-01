@@ -1,0 +1,6 @@
+.p-fixed {
+    position: fixed;
+    /* z-index: 999999; */
+     top: 260px;
+     right:280px;
+}

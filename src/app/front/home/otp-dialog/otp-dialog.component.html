@@ -1,0 +1,23 @@
+<div class="modal-body stock-modal">
+    <button class="close-btn" matDialogClose> 
+        <span class="material-icons">
+            close
+        </span>
+    </button>
+    <div class="container-contact2">
+        <h3 class="dialog-title">Enter OTP</h3>
+        <form [formGroup]="contactForm" (ngSubmit)="handleSubmit1()" novalidate autocomplete="off">
+            <mat-form-field appearance="outline">
+                <mat-label>OTP</mat-label>
+                <input matInput type='text' formControlName='otp'>
+            </mat-form-field>
+            <mat-error
+                *ngIf="contactForm.get('otp').touched && contactForm.get('otp').errors?.required">
+                Please Enter OTP
+            </mat-error>
+            <div class="my-3">
+                <button type="submit" class="btn iot-btn-primary w-100">Send</button>
+            </div>
+        </form>  
+    </div>  
+</div>     

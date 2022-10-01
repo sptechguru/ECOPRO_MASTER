@@ -1,0 +1,91 @@
+<div class="sec-common sec-bg sec-padding pt-0">
+   <div class="container container-large">
+      <div class="row align-items-center search-row mx-0">
+         <div class="col-lg-10 d-flex flex-wrap align-items-center">
+            <h3 class="inner-sec-title my-0 mr-5">My Orders</h3>
+            <form class="search-form flex-grow-1 mb-0" #searchForm="ngForm" novalidate>
+               <div class="form-group header-search-filed m-0 p-0">
+                  <label class="search-label d-block mb-0">
+                     <mat-form-field appearance="outline" class="header-mat-search order-search">
+                        <a href="javascript:(void)" (click)="orderSearchByTrackingNumber()">
+                           <span class="search-icon"><span class="material-icons">search</span></span>
+                        </a>
+                        <mat-label>Search</mat-label>
+                        <input matInput placeholder="" [(ngModel)]="tracking" 
+                        [ngModelOptions]="{standalone: true}">
+                        <button class="clear-search-button">
+                           <span class="material-icons">
+                              highlight_off
+                              </span>
+                        </button>
+                     </mat-form-field>
+                  </label>
+               </div>
+            </form>
+         </div>
+         <div class="col-lg-2 text-right">
+            <ul class="list-unstyled d-flex align-items-center flex-wrap filter-list order-list mb-0">
+               <li>
+                  <div class="dropdown">
+                     <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+                      <strong>All Orders</strong>
+                     </button>
+                     <ul class="dropdown-menu">
+                        <li><a href="javascript:(void)" (click)="getOrderByStatus('')">All orders</a></li>
+                        <li><a href="javascript:(void)" (click)="getOrderByStatus('processing')">In Progress</a></li>
+                        <li><a href="javascript:(void)" (click)="getOrderByStatus('complete')">Completed </a></li>
+                        <li><a href="javascript:(void)" (click)="getOrderByStatus('created')">Created </a></li>
+                        <li><a href="javascript:(void)" (click)="getOrderByStatus('pending_verification')">Pending verification</a></li>
+                        <li><a href="javascript:(void)" (click)="getOrderByStatus('branding_pending')">Branding verification</a></li>
+                        <li><a href="javascript:(void)" (click)="getOrderByStatus('cancelled')">Cancelled</a></li>
+                     </ul>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div class="content px-0 rounded-0">
+         <div class="category-list cart-list order-list" infinite-scroll
+         [infiniteScrollDistance]="scrollDistance"
+         [infiniteScrollUpDistance]="scrollUpDistance"
+         [infiniteScrollThrottle]="throttle"
+         (scrolled)="onScrollDown()" (scrolledUp)="onScrollUp()">
+         <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+            <div class="spinner-border" role="status">
+               <span class="sr-only">Loading...</span>
+             </div>
+          </div>
+            <div class="category-list-detail" *ngFor="let order of order_list">
+                  <div class="product-category-info">
+                        <p>
+                           <span> 
+                           <a routerLink="/order-detail/{{order.id}}" class="order-id-text">
+                              <strong>Order No: #{{order.tracking_number}}</strong></a>
+                           </span>
+                        </p>
+                     <span class="product-thumb-img"></span>
+                     <div class="category-info-txt cart-info-txt">
+                        <p class="price-label branding-type-label">Branding: <span>{{order.is_item_branding}}</span></p>
+                        <p class="price-label">Rs <span><strong>{{toFixedFun(order.total_amount) | number}}/-</strong></span> </p>
+                     </div>
+                  </div>
+               <div class="cart-remove-col">
+                  <p *ngIf="order.delivery_type === 'logistic_delevery'"><strong>Delivery type:</strong> Logistic delivery</p>
+                  <p *ngIf="order.delivery_type === 'self_pickup'"><strong>Delivery type:</strong> Self pickup</p>
+                  <p *ngIf="order.order_status === 'pending_verification'"><strong>Order status:</strong> Pending verification</p>
+                  <p *ngIf="order.order_status != 'pending_verification'"><strong>Order status:</strong> {{order.order_status}}</p>
+
+                  <p *ngIf="order.payment_status === 'partial_paid'"><strong>Payment status:</strong> 
+                    Partial paid
+                  </p>
+                  <p *ngIf="order.payment_status != 'partial_paid'"><strong>Payment status:</strong> 
+                     {{order.payment_status}}
+                   </p>
+                  <p>({{order.created_at | date}})</p>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>

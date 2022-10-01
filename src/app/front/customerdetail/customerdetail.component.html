@@ -1,0 +1,120 @@
+
+<mat-dialog-content class="mat-typography">
+    <div class="row h-100 m-0">
+        <!-- style="background: #00FFFF;color:black;height: 100%;" -->
+        <div class="col-md-6 p-0" >
+            <div class="signup-left-col">
+                <h2 style="color:black;" >Welcome<br />
+                    To
+                    
+                    <!-- <img src="assets/images/ek-matra-logo.png" alt="Ekmatra Logo" class="img-fluid"> -->
+                </h2>
+                <b><h1 style="letter-spacing: 1px; font-weight: bold; font-size: 40px!important;text-align: center;font-style: italic;"> EK MATRA</h1></b>
+    
+                <!-- <p>India's No.1 B2B Reseller platform</p> -->
+                <ul class="list-unstyled sign-up-list mt-4 mb-0">
+                    <li>
+                        <span class="material-icons">
+                            task_alt
+                        </span>Handpicked Gifting Products.
+                    </li>
+                    <li>
+                        <span class="material-icons">
+                            task_alt
+                        </span>1 Min Customizable Catalogue.
+                    </li>
+                    <li>
+                        <span class="material-icons">
+                            task_alt
+                        </span>Live Stock Check.
+                    </li>
+                    <li>
+                        <span class="material-icons">
+                            task_alt
+                        </span>Get Sample Before Buying.
+                    </li>
+                    <li>
+                        <span class="material-icons">
+                            task_alt
+                        </span>Doorstep Delivery.
+                    </li>
+                    <!-- <li>
+                        <span class="material-icons">
+                            task_alt
+                        </span>Buy Samples at the Bulk Price.
+                    </li>
+                    <li>
+                        <span class="material-icons">
+                            task_alt
+                        </span>Dedicated Account Manager.
+                    </li> -->
+                </ul>
+
+                </div>
+           
+        </div>
+        <div class="col-md-6 pt-5" style="float: right;">
+            <div  class="signup-wrap h-100 p-4">
+                <form [formGroup]="cutomerForm" (ngSubmit)="cutomerSubmit()" novalidate>
+
+                    <h3 class="dialog-title mb-4" style="font-size: 1.2rem">Customer Details Form</h3>
+        
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Full Name" type="text" formControlName="first_name">
+                        </mat-form-field>
+                    </div>
+        
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Company name</mat-label>
+                            <input matInput type="text" formControlName="business_name"
+                                placeholder=" Enter your Company name">
+                        </mat-form-field>
+                    </div>
+        
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Password</mat-label>
+                            <input id="password" matInput placeholder="{{'Password' | translate }}"
+                                [type]="passwordHide ? 'password' : 'text'" formControlName="password"> 
+                         <span style="cursor:pointer" mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+                                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </span>
+                            <small *ngIf="cutomerForm.controls['password'].invalid 
+                      && (cutomerForm.controls['password'].dirty 
+                      || cutomerForm.controls['password'].touched)" class="error">
+                                <mat-error *ngIf="cutomerForm.controls['password'].errors.required 
+                          && !cutomerForm.controls['password'].errors.minlength">
+                                    {{'Password_Required_Msg' | translate}}
+                                </mat-error>
+                                <mat-error *ngIf="cutomerForm.controls['password'].errors.pattern 
+                         && !cutomerForm.controls['password'].errors.minlength">
+                                    {{'Password_Pattern_Msg' | translate}}
+                                </mat-error>
+                                <mat-error *ngIf="cutomerForm.controls['password'].errors.maxlength">
+                                    Maximum character limit is 30.
+                                </mat-error>
+                            </small>
+                        </mat-form-field>
+                    </div>
+        
+                    <div class="form-group">
+                        <button mat-raised-button mat-dialog-close type="submit" [disabled]="cutomerForm.invalid"
+                            class="btn iot-btn-primary w-100" >
+                            <mat-spinner *ngIf="isLoginProcessing" [diameter]="20"></mat-spinner>
+                            <span>Submit</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+          
+        </div>
+
+    </div>
+</mat-dialog-content>
+
+
+

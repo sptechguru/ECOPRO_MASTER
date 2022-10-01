@@ -1,0 +1,30 @@
+<!-- <div #pagination class="pagination-wrap" *ngIf="pagesArrayOnDisplay.length > 1">
+  <ul class="pagination justify-content-end">
+    <li class="page-item first">
+      <a class="page-link" href="javascript:void(0)" aria-label="Previous"
+        (click)="AffectPagesArray('back');selectPreviousPage()">
+        <span aria-hidden="true">
+          << /span>
+            <span class="sr-only">Previous</span>
+      </a>
+    </li>
+
+    <li *ngFor="let page of pagesArrayOnDisplay" class="page-item" [ngClass]="{'active': currentSelectedPage === page}">
+      <a class="page-link" href="javascript:void(0)" (click)="emitPageChange(page)">{{page}}</a>
+    </li>
+    <li class="page-item last">
+      <a class="page-link" href="javascript:void(0)" aria-label="Next"
+        (click)="AffectPagesArray('next');selectNextPage()">
+        <span aria-hidden="true">></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</div> -->
+
+<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [boundaryLinks]="true"
+  (pageChange)="emitPageChange($event)" [pageSize]="_pageSize" [disabled]="isDisabled" [maxSize]="1">
+  <ng-template ngbPaginationPrevious>Prev</ng-template>
+  <ng-template ngbPaginationNext>Next</ng-template>
+</ngb-pagination>
+  

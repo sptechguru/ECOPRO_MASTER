@@ -1,0 +1,167 @@
+<mat-drawer-container class="example-container filter-sidebar" hasBackdrop="true">
+   <mat-drawer #drawer mode="side" class="sidebar-drawer">
+      <mat-drawer-content class="sidebar-content">
+         <div class="top-row py-4">
+            <div class="container container-large">
+               <div class="row align-items-center search-row">
+                  <div class="col-lg-12 px-0">
+                     <ul class="list-unstyled sidebarfilter-list filter-list mb-0 position-relative">
+
+                        <li class="">
+                           <div class="tree-wrap" style="width: 30%;">
+                              <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="cstm-mat-tree">
+                                 <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                    <mat-checkbox class="checklist-leaf-node"
+                                       [checked]="checklistSelection.isSelected(node)" (change)="checklistSelection.toggle(node);
+                                    getFilterProductByCategory(node, $event);">
+                                       {{node.product_category}}</mat-checkbox>
+                                 </mat-tree-node>
+                                 <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                                    <mat-form-field>
+                                       <input matInput #itemValue placeholder="New item...">
+                                    </mat-form-field>
+                                 </mat-tree-node>
+                                 <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding
+                                    class="parent-tree">
+                                    <button mat-icon-button matTreeNodeToggle
+                                       [attr.aria-label]="'toggle ' + node.filename">
+                                       <mat-icon class="mat-icon-rtl-mirror">
+                                          {{treeControl.isExpanded(node) ? 'keyboard_arrow_down' :
+                                          'keyboard_arrow_right'}}
+                                       </mat-icon>
+                                       {{node.product_category}}
+                                    </button>
+                                 </mat-tree-node>
+                              </mat-tree>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </mat-drawer-content>
+   </mat-drawer>
+</mat-drawer-container>
+
+<div class="sec-wrapper sec-padding pt-0 position-relative" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+   [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown1()">
+   <div class="top-row py-4 fixed-top cstm-fixed-top">
+      <div class="container container-large">
+         <div class="row align-items-center search-row px-4">
+            <div class="col-sm-6 col-md-4">
+               <h3 class="inner-sec-title my-0">{{categoryDetails?.product_category}}
+                  <span *ngIf="totalArrayLimit>0">{{totalArrayLimit}} Products found</span>
+               </h3>
+            </div>
+
+            <div class="col-sm-6 col-md-8 text-right">
+               <button mat-raised-button color="" class="iot-btn-dark mx-2 my-2 my-md-0" (click)="saveProducts()">
+                  <span class="material-icons mr-2">
+                     add
+                  </span>Add Products into catalogue</button>
+               <button mat-raised-button (click)="drawer.toggle()" class="mx-2"><span class="material-icons">
+                     filter_alt
+                  </span>Filters</button>
+            </div>
+
+            <!-- <div class="col-lg-2 text-right">
+               
+            </div> -->
+         </div>
+      </div>
+
+      <div class="top-row" *ngIf="catalogueName">
+         <div class="container container-large">
+            <div class="row align-items-center">
+               <div class="col-lg-12">
+                  <ol class="breadcrumb mb-0 bg-transparent">
+                     <li class="breadcrumb-item" *ngIf="cid">
+                        <a [routerLink]="['/add-catalogue', cid]">Catalogue</a>
+                     </li>
+
+                     <li class="breadcrumb-item" *ngIf="!cid">
+                        <a [routerLink]="['/catalogue']">Catalogue</a>
+                     </li>
+
+                     <li class="breadcrumb-item" *ngIf="cid">
+                        <a [routerLink]="['/catalogue-product-list', cid, catalogue_id]">
+                           {{catalogueName | titlecase}}' Products
+                        </a>
+                     </li>
+
+                     <li class="breadcrumb-item" *ngIf="!cid">
+                        <a [routerLink]="['/catalogue-product-list', catalogue_id]">
+                           {{catalogueName | titlecase}}' Products
+                        </a>
+                     </li>
+
+                     <li class="breadcrumb-item">
+                        <a>Add {{catalogueName | titlecase}}' Products</a>
+                     </li>
+                  </ol>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+   <div class="container container-large">
+      <div class="content bg-white py-4 px-4 rounded-0 cstm-content">
+
+         <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+            <div class="spinner-border" role="status">
+               <span class="sr-only">Loading...</span>
+            </div>
+         </div>
+
+         <div class="category-list">
+
+            <div class="category-list-detail" *ngFor="let item of preferedProductList">
+               <div class="product-category-info">
+                  <section class="example-section mr-3 mt-4">
+                     <mat-checkbox class="example-margin" name="off" type="checkbox"
+                        [checked]="item.product_variants.checked === 'true'"
+                        (change)="getCheckboxValues($event,item.product_variants,i)">
+                     </mat-checkbox>
+                  </section>
+                  <span class="product-thumb-img">
+                     <img *ngIf="item.featured_image" src="{{item.featured_image}}" alt="Product">
+                  </span>
+                  <div class="category-info-txt">
+                     <!--<h5><a class="text-dark-2 f-15 f-w-600">{{item.product_name}}</a></h5>
+                     <p><a class="text-dark-2 f-15">{{item.product_variants.variant_name}}</a></p>-->
+                     <h5><a class="text-dark-2 f-15 f-w-600">{{item.product_variants.variant_name}}</a></h5>
+                     <p class="price-label">Offer Price: <span>Rs. {{item.product_variants.base_price |
+                           number}}/-</span></p>
+                     <p class="price-label price-label-small" *ngIf="item.product_variants.max_retail_price">
+                        MRP: <span>Rs. {{item.product_variants.max_retail_price | number}}/-</span>
+                     </p>
+                     <!--<p class="price-label price-label-small" *ngIf="item.product_variants.hsn_code">
+                        HSN Code: <span>{{item.product_variants.hsn_code}}</span>
+                     </p>
+                  -->
+                     <p *ngIf="item.product_variants.quantity >= 100">Available Quantity:
+                        <span>{{item.product_variants.quantity}}</span>
+                     </p>
+                  </div>
+               </div>
+
+               <!--<div class="col-lg-2">
+                  <span>Margin: {{item.product_variants.margin}}</span>
+                </div>
+
+                <div class="col-lg-2">
+                  <span>Margin Type: {{item.product_variants.margin_type}}</span>
+                </div>-->
+
+               <a href="javscript:(void)"
+                  [routerLink]="['/categories', item.category_id, item.ids, item.product_variants.id]"
+                  class="btn btn-red iot-btn-primary view-detail-btn">View Detail</a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

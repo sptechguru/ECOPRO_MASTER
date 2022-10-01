@@ -1,0 +1,10 @@
+<div class="input-group">
+  <input #searchInput type="text" class="form-control" [placeholder]="this.placeholderText"
+    (change)="trimSearchData($event)" (keyup)="handleQuerying($event, searchInput.value)">
+  <span class="input-group-append">
+    <button class="btn btn-primary btn-round btn-just-icon" type="button"
+      (click)="handleQuerying($event, searchInput.value)">
+      <i class="fa fa-search"></i>
+    </button>
+  </span>
+</div>

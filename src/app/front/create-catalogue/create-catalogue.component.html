@@ -1,0 +1,74 @@
+<div class="sec-common catalogue-sec sec-bg sec-padding">
+   <div class="container container-large">
+      <div class="row align-items-center mb-5">
+         <div class="col-lg-12">
+            <h3 class="inner-sec-title my-0">Create Catalogue</h3>
+         </div>
+      </div>
+     <form [formGroup]="createCatalogueForm" (ngSubmit)="handleSubmitForm()" novalidate>
+        <div class="content p-0 mt-5 rounded-wrap-btm">
+           <div class="row align-items-center px-5 py-5">
+              <div class="col-lg-12">
+                 <div class="row">
+                    <div class="col-lg-6">
+                     <div class="form-group">
+                        <mat-form-field appearance="outline">
+                           <mat-label>Catalogue Name</mat-label>
+                           <input matInput type="text" formControlName='catalogue_name'>
+                           <div *ngIf="createCatalogueForm.controls['catalogue_name'].invalid 
+                           && (createCatalogueForm.controls['catalogue_name'].dirty 
+                           || createCatalogueForm.controls['catalogue_name'].touched)" class="error">
+                              <span *ngIf="createCatalogueForm.controls['catalogue_name'].errors.required">
+                                 Please enter catalogue name
+                              </span>
+                           </div>
+                        </mat-form-field>
+                     </div>
+                    </div>
+                 </div>
+              
+            
+              <!-- <div class="col-lg-6">
+                <div class="form-group">
+                <label class="label-uploader"> 
+                   <span class="iot-form-control-wrap file-514">
+                     <input  #fileUpload type="file" 
+                     (change)="onFileChange($event.target.files)" >     
+                   </span>
+                   <span class="iot-uploader">
+                       <span class="uploader-text"><span class="material-icons mr-2">
+                           add_circle_outline
+                           </span>{{fileUpload.files[0]?.name ? fileUpload.files[0]?.name : 'Upload Image'}}
+                           </span>
+                       <span class="uploader-btn"> Upload</span>
+                   </span>
+               </label>
+               </div>
+              </div> -->
+               <!-- <div class="col-lg-3">
+                  <img *ngIf="imgURL" src="{{imgURL}}" 
+                  width="100" height="100"/>
+               </div> -->
+           
+
+           <button class="catalogueBtn_box" [disabled]="isCreateProcessing || !createCatalogueForm.valid" type="submit">
+            <mat-spinner *ngIf="isCreateProcessing" [diameter]="20"></mat-spinner>
+            <span *ngIf="!isCreateProcessing">Create Catalogue
+            </span>
+           </button>
+         </div>
+      </div>
+           <div class="btm-btn-wrap">
+                  <!--<button class="cart-btn proceed-btn" [disabled]="isCreateProcessing">
+                     <span (click)="catalogueList()">Catalogue</span>
+                  </button>-->
+                  <button  type="submit"
+                   class="cart-btn proceed-btn">
+                   <!-- <mat-spinner *ngIf="isCreateProcessing" [diameter]="20"></mat-spinner>
+                   <span *ngIf="!isCreateProcessing">Create</span> -->
+                  </button>
+           </div>
+        </div>
+     </form>       
+   </div>
+</div>

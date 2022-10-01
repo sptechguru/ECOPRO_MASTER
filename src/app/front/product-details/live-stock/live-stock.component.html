@@ -1,0 +1,83 @@
+<div class="modal-body px-0 stock-modal">
+    <button class="close" matDialogClose> <span aria-hidden="true">&times;</span></button>
+    <div class="container-contact2">
+        <!-- <div class="wrap-contact2  px-3 pb-3 pt-3">
+            <div class="login-heading-wrap">
+                <h2 class="login-title">Live Stock</h2>
+            </div>
+            <form [formGroup]="forgotPasswordForm" novalidate>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="">
+                       <mat-label>Available Quantity</mat-label>
+                       <input matInput placeholder="Available Quantity" type="text" formControlName="avl_quantity" readonly>
+                    </mat-form-field>
+                 </div>
+               
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="">
+                       <mat-label>Stock In Hand</mat-label>
+                       <input matInput placeholder="Stock In Hand" type="text" formControlName="inventory" readonly>
+                    </mat-form-field>
+                 </div>
+
+                 <div class="form-group">
+                    <mat-form-field appearance="outline" class="">
+                       <mat-label>Reserved Stock</mat-label>
+                       <input matInput placeholder="Reserved Stock" type="text" formControlName="vendor_inventory" readonly>
+                    </mat-form-field>
+                 </div>
+            </form>
+        </div> -->
+        <table class="table livestock-table">
+            <thead>
+                <tr>
+                    <!-- <th>Stock In Hand</th>
+                      <th>Reserved Stock</th>-->
+                    <th colspan="3">Stock In Hand</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="live_stock_data">
+                    <td colspan="3">{{quantity}}</td>
+                    <!--<td>
+                          {{inventory}}
+                      </td>
+                      <td>
+                          {{vendorInventory}}
+                      </td>-->
+
+                </tr>
+                <tr *ngIf="!live_stock_data">
+                    <td colspan="3"><span class="text-center" >No live stock found</span></td>
+                    
+                </tr>
+               <!-- <tr>
+                    <th>Stock Status</th>
+                    <th>Reserve Stock</th>
+                    <th>Total Stock</th>
+                </tr>
+                <tr>
+                    <td>On Request</td>
+                    <td>2</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Stock</td>
+                    <td>4</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>On Request</td>
+                    <td>1</td>
+                    <td>3</td>
+                </tr>-->
+            </tbody>
+        </table>
+        <!--<div class="stock-wrap">
+                <h4>Made to order</h4>
+                <div class="stock-img-wrap">
+                    <img src="assets/images/img-screen.png" alt="" class="img-fluid">
+                </div>
+          </div>-->
+    </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="content-wrap sec-padding sec-wrapper">
+   <div class="container">
+      <div id="question_wrap" class="question-wrap bg-white p-3 p-lg-5">
+         <h3 class="dialog-title">Please Answer the following question about your business.</h3>
+         <form [formGroup]="questionForm" (ngSubmit)="handleSubmit()" novalidate>
+
+            <!-------------------- Establishment Type ------------------->
+
+            <div class="form-group p-0 m-0">
+               <h4 class="mb-3">1. 
+                  <span style="color:#c40000;font-size:25px;">*</span> 
+                  Select your establishment type.
+                 
+               </h4>
+               <div class="cstm-circle-check">
+                  <mat-radio-group aria-label="Select an option"
+                  class="filter-checkbox filter-radio-btn w-100 justify-content-center justify-content-lg-start">
+                     <mat-radio-button *ngFor="let type of types"
+                     (change)="onChangeType($event, type)" [value]="type.id">
+                        <span class="product-checkbox-img">
+                           <img src="{{type.image}}" alt="" class="img-fluid">
+                        </span>
+                        <span class="filter-checbox-title">
+                           {{type.business_type}}
+                        </span>
+                     </mat-radio-button>
+                  </mat-radio-group>
+               </div>
+            </div>
+
+            <!-------------------- Business Category ------------------->
+
+            <div class="form-group p-0 m-0">
+               <h4 class="mb-3">2. 
+                  <span style="color:#c40000;font-size:25px;">*</span>
+                  Select your business category.
+               </h4>
+               <div class="cstm-circle-check">
+                  <mat-radio-group aria-label="Select an option"
+                  class="filter-checkbox filter-radio-btn w-100 justify-content-center justify-content-lg-start">
+                     <mat-radio-button *ngFor="let partner of partners"
+                     (change)="onChangeBusinessCategory($event, partner)" [value]="partner.id">
+                        <span class="product-checkbox-img">
+                           <img src="{{partner.image}}" alt="" class="img-fluid">
+                        </span>
+                        <span class="filter-checbox-title">
+                           {{partner.business_partner}}
+                        </span>
+                     </mat-radio-button>
+                  </mat-radio-group>
+               </div>
+            </div>
+
+            <!-------------------- Business Sector ------------------->
+
+            <div class="form-group p-0 m-0">
+               <h4 class="mb-3">3. 
+                  <span style="color:#c40000;font-size:25px;">*</span>
+                  Select top business sector where you supply.
+               </h4>
+               <ngx-slick-carousel class="carousel question-product-slider" #slickModal="slick-carousel"
+                  [config]="questionSlider">
+                  <div ngxSlickItem class="slide" *ngFor="let item of items">
+                       <!-- <mat-radio-button
+                        (change)="onChangeBusinessSector($event, item)" [value]="item.id">
+                           <span class="product-checkbox-img">
+                              <img src="{{item.image}}" alt="" class="img-fluid">
+                           </span>
+                           <span class="filter-checbox-title">
+                              {{item.business_client}}
+                           </span>
+                        </mat-radio-button>-->
+                        <mat-checkbox class="filter-checkbox" (change)="onChangeBusinessSector($event, item)">
+                           <span class="product-checkbox-img">
+                              <img src="{{item.image}}" alt="" class="img-fluid">
+                           </span>
+                           <span class="filter-checbox-title">
+                              {{item.business_client}}
+                           </span>
+                        </mat-checkbox>
+                  </div>
+               </ngx-slick-carousel>
+            </div>
+
+            <!-------------------- Product Category  ------------------->
+
+            <div class="form-group p-0 m-0">
+               <h4 class="mb-3">4. 
+                  <span style="color:#c40000;font-size:25px;">*</span>
+                  Which product category you are primarily Interested in.
+               </h4>
+               <ngx-slick-carousel class="carousel question-product-slider" #slickModal="slick-carousel"
+                  [config]="questionSlider">
+                  <div ngxSlickItem class="slide" *ngFor="let product of products">
+                     <mat-checkbox class="filter-checkbox" (change)="onChangeProduct($event, product)">
+                        <span class="product-checkbox-img">
+                           <img src="{{product.product_category_image_150x150}}" alt="" class="img-fluid">
+                        </span>
+                        <span class="filter-checbox-title">
+                           {{product.product_category}}
+                        </span>
+                     </mat-checkbox>
+                  </div>
+               </ngx-slick-carousel>
+            </div>
+
+            <!-------------------- Annual Turnover  ------------------->
+
+            <div class="form-group p-0 m-0">
+               <h4 class="mb-3">5. 
+                  <span style="color:#c40000;font-size:25px;">*</span>
+                  Please specify your annual turnover in range.
+               </h4>
+               <div class="cstm-circle-check">
+                  <mat-radio-group aria-label="Select an option"
+                  class="filter-checkbox filter-radio-btn w-100 justify-content-center justify-content-lg-start">
+                     <mat-radio-button *ngFor="let turnOve of turnOver; index as i"
+                     (change)="onChangeTurnOver($event, turnOve)" [value]="i">
+                        <span class="product-checkbox-img">
+                           <img src="assets/images/Rupay.png" alt="" class="img-fluid">
+                        </span>
+                        <span class="filter-checbox-title">
+                           {{turnOve.label}}
+                        </span>
+                     </mat-radio-button>
+                  </mat-radio-group>
+               </div>
+            </div>
+
+            <div class="form-group">
+               <button [disabled]="isProcessing" type="submit" class="btn btn-red">
+                  <mat-spinner *ngIf="isProcessing" [diameter]="20"></mat-spinner>
+                  <span *ngIf="!isProcessing">Next</span>
+               </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>

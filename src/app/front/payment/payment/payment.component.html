@@ -1,0 +1,51 @@
+<div class="sec-common catalogue-sec sec-bg sec-padding">
+    <div class="container container-large">
+<!-- payment -->
+<div class="content px-0 pb-0 pt-5 language-wrap mt-5">
+    <div class="row px-5 mb-3">
+       <div class="col-md-12">
+          <h4>All payment method</h4>
+       </div>
+    </div>
+    <div class="text-center " style="color: #F16A2A;" *ngIf="isProcessing">
+      <div class="spinner-border" role="status">
+         <span class="sr-only">Loading...</span>
+      </div>
+   </div>
+    <div *ngIf="!isProcessing">
+       <ul class="language-list list-unstyled payment-method-list">
+         <!--<li class=""><a href="javascript:(void)" [routerLink]="'credit'"> Credit Card/Debit Card <span class="material-icons">
+            keyboard_arrow_right
+            </span></a></li>-->
+          <li class="">
+             <a href="javascript:(void)" (click)="proceed()">
+               Pay With Razorpay (Online Payment)
+               <span class="material-icons">
+                  keyboard_arrow_right
+               </span>
+             </a>
+          </li>
+          <li class="">
+            <a href="javascript:(void)" (click)="rtgs()">
+               RTGS (Manual Payment)
+               <span class="material-icons">
+                  keyboard_arrow_right
+               </span>
+            </a>
+         </li>
+         <li class="">
+            <a href="javascript:(void)" (click)="neft()">
+               NEFT (Manual Payment)
+               <span class="material-icons">
+                  keyboard_arrow_right
+               </span>
+            </a>
+         </li>
+          <!--<li class=""><a href="javascript:(void)" [routerLink]="'cheque'">Cheque <span class="material-icons">
+            keyboard_arrow_right
+            </span></a></li>-->
+      </ul>
+    </div>
+ </div>
+</div>
+</div>

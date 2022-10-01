@@ -1,0 +1,20 @@
+<div class="valori ">
+    <div id="modal-content-wrapper">
+        <div class="modal-header">
+            <h5 class="modal-title">Delete</h5>
+            <div class="icon">
+                <i class="fa fa-times" style="color:#C40000" (click)="onNoClick()"></i>
+            </div>
+        </div>
+        <div class="p-4">
+            <header id="modal-header">
+                <!-- <div class="icon-center mb-2"> <i class="fa fa-money logout-ico" style="color:#506ee4" aria-hidden="true"></i></div> -->
+                <p id="modal-title" role="alert">Are you sure you want to delete?</p>
+            </header>
+            <footer id="modal-footer" class="text-center">
+                <button class="btn btn-common btn-sm cstm" [mat-dialog-close]="data.val">Yes</button> &nbsp;
+               <button mat-button class="btn btn-common btn-sm cstm" (click)="onNoClick()">No</button>
+            </footer>
+        </div>
+    </div>
+</div>

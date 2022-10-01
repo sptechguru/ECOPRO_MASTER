@@ -1,0 +1,744 @@
+<ngx-spinner   bdColor="rgba(51,51,51,0.8)" color="#fff"
+template="<img src='https://i.gifer.com/origin/b4/b4d657e7ef262b88eb5f7ac021edda87.gif' style='width:100px;' />">
+</ngx-spinner>
+
+<div class="catalogue-sec sec-wrapper sec-padding pt-0 bg-white">
+  <div class="top-row" *ngIf="product_category || product.product_name || variant_name">
+    <div class="container container-large" *ngIf="deals != 'true'">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <ol class="breadcrumb mb-0 bg-transparent">
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/categories']">{{product_category}}</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/filtered-products/', id]">{{product.product_name}}</a>
+            </li>
+            <li class="breadcrumb-item">
+              {{variant_name}}
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-large" *ngIf="deals == 'true'">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <ol class="breadcrumb mb-0 bg-transparent">
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/categories']">{{product_category}}</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/search-deals-product/', id]">{{product.product_name}}</a>
+            </li>
+            <li class="breadcrumb-item">
+              {{variant_name}}
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngFor="let variant of product.product_variants">
+    <div *ngIf="variant.isSelected" class="bg-white">
+      <div>
+        <div class="row mx-0 layout-box" style="display: flex;">
+          <div class="col-5 col-s-12 mb-3 pt-0" style="left: 0; flex: 1;">
+            <div class="sticy-box">
+              <div>
+                <div>
+                  <div>
+                    <ngx-slick-carousel class="carousel product-slider" #slickModal="slick-carousel"
+                      [config]="slideConfig">
+                      <div ngxSlickItem class="slide-col" *ngIf="youtubeUrl && youtubeUrlStatus">
+                        <iframe width="500" height="450" [src]="youtubeUrl | safe" frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen></iframe>
+                      </div>
+                      <div ngxSlickItem class="slide slide-col" *ngIf="featuredImage && !youtubeUrlStatus">
+                        <lib-ngx-image-zoom [thumbImage]=featuredImage [fullImage]=featuredFullImage [mode]="hover"
+                          [magnification]="0" [enableScrollZoom]="false" [enableLens]="false"
+                          [isInsideStaticContainer]="true">
+                        </lib-ngx-image-zoom>
+                      </div>
+                      <div ngxSlickItem class="slide-col" *ngIf="!featuredImage && !youtubeUrlStatus">
+                        <lib-ngx-image-zoom [thumbImage]=default_image [fullImage]=featuredFullImage [magnification]="0"
+                          [enableScrollZoom]="false" [enableLens]="false" [isInsideStaticContainer]="true">
+                        </lib-ngx-image-zoom>
+                      </div>
+                    </ngx-slick-carousel>
+
+                  </div>
+
+                  <ngx-slick-carousel class="carousel product-slider-nav" #slickModal="slick-carousel"
+                    [config]="slideConfig2" *ngIf="variantSliderImageStatus">
+                    <div ngxSlickItem class="slide" *ngFor="let varian_image of variantSliderImage.product_images"
+                      (click)="productDisplay(varian_image, default_image)">
+
+                      <img src="{{varian_image.product_variant_image_150x150}}" alt="" class="img-fluid">
+                    </div>
+                    <div ngxSlickItem class="slide" (click)="productYoutubeDisplay(youtubeUrl)">
+                      <img src="assets/images/download_youtube.png" alt="" class="img-fluid">
+                    </div>
+                  </ngx-slick-carousel>
+                </div>
+                <!--<div>
+            <div class="row mx-0">
+             <div class="col-xl-4 col-lg-6 col-12 " *ngIf="sampleProductStatus && login_status">
+              <button class="btn-grn w-100 button_hover my-2"  (click)="addToCart();">Add to Cart</button>
+             </div>
+             <div class="col-xl-4 col-lg-6 col-12  " *ngIf="sampleProductStatus && login_status">
+              <button class="btn-grn w-100 button_hover my-2" (click)="getSample();">Buy Sample</button><br/>
+              
+             </div>
+             <div class="col-xl-4 col-12 " *ngIf="sampleProductStatus && login_status">
+              <button class="btn-grn w-100 button_hover my-2"  [routerLink]="['/add-catalogue', vid ]">Add to Catalogue</button>
+             </div>
+             <div class="col-lg-6 col-12" *ngIf="!sampleProductStatus && login_status">
+              <button class="btn-grn w-100 button_hover my-2" (click)="addToCart();">Add to Cart</button>
+             </div>
+             <div class="col-lg-6 col-12" *ngIf="!sampleProductStatus && login_status">
+              <button class="btn-grn w-100 button_hover my-2"  [routerLink]="['/add-catalogue', vid ]">Add to Catalogue</button>
+             </div>
+            </div>
+          </div>
+        -->
+              </div>
+
+
+              <!-- <div>
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height: auto;">
+        </div>
+        <div class="mx-0 row d-flex justify-content-center pt-4">
+            
+              <div class="col-3 px-0">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height:auto">
+              </div>
+              <div class="col-3 px-0 mx-3">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height:auto">
+              </div>
+              <div class="col-3 px-0">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height:auto">
+              </div>
+            
+        </div>
+      -->
+
+            </div>
+          </div>
+          <div class="col-7" style="right: 0; overflow-y: scroll; flex: 1; height: 100vh;">
+            <div class="pt-2" *ngIf="this.product.header_tags !=null && this.product.header_tags.length > 0">
+              <h6 class="d-inline-flex" style="border-radius:4px">
+                <ng-container >
+                  <div class="d-inline my auto badge" *ngFor="let header of this.product.header_tags;let index=index"
+                  style="color: #ffffff; background-color: #343a40; padding:6px 9px 6px 15px; font-size:12px;" [class.ml-0]="index==0">
+                  <img src="{{header.header_tag_image}}"
+                    style="height: 20px;padding-right: 5px; margin-top: -1px;"><span>{{header.name}}</span>
+                </div>
+                </ng-container>
+            
+                <!--<div class="d-inline my auto badge"
+                  style="color: #ffffff; background-color: #343a40; padding:6px 9px 6px 15px; font-size:12px;">
+                  <img src="../../../assets/images/svg/check_circle_outline_black_24dp.svg"
+                    style="height: 20px;padding-right: 5px; margin-top: -1px;"><span>In Stock</span>
+                </div>
+                <div class="d-inline my auto badge"
+                  style="color: #ffffff; background-color: #343a40; padding:6px 9px 6px 15px; font-size:12px;">
+                  <img src="../../../assets/images/svg/check_circle_outline_black_24dp.svg"
+                    style="height: 20px;padding-right: 5px; margin-top: -1px;"><span>Fast Dispatch</span>
+                </div>
+              -->
+              </h6>
+            </div>
+            <div>
+              <h2 class="my-2 pt-1">
+                {{variant.variant_name}}
+                <!-- <span class="badge badge-secondary p-2">Hot sale products</span> -->
+              </h2>
+              <!---
+              <div class="py-2">
+                <div class="colored-box">
+                  <span  class="px-2 font-weight-bold">4.9</span>
+                  <img src="../../../assets/images/svg/grade_black_24dp.svg">
+                </div>
+                <span class="pr-4 font-weight-medium">27 Viewers</span>
+                <span class="ml-2 font-weight-medium">60 buyers</span>
+              </div>
+              -->
+            </div>
+
+            <div class="my-2" *ngIf="login_status && variant.view_flat_price =='no'">
+              <div class="row mx-0" style="border-bottom: 1px solid #e9e9e9;" *ngIf="this.variant.offer_prices.length > 0">
+                <div [ngClass]="'col-'+12/this.variant.offer_prices.length" class="py-3" *ngFor="let i of variant.offer_prices">
+                  
+                  <div *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'">
+                    <span>{{i.min_quantity}} - {{i.max_quantity}} Pieces </span>
+                  </div>
+                  <div class="py-2">
+                    <h3 *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'" style="color:#c40000" class="m-0">₹{{i?.offer_price}} </h3>
+                    <h3 *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'"  class="m-0"> 
+                      <del>₹{{variant?.max_retail_price}}</del>
+                     </h3>
+                  </div>                 
+                </div>
+              </div>
+
+              <!--<div class="d-flex justify-content-between" style="border-bottom: 1px solid #e9e9e9;">
+                <div class="py-3" *ngFor="let i of variant.offer_prices">
+                  <div>
+                    <span>{{i.min_quantity}} - {{i.max_quantity}} Pieces</span>
+                  </div>
+                  <div class="py-2">
+                    <h3 style="color:#c40000" class="m-0">₹{{i.offer_price}}</h3>
+                  </div>
+                  
+                </div>
+              </div>
+            -->
+            </div>
+
+            <div class="py-2">
+              <div class="row mx-0">
+                <div class="col-lg-9 col-12">
+                  <div>
+                    <div>
+                      <div class="row mx-0">
+                        <div class="col-4 px-0 my-auto" style="margin-left: 0!important;margin-top:auto!important;">
+                          <h3 class="m-0">Variants</h3>
+                        </div>
+                        <div class="col-8 pl-0">
+                          <div class="form-group">
+                            <select class="form-control" id="sel1" [(ngModel)]="selected"
+                              [ngModelOptions]="{standalone:true}" (change)="changeFunc($event)">
+                              <option value="{{variantLoop.id}}" *ngFor="let variantLoop of product.product_variants">
+                                {{variantLoop.variant_name}}</option>
+
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      <div>
+                        <h4 class="font-weight-bold" *ngIf="variant.sample_price">
+                          Sample Price:Rs {{variant.sample_price}} + {{variant.sample_price_tax}} tax
+                        </h4>
+                      </div>
+                      <div>
+                        <h4 style="color:#333; font-weight: 500;display: inline-block;">
+                          HSN Code:{{variant.hsn_code}}</h4>
+                      </div>
+                     
+
+                      <div style="border-left: 1px solid #ccc;" class="pl-3 resp-wd col-5">
+                        <div>
+                          <h4 *ngIf="variant.ready_stock > 0" class="font-weight-medium">Ready Stock:&nbsp;{{variant.ready_stock}}</h4>
+                        </div>
+              
+                        <div class="d-flex pb-3" *ngIf="login_status && variant.view_flat_price !='no' ">
+                          <div>
+                            <h1 *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'" 
+                            style="color: #c40000; font-size: 1.9rem;">₹ {{variant.base_price | number}}</h1>
+                          </div>
+                          <div class="pt-2">
+                            <h4
+                             class="px-2 d-inline"><del *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'">₹{{variant.max_retail_price | number}}</del>
+                            </h4>
+                             <!-- <h4  *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'" style="color:#333; font-weight: 500;display: inline-block;">HSN Code :- {{variant.hsn_code}}</h4> -->
+                          </div>
+                        </div>
+                        <!-- <div  *ngIf="!login_status">
+                          <h1>₹{{variant.max_retail_price | number}}</h1>
+                        </div> -->
+                        <div style="margin-top: -5px;">
+                          <span style="font-size: 14px;">GST @ {{variant.gst | number}}% Excluded</span>
+
+                        </div>
+
+                      </div>
+
+                      <div class="d-flex pt-3 pb-2 resp-wd col-7">
+                        <div class="my-auto">
+
+                          <span>Update Qty:</span>
+                        </div>
+                        <div class="d-flex px-2 resp-wd">
+                          <div (click)="removeticket()"
+                          style="cursor: pointer;width: 40px;height: 40px;border:1px solid black;border-right: none;border-radius: 4px;border-top-right-radius:0px;border-bottom-right-radius:0px;background-color:#c40000;"
+                          class="d-flex justify-content-center align-items-center">
+                          <mat-icon class="text-white">remove</mat-icon>
+                        </div>
+                          <div style="height: 40px;width:auto;max-width:75px;border:1px solid black;"
+                            class="d-flex justify-content-center align-items-center">
+                            <span style="font-size: 24px;">
+                              <input type="text"
+                                style="border: none;width:auto;height: 40px;max-width:75px;background-color: transparent;padding-left:5px;padding-right: 5px;text-align:center;"
+                                 [(ngModel)]="quantity" (ngModelChange)="modelChanged(quantity)" maxlength="5"
+                                autocomplete="off">
+                            </span>
+                          </div>
+                            <div (click)="increaseQuantity()"
+                            style="cursor: pointer;width: 40px;height: 40px;border:1px solid black; border-left: none;border-radius: 4px;border-top-left-radius:0px;border-bottom-left-radius:0px;background-color: #c40000;"
+                            class="d-flex justify-content-center align-items-center">
+                            <mat-icon class="text-white">add</mat-icon>
+                          </div>
+                      
+                        </div>
+
+                      </div>
+                      
+                      <div class="col-7" style="float: right;" *ngIf="variant.ready_stock > 0  && variant.lead_times.length > 0 && variant.moq_ready_stock != null "> 
+                        <!--<span class="" style="font-size: 14px; margin-right: 20px;">Qty Per Pack:
+                          {{variant.package_quantity}} Piece</span>-->
+                        <span class="" style="font-size: 14px;">Min Orderable Qty : {{variant.moq_ready_stock }}
+                          pieces</span>
+                      </div>
+                      <div class="col-7" style="float: right;" *ngIf="variant.lead_times.length > 0 && variant.ready_stock <=0 && variant.moq_made_for_order != null">
+                        <!--<span class="" style="font-size: 14px; margin-right: 20px;">Qty Per Pack:
+                          {{variant.package_quantity}} Piece</span>-->
+                        <span class="" style="font-size: 14px;">Min Orderable Qty : {{variant.moq_made_for_order }}
+                          pieces</span>
+                      </div>
+                      
+
+
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-3 col-lg-3 col-12">
+
+                  <div class="d-flex left-side-cart">
+
+                    <button  class="btn btn-red iot-btn-primary view-detail-btn btn-sm"
+                    *ngIf="login_status && !this.kycdata || (!this.gstno  && this.gststatus =='pending')"
+                    (click)="openDialogs()">Unlock Exculsive Price</button>
+                    
+               <button  class="btn btn-red iot-btn-primary view-detail-btn btn-sm" *ngIf="this.kycdata && this.gstno && this.gststatus == 'pending'">
+                 Your Request is Under process
+                </button>
+                    <div *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'">
+                      <button class="btn-grn w-100 button_hover my-2" (click)="addToCart(variant);">
+                        <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                        Add to Cart
+                      </button>
+                    </div>
+
+                    <div *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'">
+                      <div *ngIf="variant.sample_availability=='yes' && login_status && variant.sample_stock > 0 &&  variant.sample_stock != null 
+                        ">
+                        <button class="btn-grn w-100 button_hover my-2" (click)="getSample();">
+                          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                          Buy Sample
+                        </button><br />
+                      </div>
+                    </div>
+
+                    <div *ngIf="this.kycdata && this.gstno && this.gststatus !== 'pending'" >
+                      <button class="btn-grn w-100 button_hover my-2" [routerLink]="['/add-catalogue', vid ]">
+                        <i class="fas fa-plus" aria-hidden="true"></i>
+                         Catalogue
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12" *ngIf="this.product.trade_assurance !=null && this.product.trade_assurance.length > 0">
+                  <div class="resp-wd resp-btn">
+                    <div class="pb-3">
+                      <div>
+                        <button class="text-center  btn btn-block "
+                          style="font-weight: 600;font-size:13px;color:black;"><span>Trade Assurance</span></button>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row mx-0">
+                        <div [ngClass]="'col-'+12/this.product.trade_assurance.length"  *ngFor="let trade of this.product.trade_assurance; let i=index;">
+                          <div class="text-xs-center text-lg-center" *ngIf="i<3">
+                          
+                            <img src="{{trade.trade_assurance_image}}" style="width: 30px; height: 30px;" >
+                          </div>
+                          <div class="pl-2 text-xs-center text-lg-center" style="margin-top: auto;margin-bottom: auto;" *ngIf="i<3">
+                            <span style="color: #333;">{{trade.name}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!--<div class="d-flex justify-content-between">
+                      
+                      
+                        <div class="d-flex" *ngFor="let trade of this.product.trade_assurance;">
+                          <div style="margin-top: auto; margin-bottom: auto;">
+                          
+                            <img src="{{trade.trade_assurance_image}}" style="width: 30px; height: 30px;">
+                          </div>
+                          <div class="pl-2" style="margin-top: auto;margin-bottom: auto;">
+                            <span style="color: #333;">{{trade.name}}</span>
+                          </div>
+                        </div>
+      
+                      </div>
+                    -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="pb-3">
+                    <div></div>
+                  </div>
+
+                  <div class="pb-3">
+                    <button class="text-center  btn btn-block "
+                      style="font-weight: 600;font-size:13px;color:black;"><span>Delivery Check</span></button>
+                  </div>
+
+                  <div class="tab-btn">
+                    <form [formGroup]="deliveryForm" (ngSubmit)="submitDeliveryForm()" *ngIf="deliveryForm">
+                      <input type="number" min=0 formControlName="unite" placeholder="No. of Units" class="light-btn pl-2">
+                      <input type="number" min=0 formControlName="pincode" placeholder="Pin Code" class="light-btn pl-2">
+                      <button class="light-btn button_hover">Check</button>
+                    </form>
+                    <h4 *ngIf="deliveryForm.valid && deliveryMsg">Delivery: <i style="color: #c40000;">{{ deliveryMsg }}</i></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bd-box">
+              <h2>Variant Description</h2>
+              <div class="mb-2" [innerHTML]="variant.variant_description"></div>
+              <!---
+              <ul>
+                <li *ngFor="let i of variant.keyFeature">{{i}}</li>
+
+              </ul>
+            -->
+              <h2 *ngIf="this.att!=undefined && this.att.length > 0 ">PRODUCT SPECIFICATIONS</h2><br />
+              <table class="table product-table" *ngIf="this.att!=undefined && this.att.length > 0 ">
+                <thead></thead>
+                <tbody>
+                  <ng-container >
+                    <tr *ngFor="let specifications of this.att;let i=index;">
+                      <td>{{specifications.attribute_name}}</td>
+                      <td>{{specifications.attribute_value}}</td>
+                    </tr>
+                  </ng-container>
+                  <!--<ng-template #specification>
+                    <tr *ngFor="let specifications of variant.keySepcification;let i=index;">
+                      <td>{{specifications.key}}</td>
+                      <td>{{specifications.value}}</td>
+                    </tr>
+                  </ng-template>
+                -->
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12" *ngIf="variant?.lead_times?.length > 0">
+
+
+              <div class="emt-box"></div>
+              <div class="grn-box">
+                <h5>Lead Time</h5>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Units</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody class="no-bd">
+                    <tr *ngFor="let i of variant.lead_times">
+                      <td>{{i.min_quantity}}-{{i.max_quantity}}</td>
+                      <td>{{i.min_eta}}-{{i.max_eta}} days</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="emt-box"></div>
+              <div class="grn-box">
+                <h5>Minimum Order Quantity</h5>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="wd-50">For Ready Stock</td>
+                      <td *ngIf="variant.moq_ready_stock > 0">{{ variant.moq_ready_stock }}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">For Made To Order</td>
+                      <td>{{ variant.moq_made_for_order }}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">For Customisation Order</td>
+                      <td>{{ variant.moq_customisation_order }}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">For Customised Box</td>
+                      <td>{{ variant.moq_customised_box }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="emt-box"></div>
+              <div class="grn-box" *ngIf="product?.branding_possibilities === 'yes'">
+                <h5>Customisation</h5>
+                <table class="table">
+                  <tbody class="no-bd">
+                    <tr>
+                      <td class="wd-50">Customisation Possible</td>
+                      <td>{{variant.customisation_possible}}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">Type of Customisation</td>
+                      <td>{{variant.customisation_type}}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">Customisation Sample </td>
+                      <td>{{variant?.customisation_sample === 'yes' ? 'yes' : 'no'}}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">Customisation Position</td>
+                      <td>{{variant.customisation_position}}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">Customisation Location</td>
+                      <td>{{variant.customisation_location}}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">Cost of Customisation</td>
+                      <td>Rs. {{variant.customisation_cost}}</td>
+                    </tr>
+                    <tr>
+                      <td class="wd-50">Customisation Template</td>
+                      <td>View</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!---
+          <div class="row mx-0 review-box">
+            <div class="col-5 ">
+              <h4>Customer Reviews</h4>
+              <div class="py-2">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <span style="color:#c40000" class="px-2 font-weight-bold">4.9</span>
+                        <span class="pr-4 font-weight-bold">4.3 out of 5</span>
+                    </div>
+                    <table class="table review-table">   
+            <tbody>
+              <tr>
+                <td><a href="">5 star</a></td>
+                <td></td>
+                <td><a href="">59%</a></td>
+              </tr>
+              <tr>
+                <td><a href="">4 star</a></td>
+                <td></td>
+                <td><a href="">24%</a></td>
+              </tr>
+              <tr>
+                <td><a href="">3 star</a></td>
+                <td></td>
+                <td><a href="">8%</a></td>
+              </tr>
+              <tr>
+                <td><a href="">2 star</a></td>
+                <td></td>
+                <td><a href="">2%</a></td>
+              </tr>
+              <tr>
+                <td><a href="">1 star</a></td>
+                <td></td>
+                <td><a href="">6%</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <h6><a href="">How are ratings calculated?</a></h6>
+          <h4>By Feature</h4>
+          <table class="table feature-table">   
+            <tbody>
+              <tr>
+                <td>For travelling</td>
+                <td></td>
+                <td><a href=""><div >
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <span style="color:#333;" class="px-2 font-weight-medium">4.0</span>
+                        
+                    </div></a></td>
+              </tr>
+              <tr>
+                <td>Charging Power</td>
+                <td></td>
+                <td><a href=""><div >
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <span style="color:#333;" class="px-2 font-weight-medium">3.9</span>
+                        
+                    </div></a></td>
+              </tr>
+              <tr>
+                <td>Battery Life</td>
+                <td></td>
+                <td><a href=""><div >
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <img src="grade_black_24dp.svg">
+                        <span style="color:#333;" class="px-2 font-weight-medium">3.9</span>
+                        
+                    </div></a></td>
+              </tr>      
+            </tbody>    
+          </table>
+          <h6></h6>
+          <div class="product-box">
+          <h4>Review this product</h4>
+          <p >Share your thoughts with other customers</p>
+          <a href="#">Write a product review</a>
+          </div>
+            </div>
+            <div class="col-7 images-box">
+              <h4>Reviews with Images</h4>
+              <div class="review-images col-12">
+              <div class="col-3">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height:auto">
+              </div>
+              <div class="col-3">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height:auto">
+              </div>
+              <div class="col-3">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height:auto">
+              </div>
+              <div class="col-3">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid" style="height:auto">
+              </div>
+              <a href="">See all customer images</a>
+              </div>
+              
+              <div class="col-12">
+              <h4>Read reviews that mention</h4>
+              <button>Power bank</button>
+              <button>Battery life</button>
+              <button>Value for money</button>
+              <button>Fully charged</button>
+              <button>Full charge</button>
+              <button>Battery backup</button>
+              <button>Micro usb</button>
+              <button>USB cable</button>
+              <button>Easy to carry</button>
+              <button>MAH battery</button>
+              <button>Stopped working</button>
+              <button>Type c cable</button>
+              <button>Best power</button>
+              <button>Much time</button>
+              <button>Must buy</button>
+              </div>
+
+                <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              Top reviews
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Link 1</a>
+              <a class="dropdown-item" href="#">Link 2</a>
+              <a class="dropdown-item" href="#">Link 3</a>
+            </div>
+          </div>
+
+
+          <h4>Top reviews from India</h4>
+          <div class="icn-reviews">
+            <p><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="img-fluid">Baskaran Rathinam</p>
+            <div class="desc-review">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <img src="red_icon.svg">
+                        <span style="color:#333;" class="px-2 font-weight-bold">Too Slow</span>
+                        <h6 style="color: #777; font-size: 14px; border-bottom: none; padding: 0; margin-bottom: 0;">Reviewed in India on 14 August 2020</h6>
+                        <h5 style="font-size: 14px; font-weight: 700; color: #c40000; margin-bottom: 0;">Verified Purchase</h5>
+                        <p style="font-size: 14px; color: #444; width: 70%; font-weight: 500;">It takes 40 to 50 mins to charge my mobile phone from direct socket, but with this power bank the mobile gor charged only 40% in an hour. </p>
+                        
+                    </div>
+          </div>
+            </div>
+          </div>
+
+
+          <div class="row mx-0 qa-box">
+            <div class="col-12">
+            <h4>Customer questions & answer</h4>
+            <form action="">
+              <input type="" placeholder="Have a question? Search for answers" />
+            </form>
+            <div class="qa-content">
+            <div class="col-1">
+              <h6 class="font-weight-bold">2</h6>
+              <span>Votes</span></div>
+            <div class="col-2">
+              <h5>Question:</h5>
+              <h6>Answer: </h6>
+            </div>
+            <div class="col-9">
+              <a href="" class="font-weight-bold" style="color: #52a1f5;">Can we charge this power bank by using vivo y15 adaptor which it is 18 w</a>
+              <h5>Yes</h5>
+              <span>By Ajmal on 21 Aug, 2021</span>
+            </div>
+            </div>
+
+            <div class="qa-content">
+            <div class="col-1">
+              <h6 class="font-weight-bold">2</h6>
+              <span>Votes</span></div>
+            <div class="col-2">
+              <h5>Question:</h5>
+              <h6>Answer: </h6>
+            </div>
+            <div class="col-9">
+              <a href="" class="font-weight-bold" style="color: #52a1f5;">Can we charge this power bank by using vivo y15 adaptor which it is 18 w</a>
+              <h5>Yes</h5>
+              <span>By Ajmal on 21 Aug, 2021</span>
+            </div>
+            </div>
+
+            <div class="qa-content">
+            <div class="col-1">
+              <h6 class="font-weight-bold">2</h6>
+              <span>Votes</span></div>
+            <div class="col-2">
+              <h5>Question:</h5>
+              <h6>Answer: </h6>
+            </div>
+            <div class="col-9">
+              <a href="" class="font-weight-bold" style="color: #52a1f5;">Can we charge this power bank by using vivo y15 adaptor which it is 18 w</a>
+              <h5>Yes</h5>
+              <span>By Ajmal on 21 Aug, 2021</span><br/><br/>
+              <a href="#" class="qa-btn">See more answered questions (996)</a>
+            </div>
+            </div>
+            
+            </div>
+          </div>
+        -->
+      </div>
+    </div>
+  </ng-container>
+</div>

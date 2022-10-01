@@ -1,0 +1,15 @@
+.email-verified {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.email-verified h3 {
+    margin-top: 30px;
+    font-size: 32px;
+    color: #19b6c7;
+    text-align: center;
+    text-transform: capitalize;
+}

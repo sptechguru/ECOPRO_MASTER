@@ -1,0 +1,16 @@
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
+.tracking-table-1 thead tr th {
+    font-weight: 600;
+    border-bottom: 2px solid #e2e2e2;
+}
+.tracking-table-1 thead tr td{
+    border-bottom: 1px solid #e2e2e2;
+}
+.tracking-table-1{
+    margin-bottom: 50px;
+}
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{
+    background-color: #c40000;
+}

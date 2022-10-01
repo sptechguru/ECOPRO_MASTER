@@ -1,0 +1,144 @@
+<div class="sec-common sec-bg sec-padding">
+    <div class="container">
+        <h3 class="inner-sec-title my-0">Checkout</h3>
+       <!-- checkout -->
+       <div class="content mt-4 p-0 cart-content">
+          <div class="category-list cart-list">
+
+            <div *ngFor="let data of cartData; let i = index;">
+            <div class="category-list-detail" *ngIf="data.user_id === userData.id">
+                <div class="product-category-info">
+                   <span class="product-thumb-img">
+                     <a *ngIf="data.deals != 'true'" [routerLink]="['/categories/'+data.cid+'/'+data.pid+'/'+data.vid]">
+                        <img *ngIf="data.variant_image === ''" src="{{default_image}}" alt="Product">
+                        <img *ngIf="data.variant_image" src="{{data.variant_image}}" alt="Product">
+                     </a>
+                     <a href="javscript:(void)" *ngIf="data.deals == 'true'" 
+                     (click)="productDetailDealsRoute(data.cid, data.pid, data.vid)">
+                        <img *ngIf="data.variant_image === ''" src="{{default_image}}" alt="Product">
+                        <img *ngIf="data.variant_image" src="{{data.variant_image}}" alt="Product">
+                     </a>
+                   </span>
+                   <div class="category-info-txt cart-info-txt">
+                        <h5>
+                           <a *ngIf="data.deals != 'true'" 
+                           [routerLink]="['/categories/'+data.cid+'/'+data.pid+'/'+data.vid]">
+                           {{data.variant_name}}</a>
+                           <a href="javscript:(void)" *ngIf="data.deals == 'true'" 
+                           (click)="productDetailDealsRoute(data.cid, data.pid, data.vid)">
+                           {{data.variant_name}}</a>
+                        </h5>
+                        <!--<h6>variant: 
+                           <span>{{data.variant_name}}</span>
+                       </h6>-->
+                        <p class="price-label">Offer Price: <span>Rs. {{toFixedFun(data.sale_price) | number}}/-  
+                           </span> </p>
+                        <p class="price-label price-label-small" *ngIf="data.MRP">MRP: <span>
+                           Rs. {{toFixedFun(data.MRP) | number}}/- 
+                        </span></p>
+                       <!--- <p class="price-label price-label-small" *ngIf="data.hsn_code">HSN Code: <span>
+                            {{data.hsn_code}}
+                        </span></p>
+                     -->
+                        <p class="price-label">GST: <span>{{toFixedFun(data.gst) | number}}% </span> </p>
+                        
+                        <!--<p class="d-flex align-items-center mt-3 ships-title">
+                           <strong>Dispatch in  {{data.ship_days}} Days</strong>
+                            <span class="material-icons ml-3">
+                            local_shipping
+                            </span>
+                         </p>
+                        -->
+                   </div>
+                </div>
+                <div class="cart-remove-col" *ngIf="data.user_id === userData.id">
+                   <P class="qty-label mt-4"><span>Qty : {{data.quantity}}</span></P>
+                </div>
+            </div>
+            </div>
+           
+             <div class="category-list-detail" *ngIf="shipingPrice != 0"> 
+                <p>
+                
+                   <small id="emailHelp" class="form-text text-muted small-txt mt-1">
+                   <span class="material-icons">
+                   report_problem
+                   </span>Delivery charges applicable*</small>
+                </p>
+             </div>
+             <div class="category-list-detail" *ngIf="shipingPrice == 0"> 
+               <p>
+               
+                  <small id="emailHelp" class="form-text text-muted small-txt mt-1" style="font-weight: bolder; color:red !important;">
+                     <!-- <span class="material-icons">
+                        report_problem
+                        </span> -->
+                 Delivery   - Hurry Free Shipping....</small>
+               </p>
+            </div>
+
+
+             <div class="category-list-detail justify-content-end" *ngIf="total_amount>500000">
+               <div class="form-check mb-0">
+
+                 <label class="form-check-label d-block mb-4">
+                    <input type="radio" id="full" class="form-check-input" name="type" (change)="paymentType('full_payment')">
+                    Full Payment
+                    <span class="circle">
+                       <span class="check"></span>
+                   </span>
+                 </label>
+
+                 <label class="form-check-label d-block mb-4">
+                    <input type="radio" id="partial" class="form-check-input" name="type" (change)="paymentType('partial_payment')">
+                    Partial Payment 
+                    <span class="circle">
+                       <span class="check"></span>
+                   </span>
+                 </label>
+                 
+               </div>
+            </div>
+
+             <div class="category-list-detail justify-content-end">
+                <div class="col-lg-6">
+                   <div class="card-content table-responsive price-detail-table checkout-table">
+                      <table class="table">
+                         <tbody>
+                            <tr>
+                              <th class="border-0">Sub Total</th>
+                              <th class="border-0 text-center">-  </th>
+                              <td class="border-0">{{toFixedFun(cartTotal) | number}}/-</td>
+                            </tr>
+                            <tr>
+                               <th class="border-0">GST</th>
+                               <th class="border-0 text-center">-  </th>
+                               <td class="border-0">{{toFixedFun(GST_amount) | number}}/-</td>
+                            </tr>
+                            <tr *ngIf="shipingPrice">
+                               <th class="border-0">Delivery Charge</th>
+                               <th class="border-0 text-center">-  </th>
+                               <td class="border-0" *ngIf="shipingPrice>0">{{toFixedFun(shipingPrice) | number}} /-</td>
+                               <!-- <td class="border-0" *ngIf="totalShipping == 0">As applicable</td> -->
+                               <td class="border-0" *ngIf="shipingPrice == 0">0 /-</td>
+                            </tr>
+                            <tr>
+                               <td colspan="3" class="border-0 text-right total-amnt">
+                                  Total : {{toFixedFun(total_amount) | number}} /-</td>
+                            </tr>
+                         </tbody>
+                      </table>
+                   </div>
+                </div>
+             </div>
+             <div class="btm-btn-wrap">
+                <button class="cart-btn">
+                   <span class="d-block"><strong>{{toFixedFun(total_amount) | number}}/-</strong></span> 
+                   <span (click)="viewDetail()">View Details</span>
+                </button>
+                <button class="cart-btn proceed-btn" (click)="checkout()">Proceed to checkout</button>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

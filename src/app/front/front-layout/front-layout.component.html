@@ -1,0 +1,10 @@
+<div class="front-module">
+    <mat-drawer-container class="sidenav-container">
+        <mat-drawer #drawer class="sidenav-wrap" mode="over">
+            <app-front-sidebar [sideNavbar]="drawer"></app-front-sidebar>
+        </mat-drawer>
+        <app-front-header [sideNavbar]="drawer"></app-front-header>
+        <router-outlet></router-outlet>
+        <app-front-footer></app-front-footer>
+      </mat-drawer-container>
+</div>

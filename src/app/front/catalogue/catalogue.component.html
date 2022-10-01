@@ -1,0 +1,63 @@
+<div class="sec-common catalogue-sec sec-bg sec-padding">
+   <div class="container container-large">
+      <div class="row align-items-center mb-5">
+         <div class="col-lg-6">
+            <h3 class="inner-sec-title my-0" *ngIf="catalogue_list.length>0">{{catalogue_list.length}} Catalogues found
+            </h3>
+         </div>
+         <div class="col-lg-6 text-right">
+            <button mat-raised-button color="" routerLink="/create-catalogue" class="iot-btn-dark">
+               <span class="material-icons mr-2">
+                  add
+               </span>Add Catalogue</button>
+         </div>
+      </div>
+      <div class="content bg-white py-4 px-5">
+         <div class="product-row" *ngIf="catalogueList && catalogueList.length>0">
+            <div *ngIf="catalogueList && catalogueList.length == 0">
+               <h3>Catalogues not found</h3>
+            </div>
+
+            <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+               <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+               </div>
+            </div>
+            <div class="product-col" *ngFor="let catalogue of catalogueList; let i index">
+               <div class="product_col-2">
+                  <a routerLink='/catalogue-product-list/{{catalogue.id}}'> 
+                      <div class="product-col-img">
+                        <img style="cursor:pointer;"
+                           src="/assets/images/catalog-icon-7343.png" alt="">
+                     </div> 
+                  </a><br>
+                 <!---
+                  <div class="dropdown img-dropdown">
+                     <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
+                        (click)="openMenu(catalogue.id)">
+                        <mat-icon>more_vert</mat-icon>
+                     </button>
+                     <ul class="dropdown-menu">
+                        <li>
+                           <a *ngIf="downloadlink" target="_blank" href="{{downloadlink}}">
+                              Download
+                           </a>
+                           <a style="cursor:pointer;" *ngIf="!downloadlink" (click)="downloadCatalogue()">
+                              Download
+                           </a>
+                        </li>
+                       
+                        <li><a routerLink="{{catalogue.id}}">Edit Catalogue</a></li>
+                        <li><a style="cursor:pointer;"
+                              (click)='openRemoveAlert(catalogue.id ,catalogue_list)'>Remove</a></li>
+                     </ul>
+                  </div>
+               -->
+               </div>
+
+               <p>{{catalogue.catalogue_name | titlecase}}</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

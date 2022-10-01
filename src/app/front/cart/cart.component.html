@@ -1,0 +1,93 @@
+<div class="sec-common sec-bg sec-padding sec-wrapper">
+    <div class="container">
+        <div class="row align-items-center mb-4">
+            <div class="col-lg-12">
+               <h3 class="inner-sec-title my-0">Cart</h3>
+            </div>
+         </div>
+       <div class="content mt-4 p-0 cart-content">
+          <div class="category-list cart-list">
+            <ng-container *ngFor="let data of cartData; let i = index;">
+                <div class="category-list-detail" *ngIf="data.user_id === userData.id">
+                    <div class="product-category-info">
+                        <span class="product-thumb-img">
+                           <a *ngIf="data.deals != 'true'" [routerLink]="['/categories/'+data.cid+'/'+data.pid+'/'+data.vid]">
+                            <img *ngIf="data.variant_image === ''" src="{{default_image}}" alt="Product">
+                            <img *ngIf="data.variant_image" src="{{data.variant_image}}" alt="Product"></a>
+                            <a href="javscript:(void)" *ngIf="data.deals == 'true'"  
+                            (click)="productDetailDealsRoute(data.cid, data.pid, data.vid)">
+                                <img *ngIf="data.variant_image === ''" src="{{default_image}}" alt="Product">
+                                <img *ngIf="data.variant_image" src="{{data.variant_image}}" alt="Product">
+                            </a>
+                        </span>
+                        <div class="category-info-txt cart-info-txt">
+                            <h5>
+                                <a *ngIf="data.deals != 'true'" [routerLink]="['/categories/'+data.cid+'/'+data.pid+'/'+data.vid]">
+                                {{data.variant_name}}</a>
+                                <a href="javscript:(void)" *ngIf="data.deals == 'true'"
+                                (click)="productDetailDealsRoute(data.cid, data.pid, data.vid)">
+                                    {{data.variant_name}}</a>
+                            </h5>
+                           <!-- <h6>variant: 
+                                <span>{{data.variant_name}}</span>
+                            </h6>-->
+                            <h6>Branding: 
+                                <span *ngIf="data.is_branding === 'yes'">yes</span> 
+                                <span *ngIf="data.is_branding === 'no'">no</span>
+                            </h6>
+                            <h6>
+                               <!-- <span *ngIf="data.cart_type === 'add_cart'">No</span> -->
+                                <span *ngIf="data.cart_type === 'get_sample'">Sample</span>
+                            </h6>
+                            <p class="price-label">Offer Price: <span>Rs. {{toFixedFun(data.sale_price) | number}}/-</span> </p>
+                            <p class="price-label price-label-small" *ngIf="data.MRP">MRP: <span>
+                                Rs. {{toFixedFun(data.MRP) | number}}/-
+                            </span></p>
+                            <p *ngIf="data.ready_stock > 0  && data.lead_times.length > 0 && data.moq_ready_stock != null">
+                                {{data.moq_ready_stock }} Piece (Min Order)</p>
+
+                            <p *ngIf="data.lead_times.length > 0 && data.ready_stock <=0 && data.moq_made_for_order != null">
+                                {{data.moq_made_for_order}} Piece (Min Order)
+                            </p>
+                           <!--- <p class="price-label price-label-small" *ngIf="data.hsn_code">HSN Code: <span>
+                                {{data.hsn_code}}
+                            </span></p>
+                        -->
+
+                            <p class="d-flex align-items-center mt-3 ships-title">
+                                <!--<strong>Dispatch in  {{data.ship_days}} Days</strong>
+                                 <span class="material-icons ml-3">
+                                 local_shipping
+                                 </span>-->
+                              </p>
+                            <!-- <p class="price-label branding-type-label">Type of Branding: <span>Screen Printing</span> </p> -->
+                        </div>
+                    </div>
+                    <div class="cart-remove-col">
+                       <button mat-button (click)="removeItem(data , i);">Remove</button>
+                       <div class="qty-label mt-4"><div class="row align-items-center">
+                           <div class="col-3">Qty -</div> 
+                           <div class="col-9">
+                                <mat-form-field appearance="fill" class="custom_field">
+                                    <input type="number" class="number"
+                                    onkeypress="return event.charCode >= 48"  min="1" matInput 
+                                    [(ngModel)]="data.quantity" (keyup)="modelChanged($event,i,data.quantity)"
+                                    autocomplete="off">
+                                </mat-form-field>
+                            </div>
+                       </div></div>
+                    </div>
+                </div>
+            </ng-container>
+             <div class="btm-btn-wrap">
+                <button class="cart-btn">
+                    <span class="d-block"><strong>{{toFixedFun(cartTotal) | number}}/-</strong></span> 
+                    <span (click)="viewDetail()">View Details</span>
+                </button>
+                <!--<button class="cart-btn proceed-btn" routerLink="/delivery-detail">Proceed</button>-->
+                <button class="cart-btn proceed-btn" (click)="proceed()">Proceed</button>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

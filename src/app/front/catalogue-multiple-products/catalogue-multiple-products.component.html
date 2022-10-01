@@ -1,0 +1,58 @@
+<div class="sec-wrapper sec-padding pt-0">
+    <div class="top-row py-4">
+       <div class="container container-large">
+          <div class="row align-items-center search-row px-4">
+             <div class="col-lg-8">
+                <h3 class="inner-sec-title my-0">{{categoryDetails?.product_category}}
+                   <span *ngIf="totalArrayLimit>0">{{totalArrayLimit}} Products found</span>
+                </h3>
+             </div>
+           
+             <div class="col-lg-4 text-right">
+               <button mat-raised-button color="" class="iot-btn-dark" 
+               (click)="addproductCatalogue()">
+                  <span class="material-icons mr-2">
+               add
+               </span>Add Products</button>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="container container-large">
+       <div class="content bg-white py-4 px-4 rounded-0">
+ 
+          <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+             <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+             </div>
+          </div>
+          <div class="category-list">
+          
+             <div class="category-list-detail" *ngFor="let item of preferedProductList">
+                <div class="product-category-info">
+                  <section class="example-section mr-3 mt-4">
+                     <mat-checkbox class="example-margin " name="off" type="checkbox" 
+                     [(ngModel)]="item.checked" (change)="getCheckboxValues($event,item,i)">
+                    </mat-checkbox>
+                 </section>
+                   <span class="product-thumb-img">
+                      <img *ngIf="item.featured_image" src="{{item.featured_image}}" alt="Product">
+                   </span>
+                   <div class="category-info-txt">
+                      <h5><a class="text-dark-2 f-15 f-w-600">{{item.product_name}}</a></h5>
+                      <p><a class="text-dark-2 f-15">{{item.product_variants.variant_name}}</a></p>
+                      <p>Price: {{item.product_variants.base_price | number}} /-</p>
+                      <p *ngIf="item.product_variants.quantity >= 100">Available Quantity: 
+                         
+                         <span >{{item.product_variants.quantity}}</span>
+                      </p>
+                   </div>
+                </div>
+                <a href="javscript:(void)"
+                   [routerLink]="['/categories', this.paramId, item.ids, item.product_variants.id]"
+                   class="btn btn-red iot-btn-primary view-detail-btn">View Detail</a>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

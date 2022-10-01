@@ -1,0 +1,27 @@
+/* .stickys {
+    position: fixed !important; 
+ } */
+ .cstm-fixed-top {
+    margin-top: 90px;
+}
+.cstm-content {
+    margin-top: 142px;
+}
+@media(max-width: 447px){
+    .sec-wrapper .cstm-content{
+        margin-top: 290px;
+    }
+}
+@media(min-width: 661px) and (max-width: 767px){
+    .cstm-fixed-top{
+        margin-top: 140px;
+    }
+}
+@media (max-width: 660px){
+    .cstm-fixed-top{
+        margin-top: 212px
+    }
+    .cstm-content{
+        margin-top: 235px;
+    }
+}

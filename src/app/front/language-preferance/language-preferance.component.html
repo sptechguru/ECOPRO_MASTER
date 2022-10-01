@@ -1,0 +1,30 @@
+<div class="sec-common catalogue-sec sec-bg sec-padding">
+    <!-- profile-wrap -->
+       <div class="container container-large">
+          <div class="profile-wrap">
+<!-- langauge -->
+<div class="content px-0 language-wrap mt-5">
+    <div class="row px-5 mb-3">
+       <div class="col-md-12">
+          <h4>Select your preferred language</h4>
+       </div>
+    </div>
+    <div>
+       <!-- <ul class="language-list list-unstyled">
+          <li class="px-5">English </li>
+          <li class="px-5">हिन्दी</li>
+          <li class="px-5">मराठी </li>
+          <li class="px-5">മലയാളം</li>
+       </ul> -->
+       <mat-selection-list #language [multiple]="false" class="language-list">
+          <mat-list-option *ngFor="let language of typesOfLanguage">
+            {{language}}
+          </mat-list-option>
+        </mat-selection-list>
+        
+    </div>
+ </div>
+ <!-- langauge -->
+ </div>
+ </div>
+ </div>

@@ -1,0 +1,82 @@
+<div class="sec-common sec-bg sec-padding">
+    <div class="container">
+       <!-- branding-types -->
+       <div class="content px-5 mt-5">
+          <div class="branding-type">
+             <h4>Type of Branding</h4>
+             <div class="row mt-3">
+                <div class="col-lg-4 mb-3">
+                   <mat-form-field appearance="outline">
+                      <mat-label>Select type</mat-label>
+                      <mat-select>
+                         <mat-option *ngFor="let food of foods" [value]="food.value">
+                         {{food.viewValue}}
+                         </mat-option>
+                      </mat-select>
+                   </mat-form-field>
+                </div>
+             </div>
+             <hr class="my-4">
+             <div>
+                <h4>Upload Your New Logo</h4>
+                <div class="row mt-3">
+                   <div class="col-lg-4">
+                      <div class="right">
+                         <label class="label-uploader">
+                         <span class="iot-form-control-wrap file-514">
+                         <input type="file" name="file-514" size="40" class="iot-form-control iot-file" 
+                         id="file-upload" accept=".jpg,.jpeg,.png,.gif" aria-invalid="false">
+                         </span>
+                         <span class="iot-uploader">
+                         <span class="uploader-text">
+                         <span class="material-icons mr-2">
+                         add_circle_outline
+                         </span>Add Image
+                         </span>
+                         <span class="uploader-btn"> Upload</span>
+                         </span>
+                         </label>
+                         <small id="emailHelp" class="form-text text-muted small-txt mt-3">
+                         <span class="material-icons">
+                         report_problem
+                         </span>Image will be in CDR Format</small>
+                      </div>
+                      <div class="right mt-4">
+                         <label class="label-uploader">
+                         <span class="iot-form-control-wrap file-514">
+                         <input type="file" name="file-514" size="40" class="iot-form-control iot-file" id="file-upload" accept=".jpg,.jpeg,.png,.gif" aria-invalid="false">
+                         </span>
+                         <span class="iot-uploader">
+                         <span class="uploader-text">
+                         <span class="material-icons mr-2">
+                         add_circle_outline
+                         </span>Add Image
+                         </span>
+                         <span class="uploader-btn"> Upload</span>
+                         </span>
+                         </label>
+                         <small id="emailHelp" class="form-text text-muted small-txt mt-3">
+                         <span class="material-icons">
+                         report_problem
+                         </span>Image will be in CDR Format</small>
+                      </div>
+                      <div class="form-check mt-4">
+                         <label class="form-check-label">
+                         <input class="form-check-input" type="checkbox" value="">
+                         Share on Email
+                         <span class="form-check-sign">
+                         <span class="check"></span>
+                         </span>
+                         </label>
+                      </div>
+                      <div class="form-group">
+                         <button class="btn iot-btn-secondary" routerLink="/branding-step">Continue</button>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <!-- branding-types -->
+    </div>
+ </div>

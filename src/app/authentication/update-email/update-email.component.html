@@ -1,0 +1,74 @@
+
+  <div class="row h-100">
+    <div class="col-lg-6 p-0">
+      <div class="signup-left-col">
+        <h3>Let's bring your retail business with</h3>
+        <div>
+          <img src="assets/images/ek-matra-logo.png" alt="Ekmatra Logo" class="img-fluid">
+        </div>
+        <h2>Welcome to Ek Matra</h2>
+        <p>India's No.1 B2B Reseller platform</p>
+        <ul class="list-unstyled sign-up-list mt-5 mb-0">
+          <li>
+            <span class="material-icons">
+              task_alt
+            </span>Access to Only Institutional Resellers.
+          </li>
+          <li> 
+            <span class="material-icons">
+              task_alt
+            </span>Exclusive Products directly from Manufacturers and Brands.
+          </li>
+          <li>
+            <span class="material-icons">
+              task_alt
+            </span>Customized E - Catalogues.
+          </li>
+          <li>
+            <span class="material-icons">
+              task_alt
+            </span>Live Stock Check.
+          </li>
+          <li>
+            <span class="material-icons">
+              task_alt
+            </span>Pan India Shipping.
+          </li>
+          <li>
+            <span class="material-icons">
+              task_alt
+            </span>Buy Samples at the Bulk Price.
+          </li>
+          <li>
+            <span class="material-icons">
+              task_alt
+            </span>Dedicated Account Manager.
+          </li>
+        </ul>
+      </div>
+
+      <!-----------------------------Email ID Change--------------------------------------->
+
+			<div class="row">
+				<div class="col-md-12">
+				  <h3 class="dialog-title">Update Email Id</h3>
+				</div>
+			</div>
+			<form [formGroup]="emailChangeForm" (ngSubmit)="emailUpdate()" novalidate>
+				<div class="form-group">
+					<mat-form-field appearance="outline" class="">
+						<mat-label>Email</mat-label>
+						<input matInput type="text" formControlName="email_change" placeholder="Email">
+					
+					</mat-form-field>
+				</div>
+				<div class="form-group">
+					<button type="submit" mat-raised-button class="btn iot-btn-primary w-100" 
+					[disabled]="isLoginProcessing">
+						<mat-spinner *ngIf="isLoginProcessing" [diameter]="20"></mat-spinner>
+						<span *ngIf="!isLoginProcessing">Save</span>
+					</button>
+				</div>
+			</form>
+  
+    </div>

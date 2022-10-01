@@ -1,0 +1,271 @@
+<div class="sec-wrapper sec-padding">
+   <div class="container">
+      <div class="content mt-4 p-0 cart-content">
+         <div class="category-list cart-list">
+            <!-- <div class="address-wrap">
+                <div class="col-lg-8">
+                   <h5>Select Your Delivery Type</h5>
+                   <div class="form-check">
+                      <label class="form-check-label d-block mb-4">
+                        <input type="radio" id="male" class="form-check-input" name="type" value="self_pickup" (change)="deliveryType('self_pickup')" checked>
+                        Pickup Yourself
+                        <span class="circle">
+                           <span class="check"></span>
+                       </span>
+                        </label>
+                        <label class="form-check-label d-block mb-4">
+                           <input type="radio" id="female" class="form-check-input" name="type" value="manual_payment" (change)="deliveryType('manual_payment')">
+                        logistic Delivery
+                        <span class="circle">
+                           <span class="check"></span>
+                       </span>
+                      </label>
+                   </div>-->
+            <!--  <div>
+                      <small id="emailHelp" class="form-text text-muted small-txt mt-1">
+                      <span class="material-icons">
+                      report_problem
+                      </span>You have to pay delivery charge 150 Rs/- to get the products at this location</small>
+                   </div>-->
+            <!--</div>
+             </div>-->
+
+            <div class="address-wrap">
+
+               <div class="row">
+                  <div class="col-lg-12" *ngIf="billing_title">
+                     <mat-checkbox class="example-margin mb-4" (change)="addressSame($event)">
+                        <strong>Shipping address is same as billing address.</strong> 
+                     </mat-checkbox>
+                  </div>
+                  <div class="col-lg-5" *ngIf="billing_title">
+                     <h5>Billing Address</h5>
+                     <p class="primary-color mb-0" style="opacity: 0.5">{{billing_title}}</p>
+                     <p class="delivery-address-text" style="opacity: 0.5; color: #000;" *ngIf="billing_address">
+                        {{billing_address}}
+                     </p>
+                  </div>
+                  <div class="col-lg-5">
+                     <h5>Delivery Address</h5>
+                     <p class="primary-color mb-0" *ngIf="!selected_address">
+                        <span>*Please add address to continue order process.</span>
+                     </p>
+                     <p class="primary-color mb-0" *ngIf="selected_address">{{selected_address.title}}
+                        <button mat-icon-button class="edit-address-btn"
+                           [routerLink]="['/edit-address',selected_address.id]">
+                           <span class="material-icons">
+                              edit
+                           </span>
+                        </button>
+                     </p>
+                     <p class="delivery-address-text" *ngIf="selected_address">{{selected_address.address_line_1}}</p>
+                     <div>
+                        <button mat-raised-button class="btn address-btn" (click)="changeAddress()">Change or Add Delivery
+                           Address</button>
+                     </div>
+                  </div>
+   
+               </div>
+              
+              
+            </div>
+
+            
+
+            <!--<div class="address-wrap">
+                <div class="col-lg-8">
+                   <h5>Delivery Estimates</h5>
+                   <p>Estimated Delivery by <span class="text-dark"><strong>1 Aug 2020</strong> </span></p>
+                   <div>
+                      <small id="emailHelp" class="form-text text-muted small-txt mt-1">
+                      <span class="material-icons">
+                      report_problem
+                      </span>You have to pay delivery charge 150 Rs/- to get the products at this location</small>
+                   </div>
+                </div>
+             </div>-->
+            <div class="address-wrap">
+               <div class="row mx-0">
+                  <div class="col-lg-8">
+                    
+                     <h5 *ngIf="cartData && cartData.length>0">Price Details ({{cartData?.length}} Item)</h5>
+                     <h5 *ngIf="!cartData && cartData.length == 0">Price Details (0 Item)</h5>
+                     <div class="card-content table-responsive price-detail-table">
+                        <table class="table">
+                           <tbody>
+                              <tr>
+                                 <th width="60%" class="border-0">Sub Total
+                                    <!--<a href="#"><span class="primary-color">VIEW DETAILS</span></a>-->
+                                 </th>
+                                 <td width="40%" class="border-0">{{toFixedFun(cartTotal) | number}}/-</td>
+                              </tr>
+                              <tr>
+                                 <th width="60%" class="border-0">GST
+                                    <!--<a href="#"><span class="primary-color">VIEW DETAILS</span></a>-->
+                                 </th>
+                                 <td width="40%" class="border-0">{{toFixedFun(GST_amount) | number}}/-</td>
+                              </tr>
+                              <!--<tr *ngIf="shipingPrice">
+                                 <th width="60%" class="border-0">Delivery Charges</th>
+                                 <td width="40%" class="border-0">{{shipingPrice | number}}/-</td>
+                              </tr>-->
+                              <!--<tr>
+                                 <th width="60%" class="border-0">Express</th> 
+                                 <td width="40%" class="border-0">
+                                    <input type="radio" name="charges" (click)="charges('express')"
+                                    checked/>
+                                 </td>
+                               </tr>
+                               <tr>
+                                 <th width="60%" class="border-0">Custom
+                                    <span>(Charges as applicable recommended for large shipping)</span>
+                                 </th> 
+                                 <td width="40%" class="border-0">
+                                    <input type="radio" name="charges" (click)="charges('custom')"/>
+                                 </td>
+                               </tr>-->
+   
+                           </tbody>
+                        </table>
+                     </div>
+   
+                     <div class="express-shiping-wrap">
+                       
+                        <div class="d-flex align-items-center">
+                           <mat-radio-group aria-label="Select an option" class="radio-2">
+                              <mat-radio-button value="1" [checked]="chargess == 'express'" 
+                              (click)="charges('express')"><strong style="font-weight: bolder; color:red;" *ngIf="chargess == 'express' && totalShipping == 0 && chargess != 'custom'">Delivery   - Hurry Free Shipping....</strong> 
+                             <strong *ngIf="chargess == 'express' && totalShipping > 0 ">Delivery</strong>
+                                
+                               
+                           </mat-radio-button>
+                          
+                           </mat-radio-group>
+                           
+                          
+                           <p class="inr-wrap text-right mt-3" *ngIf="chargess == 'express' && totalShipping != 0">INR  
+                              <span class="inr-underline ml-2">{{toFixedFun(totalShipping) | number}}/-</span>
+                           </p>
+                           <p class="inr-wrap text-right mt-3" *ngIf="chargess == 'custom'">INR -{{chargess}}
+                              <span class="inr-underline ml-2"></span>
+                              
+                           </p>
+                           <p class="inr-wrap text-right mt-3" *ngIf="chargess == 'express' && totalShipping == 0">INR  
+                              <span class="inr-underline ml-2">0/-</span>
+                           </p>
+                          
+                        </div>
+                        <div class="row mb-4">
+                           <ng-container *ngFor="let i of cartData;let j=index;">
+                              <div class="col-md-5 col-6">
+                                 <img [src]="i.variant_image" class="img-fluid">
+                              </div>
+                              <div class="col-md-7 col-6">
+                                 <h5 class="pt-5 mb-2">{{i.variant_name}}</h5>
+                                 <h6 *ngIf="delivery_day_list[j]">{{delivery_day_list[j]}}</h6>
+                              </div>
+                              <div class="col-12" style="border-bottom: 1px solid #DCDCDC;">
+                                 
+                              </div>
+                           </ng-container>
+                         
+                        </div>
+                        <!--<p class="mb-0">Estimated delivery timelines (from date of Dispatch)</p>
+                        <div class="card-content table-responsive price-detail-table my-4">
+                           <table class="table shipping-table">
+                              <tbody>
+                                 <tr>
+                                    <th>
+                                       <!-- <input type="radio" name="charges" (click)="charges('express')" checked /> Express
+                                       Shipping 
+                                          Mumbai
+                                    </th>
+                                    <td>
+                                       1-2 Days
+                                    </td>
+                                    <th>
+                                          West Bengal
+                                    </th>
+                                    <td>
+                                       4-5 Days
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <th>
+                                          Gujarat
+                                    </th>
+                                    <td>
+                                       1-2 Days
+                                    </td>
+                                    <th>
+                                       Delhi NCR
+                                    </th>
+                                    <td>
+                                       3-4 Days
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <th>
+                                         Tamil Nadu
+                                    </th>
+                                    <td>
+                                       2-3 Days
+                                    </td>
+                                    <th>
+                                          Andhra Pradesh
+                                    </th>
+                                    <td>
+                                       2-3 Days
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <th>
+                                         Rest of Maharashtra
+                                    </th>
+                                    <td>
+                                       2-3 Days
+                                    </td>
+                                    <th>
+                                          Karnataka
+                                    </th>
+                                    <td>
+                                       3-4 Days
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>-->
+                        <div class="d-flex align-items-center">
+                           <mat-radio-group aria-label="Select an option" class="radio-2">
+                              <mat-radio-button value="2" [checked]="chargess == 'custom'" (click)="charges('custom')"><strong>Custom Shipping</strong> </mat-radio-button>
+                           </mat-radio-group>
+                           <p class="inr-wrap text-right mb-0"> Charges as applicable</p>
+                        </div>
+                        <p class="mt-3">Recommended for orders above 500 kgs.</p>
+                     </div>
+                  </div>
+               </div>
+               
+            </div>
+            <div class="btm-btn-wrap">
+               <button class="cart-btn">
+                  <span class="d-block" *ngIf="!totalShipping">
+                     <strong>{{toFixedFun(cartTotal + GST_amount) | number}}/-</strong>
+                  </span>
+                  <span class="d-block" *ngIf="totalShipping">
+                     <strong>{{toFixedFun(cartTotal + totalShipping + GST_amount) | number}}/-</strong> 
+                  </span>
+                  <span (click)="viewDetail()">View Details</span>
+               </button>
+               <!--<button class="cart-btn proceed-btn" 
+               (click)="deliveryDetail()">Proceed</button>-->
+               <button class="cart-btn proceed-btn" [disabled]="isProcessing" 
+               type="button" (click)="deliveryDetail()">
+                  <mat-spinner *ngIf="isProcessing" [diameter]="20"></mat-spinner>
+                  <span *ngIf="!isProcessing">Proceed</span>
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

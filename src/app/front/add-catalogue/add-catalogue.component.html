@@ -1,0 +1,42 @@
+<div class="sec-common sec-bg sec-padding">
+   <div class="container">
+      <div class="content bg-white py-4 px-5 mt-5 create-catalouge">
+         <div class="product-row category-row">
+            <div class="product-col">
+               <a href="javascript:(void)" (click)="AddCatalogue()">
+                  <div class="product-col-img">
+                     <span class="material-icons add-icon">
+                     add
+                     </span>
+                  </div>
+               </a>
+               <p>Create New</p>
+            </div>
+           
+              <div class="product-col" *ngFor="let catalogue of catalogue_list; let i index"
+              >
+                 <a href="javascript:(void)" *ngIf="cid" (click)="addProductIntoCatalogueDialog(catalogue.id, catalogue.catalogue_name)"
+                 >
+                    <div >
+                       <img class="product-col-img" src="{{catalogue.catalogue_image!=''? catalogue.catalogue_image :'/assets/images/catalog-icon-7343.png'}}" alt="">
+                    </div>
+                  </a>
+                  <a href="javascript:(void)" *ngIf="!cid && !this.productToggle" routerLink="/catalogue-product-list/{{catalogue.id}}" 
+                  (click)="addProductIntoCatalogue(catalogue.id)">
+                     <div >
+                        <img class="product-col-img" src="{{catalogue.catalogue_image!=''? catalogue.catalogue_image :'/assets/images/catalog-icon-7343.png'}}" alt="">
+                     </div>
+                   </a>
+                   <a href="javascript:(void)" *ngIf="this.productToggle" 
+                  (click)="saveProducts(catalogue.id)">
+                     <div >
+                        <img class="product-col-img" src="{{catalogue.catalogue_image!=''? catalogue.catalogue_image :'/assets/images/catalog-icon-7343.png'}}" alt="">
+                     </div>
+                   </a>
+                   
+                 <p>{{catalogue.catalogue_name}}</p>
+              </div>
+         </div>
+      </div>
+   </div>
+</div>

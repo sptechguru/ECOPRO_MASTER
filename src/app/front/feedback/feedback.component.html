@@ -1,0 +1,51 @@
+<div class="sec-common sec-bg sec-padding">
+    <div class="container">
+       <!-- feedback-sec -->
+       <div class="content p-0 mt-5 rounded-wrap-btm">
+          <div class="row align-items-center search-row px-5 py-5">
+             <div class="col-lg-12">
+                <div class="form-group">
+                   <mat-form-field appearance="outline">
+                      <mat-label>Select a Reason</mat-label>
+                      <mat-select>
+                         <mat-option *ngFor="let food of foods" [value]="food.value">
+                         {{food.viewValue}}
+                         </mat-option>
+                      </mat-select>
+                   </mat-form-field>
+                </div>
+                <div class="form-group">
+                   <mat-form-field appearance="outline">
+                      <mat-label>Additional Comment</mat-label>
+                      <textarea matInput></textarea>
+                   </mat-form-field>
+                </div>
+                <div class="form-group col-lg-5 px-0">
+                   <div class="right">
+                      <!-- <label for="file-upload" id="custom-file-upload" class="custom-file-upload">
+                         <i class="fa fa-cloud-upload"></i> Choose File</label> -->
+                      <label class="label-uploader">
+                         <span class="iot-form-control-wrap file-514">
+                         <input type="file" name="file-514" size="40" class="iot-form-control iot-file" id="file-upload" accept=".jpg,.jpeg,.png,.gif" aria-invalid="false">
+                         </span>
+                         <span class="iot-uploader">
+                            <span class="uploader-text">
+                               <span class="material-icons mr-2">
+                               add_circle_outline
+                               </span>Upload Image
+                               <!-- ( <span class="uploader-text-color">10MB Maximum</span> ) -->
+                            </span>
+                            <span class="uploader-btn"> Upload</span>
+                         </span>
+                      </label>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="btm-btn-wrap">
+             <button class="cart-btn proceed-btn" routerLink="/return">Confirm</button>
+          </div>
+       </div>
+       <!-- feedback-sec -->
+    </div>
+ </div>

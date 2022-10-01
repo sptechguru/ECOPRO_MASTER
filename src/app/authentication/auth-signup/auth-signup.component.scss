@@ -1,0 +1,118 @@
+
+.language-select {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    select.form-control {
+        border: 1px solid #e0e0e0;
+        padding: 0 10px;
+        text-transform: uppercase;
+        text-align: center;
+        width: auto;
+        height: 40px;
+        cursor: pointer;
+        box-shadow: 2px 2px 7px 2px #e2e0e0;
+    }
+} 
+ // file-upload
+ label#custom-file-upload, label#fileLabel {
+    display: none;
+}
+.input-grid .form-group label {
+    color: #292929;
+}
+.label-uploader {
+    display: block;
+}
+.input-grid span.iot-form-control-wrap {
+    display: block;
+}
+.iot-form-control-wrap {
+    position: relative;
+}
+.label-uploader input#file-upload {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: -100000px;
+}
+div.iot input[type="file"] {
+    cursor: pointer;
+}
+.input-grid input.iot-form-control {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px 30px 5px 15px;
+    height: 42px;
+    border: 1px solid #cacaca;
+}
+span.iot-uploader {
+    display: flex;
+    width: 100%;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    justify-content: space-between;
+    height: 44px;
+    color: #8b969c;
+    cursor: pointer;
+}
+span.iot-uploader .uploader-text {
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+span.iot-uploader span.uploader-btn {
+    background: #5A5A5A;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+.cdk-overlay-pane {
+    width: 600px;
+    max-width: 100% !important;
+    justify-content: flex-end;
+    margin: 0 15px;
+    
+}
+.signup-wrap{
+    height: 100%;
+}
+.kyc-sec {
+    background-color: #EFEFF4;
+}
+::ng-deep {
+    mat-panel-title.mat-expansion-panel-header-title {
+        font-weight: 600;
+        color: #2B2B2B;
+        font-size: 14px;
+    }
+    .mat-expansion-panel-content .mat-expansion-panel-body {
+        background: #EEEEEE;
+        padding-top: 20px;
+    }
+    .mat-expansion-panel-body .mat-form-field-appearance-outline .mat-form-field-wrapper{
+        background: #fff;
+        border-radius: 5px;
+    }
+    .mat-dialog-container {
+       padding-top: 0;
+       padding-left: 0;
+       padding-bottom: 0!important;
+       width:100%!important;
+       margin:0 auto;
+    }
+    .cdk-overlay-pane{
+        height: auto;
+    }
+}

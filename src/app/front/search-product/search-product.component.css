@@ -1,0 +1,27 @@
+.search_text_after{
+    color:#c40000;
+}
+.product-category-info-search span.product-thumb-img{
+    width: 200px !important;
+    height: 200px !important;
+}
+.category-list-detail{
+    /*cursor: pointer;*/
+    margin: 20px 0;
+}
+button.sort-btn {
+    border: 0;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.mat-select-panel-wrap {
+    flex-basis: auto;
+}
+.cdk-overlay-pane {
+    top: 140.5px;
+    left: 1371px;
+    transform: none; 
+}

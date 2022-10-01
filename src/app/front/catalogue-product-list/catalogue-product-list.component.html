@@ -1,0 +1,252 @@
+<div class="sec-wrapper sec-padding d-flex align-items-center" style="min-height: 400px;" *ngIf="status">
+   <div class="container">
+      <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+         <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+         </div>
+      </div>
+      <h2 class="sec-title text-center">{{catalogueName | titlecase}}' product not found</h2>
+   </div>
+   <div class="col-lg-4 text-right">
+      <button mat-raised-button color="" class="iot-btn-dark" *ngIf="!cid"
+         [routerLink]="['/add-catalogue-products',catalogue_id]">
+         <span class="material-icons mr-2">
+            add
+         </span>Add Products</button>
+      <button mat-raised-button color="" class="iot-btn-dark" *ngIf="cid"
+         [routerLink]="['/add-catalogue-products',cid,catalogue_id]">
+         <span class="material-icons mr-2">
+            add
+         </span>Add Products</button>
+   </div>
+</div>
+
+<div class="sec-common catalogue-sec sec-bg sec-padding" *ngIf="!status">
+   <div class="top-row" *ngIf="catalogueName">
+      <div class="container container-large">
+         <div class="row align-items-center">
+            <div class="col-lg-12">
+               <ol class="breadcrumb mb-0 bg-transparent">
+                  <li class="breadcrumb-item" *ngIf="cid">
+                     <a [routerLink]="['/add-catalogue', cid]">Catalogue</a>
+                  </li>
+
+                  <li class="breadcrumb-item" *ngIf="!cid">
+                     <a [routerLink]="['/catalogue']">Catalogue</a>
+                  </li>
+
+                  <li class="breadcrumb-item">
+                     <a>{{catalogueName | titlecase}}' Products</a>
+                  </li>
+               </ol>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="container container-large">
+      <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+         <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+         </div>
+      </div>
+      <div class="content p-0 mt-5 rounded-wrap-btm" *ngIf="catalogueName">
+         <div class="row align-items-center mb-3 search-row px-5 pt-2">
+            <div class="col-lg-4">
+               <h3 class="inner-sec-title my-0">{{catalogueName | titlecase}}
+                  <span>({{totalArrayLimit}} Product found)</span>
+               </h3>
+            </div>
+
+            <div class="col-lg-2 text-right">
+               <button mat-raised-button color="" class="iot-btn-dark" *ngIf="!cid"
+                  [routerLink]="['/add-catalogue-products',catalogue_id]">
+                  <span class="material-icons mr-2">
+                     add
+                  </span>Add Products</button>
+
+               <button mat-raised-button color="" class="iot-btn-dark" *ngIf="cid"
+                  [routerLink]="['/add-catalogue-products',cid,catalogue_id]">
+                  <span class="material-icons mr-2">
+                     add
+                  </span>Add Products</button>
+            </div>
+
+            <div class="col-lg-2 text-right">
+               <div class="form-group pb-0">
+                  <mat-form-field appearance="outline" class="">
+                     <mat-label>Margin Type</mat-label>
+                     <mat-select matInput placeholder="Margin Type" [(ngModel)]="all_margin_type"
+                        disableOptionCentering="true">
+                        <mat-option value="percent">%</mat-option>
+                        <mat-option value="rupees">₹</mat-option>
+                     </mat-select>
+                  </mat-form-field>
+               </div>
+            </div>
+
+            <div class="col-lg-2 text-right">
+               <div class="form-group pb-0">
+                  <mat-form-field appearance="outline" class="">
+                     <mat-label>Margin for all</mat-label>
+                     <input matInput type='number' placeholder="Margin for all" [(ngModel)]="all_margin">
+                     <button mat-button matSuffix mat-icon-button *ngIf="all_margin" (click)="marginRemove()">
+                        <mat-icon>close</mat-icon>
+                     </button>
+                  </mat-form-field>
+               </div>
+            </div>
+
+            <div class="col-lg-2 text-right px-0">
+               <div class="d-flex flex-wrap align-items-center justify-content-between">
+                  <button mat-raised-button color="" class="iot-btn-dark" (click)="addAllMargin()">
+                     <span class="material-icons mr-2">
+                     </span>Apply</button>
+
+                  <a *ngIf="downloadlink" target="_blank" href="{{downloadlink}}" class="text-center">
+                     <i class="icon-cloud-download">
+                        <span class="material-icons">
+                           cloud_download
+                        </span>
+                     </i>
+                     <span class="d-block" style="font-size: 13px;">Download Pdf</span>
+                  </a>
+               </div>
+            </div>
+
+
+            <div class="col-lg-7 text-right">
+               <ul class="list-unstyled d-flex align-items-center flex-wrap justify-content-center filter-list mb-0">
+                  <li>
+                     <div class="dropdown">
+                        <!-- <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+                           <span class="material-icons">
+                           settings
+                           </span>
+                           margin
+                        </button>-->
+                        <!-- <ul class="dropdown-menu">
+                           <li><a href="javascript:(void)" (click)="showmarginAll()">Margin for all products</a></li>
+                           <li><a href="#">Margin for single products</a></li>
+                        </ul>-->
+                     </div>
+                  </li>
+                  <li>
+                     <!--<span class="material-icons mr-1">
+                     import_export
+                     </span>
+                     Sort-->
+                  </li>
+                  <li>
+                     <span class="material-icons mr-1">
+                     </span>
+
+                  </li>
+               </ul>
+            </div>
+         </div>
+
+         <div class="category-list cart-list">
+            <div class="category-list-detail row" *ngFor="let item of catalogueProductList">
+               <div class="col-md-12 col-lg-4">
+                  <div class="product-category-info">
+                     <span class="product-thumb-img">
+                        <img *ngIf="item.featured_image" src="{{item.featured_image}}" alt="Product">
+                     </span>
+                     <div class="category-info-txt">
+                        <h5 class="m-0"><a class="text-dark-2 f-15 f-w-600">{{item.product_name}}</a></h5>
+                        <p><a class="text-dark-2 f-15">{{item.product_variants.variant_name}}</a></p>
+                        <p class="price-label d-flex align-items-center">
+                           <span class="small-text mr-3">
+                              Offer Price:
+                           </span>
+                           <span class="flex-grow-1">
+                              <span class="d-block">Rs. {{item.product_variants.base_price | number}}/-</span>
+                              <span class="gst-txt">(+ {{item.product_variants.gst}}% GST )</span>
+                           </span>
+                        </p>
+                        <p class="price-label price-label-small" *ngIf="item.product_variants.max_retail_price">
+                           MRP: <span>Rs. {{item.product_variants.max_retail_price | number}}/-</span>
+                        </p>
+                        <p class="price-label price-label-small" *ngIf="!item.product_variants.max_retail_price">
+                           MRP: <span>Rs. 0/-</span>
+                        </p>
+                        <!--<p class="price-label price-label-small" *ngIf="item.product_variants.hsn_code">
+                           HSN Code: <span>{{item.product_variants.hsn_code}}</span>
+                        </p>
+                     -->
+                        <p *ngIf="item.product_variants.quantity >= 100">Available Quantity:
+                           
+                           <span >{{item.product_variants.quantity}}</span>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 col-lg-8">
+                  <div class="product-row-content d-flex flex-wrap sbm-product-list-1">
+                     <div class="sbm-ml1-margin">
+                        <div class="form-group pb-0">
+                           <mat-form-field appearance="outline" class="">
+                              <mat-label>Margin Type</mat-label>
+                              <mat-select matInput placeholder="Margin Type"
+                                 [(ngModel)]="item.product_variants.catalogues_product.margin_type"
+                                 disableOptionCentering="true" (selectionChange)="changeMarginType($event)">
+                                 <mat-option value="percent">%</mat-option>
+                                 <mat-option value="rupees">₹</mat-option>
+                              </mat-select>
+                           </mat-form-field>
+                        </div>
+                     </div>
+      
+                     <div class="sbm-ml1-margin">
+                        <div class="form-group pb-0">
+                           <mat-form-field appearance="outline" class="">
+                              <mat-label>Margin</mat-label>
+                              <input matInput type="number" placeholder="Margin"
+                                 [(ngModel)]="item.product_variants.catalogues_product.margin"
+                                 (keyup)="marginsEnter($event.target.value)">
+                           </mat-form-field>
+                        </div>
+                     </div>
+      
+                     <div class="text-right sbm-ml1-selling-price">
+                        <span *ngIf="item.product_variants.catalogues_product.margin>0
+                           && item.product_variants.catalogues_product.margin_type === 'percent'">
+                           <strong>Selling Price: Rs.
+                              {{(item.product_variants.base_price)+(item.product_variants.base_price*item.product_variants.catalogues_product.margin)/100
+                              | number:'1.0-0'}}/-</strong>
+                        </span>
+      
+                        <span *ngIf="item.product_variants.catalogues_product.margin>0
+                           && item.product_variants.catalogues_product.margin_type === 'rupees'">
+                           <strong>Selling Price: Rs. {{item.product_variants.base_price +
+                              item.product_variants.catalogues_product.margin | number:'1.0-0'}}/-</strong>
+                        </span>
+      
+                        <span *ngIf="item.product_variants.catalogues_product.margin === 0 && 
+                        item.product_variants.max_retail_price">
+                           <strong>Selling Price: Rs. {{item.product_variants.max_retail_price | number:'1.0-0'}}/-</strong>
+                        </span>
+      
+                        <span *ngIf="item.product_variants.catalogues_product.margin === 0 && 
+                        !item.product_variants.max_retail_price">
+                           <strong>Selling Price: Rs. 0/-</strong>
+                        </span>
+                     </div>
+      
+                     <div class="text-right sbm-ml1-action">
+                        <button mat-raised-button color="" class="iot-btn-dark" (click)="addMargin(item.product_variants)">
+                           <!-- <span class="material-icons mr-2"></span> -->
+                           Apply</button>
+                        <button mat-button 
+                        (click)="openRemoveProduct(item.product_variants.catalogues_product.catalogue_id,item.product_variants.catalogues_product.variant_id)" 
+                        class="sbm-remove-btn">Remove</button>
+                     </div>
+                  </div>
+               </div>
+               
+               
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

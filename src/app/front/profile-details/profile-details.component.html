@@ -1,0 +1,136 @@
+<div class="sec-common catalogue-sec sec-bg sec-padding">
+       <div class="container container-large">
+          <div class="profile-wrap">
+             <div class="content p-0 mt-5">
+                <div class="profile-detail p-5" *ngIf="savedProfile">
+                   <button class="edit-btn float-right mb-5" (click)="showProfile()"><span class="material-icons">
+                   edit
+                   </span>
+                   </button>
+                   <div class="profile-image mr-5">
+                      <img src="{{profilePic}}" alt="">
+                   </div>
+                   <div class="card-content">
+                      <table class="table">
+                         <tbody>
+                            <tr>
+                               <th>First Name</th>
+                               <td>{{profileDetail?.first_name | titlecase}}</td>
+                            </tr>
+                            <tr>
+                               <th>Last Name:</th>
+                               <td>{{profileDetail?.last_name | titlecase}}</td>
+                            </tr>
+                            <tr>
+                               <th>Email:</th>
+                               <td>{{profileDetail?.email}}</td>
+                            </tr>
+                            <tr>
+                               <th>Phone:</th>
+                               <td>{{profileDetail?.phone_number}}</td>
+                            </tr>
+                         </tbody>
+                      </table>
+                   </div>
+                </div>
+
+                <!---------------------------Edit Profile---------------------------------------->
+                <div class="edit-profile-detail rounded-wrap-btm" *ngIf="editProfile">
+                   <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()" novalidate>
+                      <div class="row p-5">
+                         <div class="col-lg-3 mb-4 mb-lg-0">
+                            <div class="edit-profile-img-wrap">
+                               <label class="label-uploader">
+                                  <span class="iot-form-control-wrap file-514">
+                                  <input class="iot-form-control iot-file" #fileUpload formControlName='profile_pic' type="file"
+                                  (change)="onFileChange($event)" accept="image/png, image/jpeg, image/jpg">
+                                  </span>
+                                  <span class="iot-uploader profile-image">
+                                     <img src="{{profilePic}}" alt="">
+                                     <span class="uploader-text">
+                                        <span class="material-icons">
+                                        add
+                                        </span>
+                                     </span>
+                                  </span>
+                               </label>
+                            </div>
+                         </div>
+                         <div class="col-lg-9">
+                            <div class="col-md-12 mb-3">
+                               <mat-form-field appearance="outline">
+                                  <mat-label>First Name</mat-label>
+                                  <input matInput type='text' formControlName='first_name'>
+                                  <div *ngIf="profileForm.controls['first_name'].invalid 
+                                  && (profileForm.controls['first_name'].dirty 
+                                  || profileForm.controls['first_name'].touched)" class="error">
+                                     <mat-error *ngIf="profileForm.controls['first_name'].errors.required">
+                                        First Name is required
+                                     </mat-error>
+                                  </div>
+                               </mat-form-field>
+                              
+                            </div>
+                            <div class="col-md-12 mb-3">
+                              <mat-form-field appearance="outline">
+                                 <mat-label>Last Name</mat-label>
+                                 <input matInput type='text' formControlName='last_name'>
+                                 <div *ngIf="profileForm.controls['last_name'].invalid 
+                                 && (profileForm.controls['last_name'].dirty 
+                                 || profileForm.controls['last_name'].touched)" class="error">
+                                    <mat-error *ngIf="profileForm.controls['last_name'].errors.required">
+                                       Last Name is required
+                                    </mat-error>
+                                 </div>
+                              </mat-form-field>
+                             
+                            </div>
+                            <div class="col-md-12 mb-3">
+                               <mat-form-field appearance="outline">
+                                  <mat-label>Email</mat-label>
+                                  <input matInput type='text' formControlName='email'>
+                                  <div *ngIf="profileForm.controls['email'].invalid 
+                               && (profileForm.controls['email'].dirty 
+                               || profileForm.controls['email'].touched)" class="error">
+                                  <mat-error *ngIf="profileForm.controls['email'].errors.required">
+                                     Email is required
+                                  </mat-error>
+                                  <mat-error *ngIf="profileForm.controls['email'].errors.email">
+                                    Please enter valid email
+                                 </mat-error>
+                               </div>
+                               </mat-form-field>
+                               
+                            </div>
+                            <div class="col-md-12 mb-3">
+                               <mat-form-field appearance="outline">
+                                  <mat-label>Phone</mat-label>
+                                  <input matInput type='number' formControlName='phone'>
+                                  <div *ngIf="profileForm.controls['phone'].invalid 
+                                  && (profileForm.controls['phone'].dirty 
+                                  || profileForm.controls['phone'].touched)" class="error">
+                                     <mat-error *ngIf="profileForm.controls['phone'].errors.required">
+                                        Phone number is required
+                                     </mat-error>
+                                  </div>
+                               </mat-form-field>
+                              
+                            </div>
+                          
+                         </div>
+                      </div>
+                      <div class="col-md-12 p-0">
+                         <div class="btm-btn-wrap">
+                            <button class="btn iot-btn-secondary proceed-btn w-100 m-0"
+                            [disabled]="!profileForm.valid" type="submit">  
+                              <mat-spinner *ngIf="isLoginProcessing" [diameter]="20"></mat-spinner>
+                              <span *ngIf="!isLoginProcessing">Save</span>
+                           </button>
+                         </div>
+                      </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+ </div>

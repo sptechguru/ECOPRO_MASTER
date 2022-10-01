@@ -1,0 +1,163 @@
+
+<div class="sec-wrapper sec-padding pt-0">
+    <div class="sec-banner overlay-1">
+        <div class="container">
+            <h2>Contact Us</h2>
+        </div>
+    </div>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-column-wrap">
+                    <ul class="list-unstyled contact-list">
+                        <li>
+                            <span class="contact-icon">
+                                <span class="material-icons">
+                                    room
+                                </span>
+                            </span>
+                            <span class="contact-list-txt">
+                               <span class="d-block"><strong>Address</strong></span> 
+                                904, Ekmatra Technology Pvt Ltd, DLH Park, Rani sati marg, S.V Road, Goregaon West, Mumbai - 400064
+                            </span>
+                        </li>
+                        <li>
+                            <span class="contact-icon">
+                                <span class="material-icons">
+                                    phone_in_talk
+                                </span>
+                            </span>
+                            <span class="contact-list-txt">
+                               <span class="d-block"><strong>Contact No</strong></span> 
+                                <a href="tel:7777051898">7777051898</a>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="contact-icon">
+                                <span class="material-icons">
+                                    email
+                                </span>
+                            </span>
+                            <span class="contact-list-txt">
+                               <span class="d-block"><strong>Email</strong></span> 
+                                <a href="mailto:support@ekmatra.store">support@ekmatra.store</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="contact-from-wrap p-5 bg-white">
+
+                    <form [formGroup]="contactUsForm" (ngSubmit)="handleSubmitFirst()" novalidate autocomplete="off">
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput type='text' placeholder="Name" formControlName='name' maxlength="30">
+                            <div *ngIf="contactUsForm.controls['name'].invalid 
+                            && (contactUsForm.controls['name'].dirty 
+                            || contactUsForm.controls['name'].touched)" class="error">
+                               <span *ngIf="contactUsForm.controls['name'].errors.required">
+                                  Please enter name
+                               </span>
+                                <span *ngIf="contactUsForm.controls['name'].errors.maxlength">
+                                    Maximum 30 characters required.
+                                </span>
+                                <span *ngIf="contactUsForm.controls['name'].errors.pattern">
+                                    Please enter valid name
+                                </span>
+                            </div>
+                        </mat-form-field>
+                      
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Enter your email</mat-label>
+                            <input matInput type='email' placeholder="Email" formControlName='email' maxlength="30">
+                            <div *ngIf="contactUsForm.controls['email'].invalid 
+                            && (contactUsForm.controls['email'].dirty 
+                            || contactUsForm.controls['email'].touched)" class="error">
+                               <span *ngIf="contactUsForm.controls['email'].errors.required">
+                                  Please enter email
+                               </span>
+                               <span *ngIf="contactUsForm.controls['email'].errors.email">
+                                Please enter valid email
+                             </span>
+                            </div>
+                        </mat-form-field>
+                      
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Contact Number</mat-label>
+                            <input matInput type='text' placeholder="Contact Number" formControlName='contact_number' 
+                            maxlength="15">
+                            <div *ngIf="contactUsForm.controls['contact_number'].invalid 
+                            && (contactUsForm.controls['contact_number'].dirty 
+                            || contactUsForm.controls['contact_number'].touched)" class="error">
+                               <span *ngIf="contactUsForm.controls['contact_number'].errors.required">
+                                  Please enter contact number
+                               </span>
+                               <span *ngIf="contactUsForm.controls['contact_number'].errors.pattern">
+                                Please enter valid contact number
+                             </span>
+                             <span *ngIf="contactUsForm.controls['contact_number'].errors.minlength && 
+                             !contactUsForm.controls['contact_number'].errors.pattern">
+                                Please enter at least 10 digit number
+                             </span>
+                             <span *ngIf="contactUsForm.controls['contact_number'].errors.maxLength && 
+                             !contactUsForm.controls['contact_number'].errors.pattern">
+                                Maximum 15 digit number is required.
+                             </span>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput type='text' placeholder="Company Name" formControlName='company_name' 
+                            maxlength="30">
+                            <div *ngIf="contactUsForm.controls['company_name'].invalid 
+                            && (contactUsForm.controls['company_name'].dirty 
+                            || contactUsForm.controls['company_name'].touched)" class="error">
+                               <span *ngIf="contactUsForm.controls['company_name'].errors.required">
+                                  Please enter company name
+                               </span>
+                               <!--<span *ngIf="contactUsForm.controls['company_name'].errors.pattern">
+                                No white space is required at the beginning or end of the string.
+                            </span>-->
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Message</mat-label>
+                            <textarea matInput rows="5" placeholder="Meassge" formControlName='message'  maxlength="500"></textarea>
+                            <div *ngIf="contactUsForm.controls['message'].invalid 
+                            && (contactUsForm.controls['message'].dirty 
+                            || contactUsForm.controls['message'].touched)" class="error">
+                               <span *ngIf="contactUsForm.controls['message'].errors.required">
+                                  Please enter message
+                               </span>
+                               <!--<span *ngIf="contactUsForm.controls['message'].errors.pattern">
+                                No white space is required at the beginning or end of the string.
+                            </span>-->
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button [disabled]="isProcessing || !contactUsForm.valid" 
+                    type="submit"
+                    class="btn iot-btn-primary w-100">
+                    <mat-spinner *ngIf="isProcessing" [diameter]="20"></mat-spinner>
+                    <span *ngIf="!isProcessing">Send</span>
+                  </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div> 
+    </div>
+</div>
+
+

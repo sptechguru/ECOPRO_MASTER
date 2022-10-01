@@ -1,0 +1,65 @@
+<div class="sidebar-detail">
+    <div class="d-flex align-items-center sidebar-top">
+        <span class="profile-img mr-3">
+            <!--<a style="cursor: pointer;" [routerLink]="['/profile']">
+                <img src="{{profile}}" alt="" > 
+            </a>-->
+            <a>
+                <img src="assets/images/iot-logo.svg" alt="">
+            </a>
+        </span>
+        <!--<a style="cursor: pointer;" [routerLink]="['/profile']">
+            <div class="profile-user-detail text-white">
+                <h5 class="mb-0 text-white">{{userName}}</h5>
+                <p class="mb-0">{{userEmail}}</p>
+            </div>
+         </a>-->
+
+        <a>
+            <div class="profile-user-detail text-white">
+                <h5 class="mb-0 text-white">{{userName}}</h5>
+                <p class="mb-0">{{userEmail}}</p>
+            </div>
+        </a>
+
+    </div>
+    <ul class="list-unstyled d-flex flex-wrap align-item-center sidebar-list">
+        <li *ngIf="BusinessKyc === 'yes'">
+            <a href="javascript:(void)" (click)="sideNavbar.close();" routerLink="/categories">
+                <span class="icon-menu"></span> Categories
+            </a>
+        </li>
+        <li *ngIf="BusinessKyc === 'yes' ">
+            <a href="javascript:(void)" (click)="sideNavbar.close()" routerLink="/catalogue">
+                <span class="icon-catalog"></span> Catalogue
+            </a>
+        </li>
+        <li *ngIf="BusinessKyc === 'yes' ">
+            <a href="javascript:(void)" (click)="sideNavbar.close();" routerLink="/order">
+                <span class="icon-packing"></span> My Orders
+            </a>
+        </li>
+        <!--<li *ngIf="BusinessKyc === 'yes' && PersonalKyc === 'yes'"> <a href="javascript:(void)" routerLink="/order" (click)="sideNavbar.close();">
+            <span class="icon-order"></span> Sample Orders</a> 
+        </li>
+        <li *ngIf="BusinessKyc === 'yes' && PersonalKyc === 'yes'"> <a href="javascript:(void)" routerLink="/notification">
+            <span class="icon-bell"></span> Notification </a> 
+        </li>
+        <li *ngIf="BusinessKyc === 'yes' && PersonalKyc === 'yes'"> <a href="javascript:(void)">
+            <span class="icon-chat"></span> Chat</a> 
+        </li>
+        <li> <a href="javascript:(void)"><span class="icon-support"></span> Support </a> </li>-->
+        <!--<li> 
+            <a href="javascript:(void)" routerLink="/about-us">
+                <span class="icon-information"></span> About Us
+            </a> 
+        </li>-->
+        <!--<li> 
+            <a target='_blank' [href]="privacyUrl">
+            <span class="icon-contract"></span> Privacy Policy</a> 
+        </li>-->
+        <!-- <li> <a href="javascript:(void)"><span class="icon-app-1"></span> App version {{appVersion}}</a> </li> -->
+        <li> <a href="javascript:(void)" (click)="logout();sideNavbar.close()"><span class="icon-shutdown"></span>
+                Logout</a> </li>
+    </ul>
+</div>

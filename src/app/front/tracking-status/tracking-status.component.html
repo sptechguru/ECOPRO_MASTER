@@ -1,0 +1,153 @@
+<div class="sec-common sec-bg sec-padding">
+    <div class="container container-large">
+      <div class="row align-items-center mb-4">
+         <div class="col-lg-12">
+            <h3 class="inner-sec-title my-0">Order Tracking Status</h3>
+         </div>
+      </div>
+       <div class="content mt-5 px-0">
+          <div class="category-list cart-list">
+            <div class="category-list-detail">
+                <div>
+                    <a href="javscript:(void)" [routerLink]="['/order-detail', orderId]" 
+                    class="btn btn-red iot-btn-primary view-detail-btn">Order Detail</a> 
+                </div>
+               
+            </div>
+             <mat-accordion class="d-block p-5">
+                <mat-expansion-panel class="mat-tracking-1" *ngFor="let shipment of shipment_detail; let i = index">
+                    <mat-expansion-panel-header>
+                       Shipment #{{i+1}}
+                      <a *ngIf="AWB_status && AWB_status.shipping_provider == 'SHIPROCKET_EM'
+                       && AWB_status.tracking_number" 
+                       target="_blank" 
+                        href="https://shiprocket.co/tracking/{{AWB_status.tracking_number}}" 
+                       style="margin-left: 10%;">AWB - {{AWB_status.tracking_number}} , Courier service - {{AWB_status.shipping_provider}}</a>
+                       <a *ngIf="AWB_status && AWB_status.shipping_provider == null
+                       && AWB_status.tracking_number" 
+                       target="_blank" 
+                       href="http://www.shreetirupaticourier.net/Frm_DocTrack.aspx?docno={{AWB_status.tracking_number}}&Tmp=1609915017343"
+                       style="margin-left: 10%;">AWB - {{AWB_status.tracking_number}} , Courier service - {{AWB_status.shipping_provider}}</a>
+                       <a *ngIf="AWB_status && AWB_status.shipping_provider == 'SELF'
+                       && AWB_status.tracking_number" 
+                       style="margin-left: 10%;">AWB - {{AWB_status.tracking_number}} , Courier service - {{AWB_status.shipping_provider}}</a>
+                    </mat-expansion-panel-header>
+                    <table class="table tracking-table-1">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    Invoice
+                                </th>
+                                <th class="text-center">
+                                    Eway bill
+                                </th>
+                                <th class="text-center">
+                                    Challan
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td>
+                                    <a *ngIf="(shipment?.invoice)" [href]="shipment?.invoice" 
+                                    target="_blank">
+                                        <i class="icon-cloud-download">
+                                            <span class="material-icons">
+                                                cloud_download
+                                            </span>
+                                        </i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a *ngIf="(shipment?.eway_bill)" [href]="shipment?.eway_bill" 
+                                    target="_blank">
+                                        <i class="icon-cloud-download">
+                                            <span class="material-icons">
+                                                cloud_download
+                                            </span>
+                                        </i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a *ngIf="(shipment?.challan)" [href]="shipment?.challan" 
+                                    target="_blank">
+                                        <i class="icon-cloud-download">
+                                            <span class="material-icons">
+                                                cloud_download
+                                            </span>
+                                        </i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <p>Invoice
+                        <a *ngIf="(shipment?.invoice)" [href]="shipment?.invoice" target="_blank">
+                            <i class="icon-cloud-download">
+                                <span class="material-icons">
+                                    cloud_download
+                                </span>
+                            </i>
+                        </a>
+                    </p> 
+                    <p>Eway bill
+                        <a *ngIf="(shipment?.eway_bill)" [href]="shipment?.eway_bill" target="_blank">
+                            <i class="icon-cloud-download">
+                                <span class="material-icons">
+                                    cloud_download
+                                </span>
+                            </i>
+                        </a>
+                    </p>  
+                    <p>Challan
+                        <a *ngIf="(shipment?.challan)" [href]="shipment?.challan" target="_blank">
+                            <i class="icon-cloud-download">
+                                <span class="material-icons">
+                                    cloud_download
+                                </span>
+                            </i>
+                        </a>
+                    </p>   -->
+                        
+                    <mat-horizontal-stepper #stepper>
+                        <mat-step [Disabled]="true" [completed]="shipment.shipping_status === 'CREATED' ||
+                                               shipment.shipping_status === 'PACKED'|| 
+                                               shipment.shipping_status === 'DISPATCHED' ||
+                                               shipment.shipping_status === 'READY_TO_SHIP' ||
+                                               shipment.shipping_status === 'DELIVERED'" 
+                                               [editable]="false">
+                          <ng-template matStepLabel>Created</ng-template>
+                      </mat-step>
+                        <mat-step [completed]="shipment.shipping_status === 'PACKED'|| 
+                                                shipment.shipping_status === 'DISPATCHED' ||
+                                                shipment.shipping_status === 'READY_TO_SHIP' ||
+                                                shipment.shipping_status === 'DELIVERED'" 
+                                                [editable]="false">
+                          <ng-template matStepLabel>Packed</ng-template>
+                      </mat-step>
+                      <mat-step [completed]="shipment.shipping_status === 'READY_TO_SHIP' ||
+                                             shipment.shipping_status === 'DISPATCHED' || 
+                                             shipment.shipping_status === 'DELIVERED'" 
+                      [editable]="false">
+                        <ng-template matStepLabel>Ready to ship</ng-template>
+                      </mat-step>     
+                      <mat-step [completed]="shipment.shipping_status === 'DISPATCHED' ||
+                                              shipment.shipping_status === 'DELIVERED'"
+                                              [editable]="false">
+                        <ng-template matStepLabel>Dispatched</ng-template>
+                    </mat-step>
+                  
+                    <mat-step  [completed]="shipment.shipping_status === 'DELIVERED'" 
+                                           [editable]="false">
+                        <ng-template matStepLabel>Delivered</ng-template>
+                    </mat-step>
+                      </mat-horizontal-stepper>
+                </mat-expansion-panel>
+            </mat-accordion>
+    
+          </div>
+       </div>
+            
+      
+    </div>
+ </div>

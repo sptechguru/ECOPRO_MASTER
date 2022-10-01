@@ -1,0 +1,143 @@
+<div class="sec-common catalogue-sec sec-bg sec-padding">
+    <!-- profile-wrap -->
+       <div class="container container-large">
+          <div class="profile-wrap">
+<!-- kyc-verification -->
+<div class="content mt-5">
+    <div>
+       <img src="{{logo}}" alt="" height="120" width="120">
+    </div>
+    <div class="mt-5">
+       <mat-accordion>
+          <mat-expansion-panel>
+             <mat-expansion-panel-header>
+                <mat-panel-title>
+                   Business KYC Verification 
+                </mat-panel-title>
+             </mat-expansion-panel-header>
+             <div>
+              
+                <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()" novalidate>
+                   <div class="row">
+                      <div class="col-md-6 mb-3">
+                         <mat-form-field appearance="outline">
+                            <mat-label>Business Name</mat-label>
+                            <input matInput type='text' formControlName='business_name'>
+                            <div *ngIf="profileForm.controls['business_name'].invalid 
+                            && (profileForm.controls['business_name'].dirty 
+                            || profileForm.controls['business_name'].touched)" class="error">
+                        <mat-error *ngIf="profileForm.controls['business_name'].errors.required">
+                           Business Name is required
+                        </mat-error>
+                       </div>
+                         </mat-form-field>
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                         <div class="right">
+                            <label for="file-upload" id="custom-file-upload" class="custom-file-upload">
+                            <i class="fa fa-cloud-upload"></i> Choose File</label>
+                            <label class="label-uploader">
+                               <span class="iot-form-control-wrap file-514">
+                               <input class="iot-form-control iot-file" 
+                                 #fileUpload formControlName='logo' type="file"
+                                 (change)="onFileChange($event)" accept="image/png, image/jpeg, image/jpg">
+                               </span>
+                               <span class="iot-uploader">
+                                  <span class="uploader-text">
+                                     <span class="material-icons mr-2">
+                                     add_circle_outline
+                                     </span>Add New photos
+                                  </span>
+                                  <span class="uploader-btn"> Upload</span>
+                               </span>
+                            </label>
+                         </div>
+                      </div>
+                     
+                      
+                     <div class="col-md-6 mb-3">
+                         <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Established year</mat-label>
+                            <mat-select matInput type='text' formControlName='year'>
+                              <mat-option [value]="2013">2013</mat-option>
+                              <mat-option [value]="2014">2014</mat-option>
+                              <mat-option [value]="2015">2015</mat-option>
+                              <mat-option [value]="2016">2016</mat-option>
+                              <mat-option [value]="2017">2017</mat-option>
+                              <mat-option [value]="2018">2018</mat-option>
+                              <mat-option [value]="2019">2019</mat-option>
+                              <mat-option [value]="2020">2020</mat-option>
+                              <mat-option [value]="2021">2021</mat-option>
+                           </mat-select>
+                           <div *ngIf="profileForm.controls['year'].invalid 
+                                  && (profileForm.controls['year'].dirty 
+                                  || profileForm.controls['year'].touched)" class="error">
+                              <mat-error *ngIf="profileForm.controls['year'].errors.required">
+                                 Established year is required
+                              </mat-error>
+                             </div>
+                         </mat-form-field>
+                      </div>
+                      
+
+                      <div class="col-md-6 mb-3">
+                         <mat-form-field appearance="outline">
+                            <mat-label>Business Type</mat-label>
+                            <mat-select matInput type='text' formControlName='business_type'>
+                               <mat-option *ngFor="let type of businessType" [value]="type.id">
+                               {{type.business_type}}
+                               </mat-option>
+                            </mat-select>
+                            <div *ngIf="profileForm.controls['business_type'].invalid 
+                                  && (profileForm.controls['business_type'].dirty 
+                                  || profileForm.controls['business_type'].touched)" class="error">
+                              <mat-error *ngIf="profileForm.controls['business_type'].errors.required">
+                                 Business Type is required
+                              </mat-error>
+                             </div>
+                         </mat-form-field>
+                      </div>
+                      
+                      <div class="col-md-12 mb-3">
+                         <mat-form-field appearance="outline">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput formControlName='description' rows="5"></textarea>
+                            <div *ngIf="profileForm.controls['description'].invalid 
+                                  && (profileForm.controls['description'].dirty 
+                                  || profileForm.controls['description'].touched)" class="error">
+                              <mat-error *ngIf="profileForm.controls['description'].errors.required">
+                                 Description is required
+                              </mat-error>
+                             </div>
+                         </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <button class="btn iot-btn-secondary" [disabled]="!profileForm.valid" type="submit"> 
+                           <mat-spinner *ngIf="isLoginProcessing" [diameter]="20"></mat-spinner>
+                           <span *ngIf="!isLoginProcessing">Save</span> 
+                        </button>
+                      </div>
+                   </div>
+                </form>
+             </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+             <mat-panel-title>
+                Personal
+             </mat-panel-title>
+             <mat-panel-description>
+                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+             </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+          </mat-expansion-panel>
+       </mat-accordion>
+    </div>
+ </div>
+ <!-- kyc-verification -->
+ </div>
+ </div>
+ </div>

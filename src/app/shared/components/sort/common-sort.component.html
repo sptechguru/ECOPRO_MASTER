@@ -1,0 +1,17 @@
+<!-- <div class="input-group">
+  <select #sortInput class="form-control" [disabled]="isDisabled" (change)="handleSorting($event)">
+  	<option value="">{{ defaultText }}</option>
+  	<option *ngFor="let sort of sortObject" [selected]="( parentModel == sort.key )" [value]="sort.key">{{ sort.value }}</option>
+  </select>
+</div> -->
+
+<mat-form-field appearance="fill">
+  <!-- <mat-label>Favorite food</mat-label> -->
+  <mat-label>{{_defaultText}}</mat-label>
+  <mat-select [disabled]="isDisabled" [(value)]="_selectedValue" (selectionChange)="handleSorting($event.value)">
+    <mat-option value="">All</mat-option>
+    <mat-option *ngFor="let sort of sortObject" [value]="sort.key">
+      {{ sort.value }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,15 @@
+.error{
+    color: red;
+    font-size: 15px;
+}
+.catalogueBtn_box{
+    background-color: #c40000 !important;
+    color: #fff;
+    border: 0px;
+    width: 100%;
+    min-width: auto;
+    max-width: 170px;
+    margin-top: 14px;
+    padding: 7px 5px;
+    border-radius: 4px;
+}

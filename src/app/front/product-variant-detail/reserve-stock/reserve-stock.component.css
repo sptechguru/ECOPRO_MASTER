@@ -1,0 +1,54 @@
+.table.livestock-table th, .table.livestock-table td {
+    text-align: left;
+}
+
+/* .table.livestock-table th, .table.livestock-table td {
+    border: 1px solid #777474;
+} */
+.table.livestock-table td {
+    border: 1px solid #bcbaba;
+    text-align: center;
+}
+.livestock-table tr:nth-child(even) {
+    background: #d7d7d7;
+}
+/*bottom-left border-radius*/
+.table.livestock-table tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+  }
+  
+  /* bottom-right border-radius */
+  .table.livestock-table tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+  }
+
+button.close {
+    position: absolute;
+    right: -15px;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    color: #c40000;
+    z-index: 999;
+    opacity: 1;
+    box-shadow: 0px 0px 8px 0px #666464;
+    font-size: 35px;
+    top: -15px;
+}
+button.close span{
+    font-weight: 600;
+}
+.stock-modal{
+    padding: 30px;
+    max-height: inherit;
+    overflow: visible;
+}
+.cstm_dialog_panel .mat-dialog-container{
+    padding: 0;
+}

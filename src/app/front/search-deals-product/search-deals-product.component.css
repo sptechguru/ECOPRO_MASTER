@@ -1,0 +1,33 @@
+button.sort-btn {
+    border: 0;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.product-category-info-search span.product-thumb-img{
+    width: 200px !important;
+    height: 200px !important;
+}
+.category-list-detail{
+    /*cursor: pointer;*/
+    margin: 20px 0;
+}
+.collectioncard{
+    margin:0px!important;
+    width: -webkit-fill-available!important;
+    min-height: 295px!important;
+    max-height: 295px!important;
+    box-shadow: 1px 2px 13px -1px rgba(48,40,40,0.69);
+    -webkit-box-shadow: 1px 2px 13px -1px rgba(48,40,40,0.69);
+    -moz-box-shadow: 1px 2px 13px -1px rgba(48,40,40,0.69);
+    border-radius: 4px;
+}
+@media only screen and (max-width: 747px){
+ .collectioncard{
+    margin: 0px !important;
+    width: -webkit-fill-available;
+    min-height:none!important;;
+    max-height:none!important;;
+ }
+}

@@ -1,0 +1,223 @@
+<div class="catalogue-sec sec-wrapper sec-padding pt-0">
+
+    <div class="top-row" *ngIf="product.variant_name">
+       <div class="container container-large">
+          <div class="row align-items-center">
+             <div class="col-lg-12">
+                <ol class="breadcrumb mb-0 bg-transparent">
+                   <li class="breadcrumb-item">
+                      <a>{{product?.master_product.product_name}}</a>
+                   </li>
+                   <li class="breadcrumb-item">
+                      {{product?.variant_name}}
+                   </li>
+                </ol>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="container container-large">
+        <div class="bg-transparent py-4">
+           <ng-container *ngIf="product">
+              <ng-container>
+                 <ng-container>
+                    <div class="row mb-4">
+                       <div class="col-lg-6">
+                          <div class="product-slider-share bg-white position-relative p-4">
+                             <a class="share" href="https://api.whatsapp.com/send?phone={{phone_number}}
+                             &text={{base_url}}" 
+                             target="_blank">
+                                <i class="fas fa-share-alt" style="font-size: 30px;color:#c40000;cursor: pointer;"></i>  
+                             </a>
+                             <ngx-slick-carousel class="carousel product-slider" #slickModal="slick-carousel"
+                                [config]="slideConfig">
+                                <div ngxSlickItem class="slide-col" *ngIf="youtubeUrl && youtubeUrlStatus">
+                                   <iframe width="500" height="450" [src]="youtubeUrl | safe" frameborder="0" 
+                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                   allowfullscreen></iframe>
+                                </div>
+                                <div ngxSlickItem class="slide slide-col" *ngIf="featuredImage && !youtubeUrlStatus">
+                                   <lib-ngx-image-zoom  [thumbImage]=featuredImage
+                                      [fullImage]=featuredFullImage [mode]="hover" [magnification]="0"
+                                      [enableScrollZoom]="false" [enableLens]="false" [isInsideStaticContainer]="true">
+                                   </lib-ngx-image-zoom>
+                                </div>
+                                <div ngxSlickItem class="slide-col" *ngIf="!featuredImage && !youtubeUrlStatus">
+                                   <lib-ngx-image-zoom  [thumbImage]=default_image
+                                      [fullImage]=featuredFullImage [magnification]="0" [enableScrollZoom]="false"
+                                      [enableLens]="false" [isInsideStaticContainer]="true"></lib-ngx-image-zoom>
+                                </div>
+                             </ngx-slick-carousel>
+     
+                             <ngx-slick-carousel class="carousel product-slider-nav" #slickModal="slick-carousel"
+                                [config]="slideConfig2" *ngIf="variantSliderImageStatus">
+                                <div ngxSlickItem class="slide"
+                                   *ngFor="let varian_image of variantSliderImage.product_images"
+                                   (click)="productDisplay(varian_image, default_image)">
+                                   <img src="{{varian_image.product_variant_image_150x150}}" alt="" class="img-fluid">
+                                </div>
+                                <div ngxSlickItem class="slide" (click)="productYoutubeDisplay(youtubeUrl)">
+                                   <img src="assets/images/download_youtube.png" alt="" class="img-fluid">
+                                </div>
+                             </ngx-slick-carousel>
+                          </div>
+  
+                       </div>
+                       <div class="col-lg-6">
+                          <div class="row">
+                             <div class="col-lg-12 mb-4">
+                                <div class="category-detail-wrap">
+                                   <h4>{{product?.master_product?.product_name}}</h4>
+                                   <div class="row">
+                                      <div class="col-md-7">
+                                         <p class="price-label d-flex align-items-center">
+                                            <span class="offer-txt mr-3">Offer Price:</span>
+                                            <span class="flex-grow-1">
+                                               <span>Rs. {{product.base_price | number}}/-</span><br />
+                                               <span class="gst-txt">(+ {{product.gst}}% GST )</span>
+                                            </span>
+                                         </p>
+                                         <p class="price-label" *ngIf="product.max_retail_price">MRP: Rs.
+                                            {{product.max_retail_price | number}}/- </p>
+                                       <!---  <p class="price-label" *ngIf="product.hsn_code">HSN Code: {{product.hsn_code}}
+                                         </p>
+                                       -->
+                                         <div>
+                                            <increment-input [value]="_value || 0" [step]="_step" [min]="_min"
+                                               [max]="_max" [wrap]="_wrap"></increment-input>
+                                         </div>
+                                         <p>{{minimum_order_quantity}} Piece (Min Order)</p>
+                                         <mat-form-field appearance="outline" class="custom_field mb-4">
+                                            <mat-label>{{product.variant_name}}</mat-label>
+                                            <mat-select (selectionChange)="changeFunc($event)" disabled>
+                                               <mat-option value="{{product.variant_name}}">
+                                                  {{product.variant_name}}</mat-option>
+                                            </mat-select>
+                                         </mat-form-field>
+                                         <mat-form-field appearance="outline" class="custom_field">
+                                            <mat-label>Quantity</mat-label>
+                                            <input type="number" min="1" max="5" matInput [(ngModel)]="quantity"
+                                               (ngModelChange)="modelChanged(quantity)">
+                                         </mat-form-field>
+                                       
+                                      </div>
+                                      <div class="col-md-5">
+                                         
+                                         <div class="rounded-btn-wrap">
+                                            <button (click)="openReserveStock(product, product.sku_code)"
+                                               class="btn iot-btn-secondary rounded-btn w-100 mb-3">Check Stock</button>
+                                         </div>
+                                      </div>
+                                    </div>
+                                   <div class="my-4">
+                                      <button mat-raised-button color="" class="iot-btn-dark w-100"
+                                         [routerLink]="['/add-catalogue', vid ]">
+                                         <span class="material-icons mr-2">
+                                            add
+                                         </span> Add to Catalogue
+                                      </button>
+                                   </div>  
+  
+                                   <div class="row my-4" *ngIf="available_qty != 0">
+                                      <div class="col-md-6">
+                                         <button class="btn iot-btn-secondary rounded-btn w-100 mb-3 mb-md-0"
+                                            (click)="addToCart();" [disabled]="!quantity_status">
+                                            <span class="material-icons">shopping_cart</span> Add to cart
+                                         </button>
+                                      </div>
+                                      <div class="col-md-6">
+                                         <button class="btn iot-btn-secondary rounded-btn w-100" (click)="getSample();"
+                                            [disabled]="!quantity_status">Get Sample</button>
+                                      </div>
+                                   </div>
+  
+                                   <div class="row my-4" *ngIf="available_qty === 0">
+                                      <div class="col-md-12">
+                                         <button class="btn iot-btn-secondary rounded-btn w-100 mb-3 mb-md-0"
+                                            [disabled]="true">
+                                            <span class="material-icons"></span> On Request
+                                         </button>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                          
+                        </div>
+                        <div class="col-lg-12" *ngIf="product.variant_description && product.variant_description!=''">
+                           <div class="category-detail-wrap">
+                              <h4>Variant Description</h4>
+                              <div class="card">
+                                 <div class="card-content table-responsive table-full-width cstm-table">
+                                    <table class="table">
+                                       <tbody>
+                                          <tr>
+                                             <td>
+                                                <ng-container>
+                                                   <span [innerHTML]="product.variant_description"></span>
+                                                </ng-container>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-12" *ngIf="att">
+                           <div class="category-detail-wrap">
+                              <h4>Specifications</h4>
+                              <div class="card">
+                                 <div class="card-content table-responsive table-full-width cstm-table">
+                                    <table class="table">
+                                       <tbody>
+                                          <tr *ngFor="let attribute of att">
+                                             <th>{{attribute.attribute_name}}</th>
+                                             <td>
+                                                <ng-container
+                                                   *ngFor="let value of attribute.attribute_value; let last = last;">
+                                                   {{value}}{{last ? '' : ','}}
+                                                </ng-container>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+   
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  
+                 </ng-container>
+              </ng-container>
+           </ng-container>
+        </div>
+
+        <div class="carousel-wrap bg-white py-5 px-4">
+            <h4 class="mb-4">Latest Products</h4>
+            <ngx-slick-carousel class="carousel realated-product-carousel" #slickModal="slick-carousel"
+               [config]="slideConfig1">
+   
+               <div ngxSlickItem class="slide" *ngFor="let item of preferedProductList"
+                  (click)="onClickPreferredProductList(this.id, item.ids, item.product_variants.id)">
+   
+                  <a [routerLink]="['/categories', this.id, item.ids, item.product_variants.id]">
+                     <img *ngIf="item.product_variants.product_images.length === 0" src="{{default_image}}" alt=""
+                        class="img-fluid">
+                     <img *ngIf="item.product_variants.product_images.length > 0"
+                        src="{{item.product_variants.product_images[0].product_variant_image_150x150}}" alt=""
+                        class="img-fluid">
+                  </a>
+                  <p class="carosuel-title">{{item.product_name}}</p>
+               </div>
+            </ngx-slick-carousel>
+         </div>
+       
+     </div>
+
+ </div>

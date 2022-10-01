@@ -1,0 +1,117 @@
+
+   <div class="category-filter-new sec-padding">
+    <div class="container">
+        <div class="mb-4">
+            <a class="btn btn-red"  [routerLink]="['/prefered-products']">
+                <span class="material-icons">
+                    keyboard_backspace
+                </span>
+                Back 
+            </a>
+        </div>
+       
+       <mat-card class="category-filter-checkbox">
+           <mat-card-header>
+               <mat-card-title>Categories</mat-card-title>
+           </mat-card-header>
+           <mat-card-content class="filter-checkbox-wrap filter-category-checkbox-wrap p-5">
+               <mat-checkbox class="filter-checkbox" *ngFor="let categoriesList of categories" 
+               (change)="preferedCategoryArray($event, categoriesList)">
+                   <span class="product-checkbox-img">
+                       <img src="{{categoriesList.product_category_image_150x150}}" 
+                       alt=""  class="img-fluid">
+                   </span>
+                   <span class="filter-checbox-title">
+                      {{categoriesList.product_category}}
+                   </span>
+               <!-- <p>{{categoriesList.id}}</p> -->
+
+               </mat-checkbox>
+           </mat-card-content>
+       </mat-card>
+
+       <form [formGroup]="filterForm">
+       <div class="row">
+
+           <div class="col-lg-6">
+               <mat-card class="category-filter-checkbox">
+                   <mat-card-header>
+                       <mat-card-title>Price</mat-card-title>
+                   </mat-card-header>
+                   <mat-card-content class="filter-checkbox-wrap py-5">
+                    <div class="row justify-content-between">
+                        <div class="col-6">
+                            <label>Min Price:{{this.filterForm.controls.pmin.value}}</label>
+                            <mat-form-field appearance="outline" class="custom_field">
+                                <input type="number" formControlName="pmin" matInput autocomplete="off">
+                             </mat-form-field>
+                           <!--- <input type="text" class="form-control border px-3" formControlName="pmin" #input3 (input)="removeWord(input3)">-->
+                            <div class="mt-2" *ngIf="this.filterForm.controls.pmin.invalid && (this.filterForm.controls.pmin.dirty || this.filterForm.controls.pmin.touched)">
+                                <span class="text-danger" *ngIf="this.filterForm.controls.pmin.errors?.required">Minimum Price is required</span>
+                                <span class="text-danger " *ngIf="this.filterForm.controls.pmin.errors?.pattern">Minimum Price is invalid</span>
+                            </div>
+                        
+                        </div>
+                        <div class="col-6">
+                        <label>Max Price:{{this.filterForm.controls.pmax.value}}</label>
+                        <mat-form-field appearance="outline" class="custom_field">
+                            <input type="number" formControlName="pmax"  matInput autocomplete="off">
+                         </mat-form-field>
+                   <!---
+                         <input type="text" class="form-control border px-3" formControlName="pmax" #input2 (input)="removeWord(input2)">-->
+                         <div class="mt-2" *ngIf="this.filterForm.controls.pmax.invalid && (this.filterForm.controls.pmax.dirty || this.filterForm.controls.pmax.touched)">
+                            <span class="text-danger " *ngIf="this.filterForm.controls.pmax.errors?.required">Maximum Price is required</span>
+                            <span class="text-danger " *ngIf="this.filterForm.controls.pmax.errors?.pattern">Maximum Price is invalid</span>
+                        </div>
+                    
+                        </div>
+                    </div>
+
+                <!---
+                       <ng5-slider [(value)]="minValues" [(highValue)]="maxValues" 
+                       [options]="optionss" class="price-range-slider" 
+                        (userChangeEnd)="filterProductByPrices($event)"></ng5-slider>
+                -->  
+                   </mat-card-content>
+               </mat-card>
+           </div>
+
+           <div class="col-lg-6">
+               <mat-card class="category-filter-checkbox testnew">
+                   <mat-card-header>
+                       <mat-card-title>Stock</mat-card-title>
+                   </mat-card-header>
+                   <mat-card-content class="filter-checkbox-wrap py-5">
+                    <div class="row justify-content-between">
+                       <div class="col-12 text-center">
+                            <label>Stock:{{this.filterForm.controls.smin.value}}</label>
+                            <mat-form-field appearance="outline" class="custom_field">
+                                <input type="number" formControlName="smin"  matInput autocomplete="off">
+                             </mat-form-field>
+                            <!--<input type="text" class="form-control border px-3" formControlName="smin" #input1 (input)="removeWord(input1)">-->
+                            <div class="mt-2" *ngIf="this.filterForm.controls.smin.invalid && (this.filterForm.controls.smin.dirty || this.filterForm.controls.smin.touched)">
+                                <span class="text-danger " *ngIf="this.filterForm.controls.smin.errors?.required">Stock is required</span>
+                                <span class="text-danger " *ngIf="this.filterForm.controls.smin.errors?.pattern">Stock is invalid</span>
+                            </div>
+                        </div>
+                    </div>
+                   <!---   
+                      <ng5-slider [(value)]="minValues2" [(highValue)]="maxValues2" 
+                      [options]="optionss2" class="price-range-slider" 
+                       (userChangeEnd)="filterProductByStock($event)"></ng5-slider>
+                   -->
+                   </mat-card-content>
+               </mat-card>
+           </div>
+
+       </div>
+    </form>
+       <div class="text-center my-4">
+          <button class="btn btn-red" (click)="applyFilter()">Apply & Continue</button>
+       </div>
+   </div>
+ </div>
+
+
+
+ 

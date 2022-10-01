@@ -1,0 +1,372 @@
+// kyc-sec
+.kyc-sec {
+    background-color: #EFEFF4;
+}
+::ng-deep {
+    mat-panel-title.mat-expansion-panel-header-title {
+        font-weight: 600;
+        color: #2B2B2B;
+        font-size: 14px;
+    }
+    .mat-expansion-panel-content .mat-expansion-panel-body {
+        background: #EEEEEE;
+        padding-top: 20px;
+    }
+    .mat-expansion-panel-body .mat-form-field-appearance-outline .mat-form-field-wrapper{
+        background: #fff;
+        border-radius: 5px;
+    }
+    .mat-dialog-container {
+        padding-top: 0;
+        padding-left: 0;
+        padding-bottom: 0!important;
+        width:70%!important;
+        margin:0 auto;
+     }
+     .cdk-overlay-pane{
+         height: auto;
+     }
+}
+.cstm-group .cstm-label {
+    color: #2B2B2B;
+    font-weight: 600;
+    font-size: 16px;
+}
+h4.cstm-label {
+    border-bottom: 1px solid #C9C9C9;
+    padding-bottom: 15px;
+}
+.doc-detail span.iot-uploader{
+    border: 0;
+    background: transparent;
+    width: auto;
+    display: block;
+    height: auto;
+}
+.doc-list li {
+    color: #8F8F8F;
+    padding: 3px 0 3px 15px;
+    position: relative;
+    &::before{
+        position: absolute;
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: #8F8F8F;
+        border-radius: 50%;
+        top: 9px;
+        left: 0;
+    }
+}
+.wrong-doc-img {
+    border: 2px solid #F16A2A;
+    padding: 20px;
+    position: relative;
+    & button{
+        position: absolute;
+        bottom: -22px;
+        left: 39%;
+    }
+}
+// file-upload
+label#custom-file-upload, label#fileLabel {
+    display: none;
+}
+.input-grid .form-group label {
+    color: #292929;
+}
+.label-uploader {
+    display: inline-block;
+}
+.input-grid span.iot-form-control-wrap {
+    display: block;
+}
+.iot-form-control-wrap {
+    position: relative;
+}
+.label-uploader input#file-upload {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: -100000px;
+}
+div.iot input[type="file"] {
+    cursor: pointer;
+}
+.input-grid input.iot-form-control {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px 30px 5px 15px;
+    height: 42px;
+    border: 1px solid #cacaca;
+}
+span.iot-uploader {
+    display: flex;
+    width: 100%;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    justify-content: space-between;
+    height: 44px;
+    color: #8b969c;
+    cursor: pointer;
+}
+span.iot-uploader .uploader-text {
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    padding-right: 15px;
+}
+span.iot-uploader span.uploader-btn {
+    background: #5A5A5A;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.advance-icon{
+    margin: 9px 10px 0 2px;
+    font-size: 30px;
+}
+
+.mat-error {
+    color: red;
+    padding: 1.2rem !important;
+    font-size: 0.7rem;
+}
+
+.mat-select-disabled .mat-select-value, .mat-input-element:disabled{
+    color: rgba(0,0,0,.87);
+    opacity: 0.3;
+    margin-bottom: -12px;
+    padding: 0.1rem;
+}
+
+.email_change{
+  //  margin-left: 287px !important;
+    margin-top: -23px !important;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.mat-expansion-panel-header{
+    height: auto !important;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+}
+.bgbody{
+    position: fixed;
+    right: 188px !important;
+    height: 85%;
+    background: #00FFFF;
+    padding: 25px;
+    color: #fff;
+}
+.close-btn{
+    right: 4px !important;
+    top: 1px !important;
+    background-color:grey;
+    width: 22px;
+    height: 31px;
+    border: none;
+
+}
+
+.material-icons {
+    font-size: 30px !important;
+}
+.text-white{
+    line-height: 30px;
+}
+.img-fluid {
+    max-width: 90% !important;
+    height: auto;
+}
+
+ul {
+    padding-left: 0;
+}
+
+ul li {
+    list-style: none;
+    align-items: center;
+    display: flex;
+}
+
+.benicon img{
+    width: 22px;
+    height: auto;
+    margin-right: 10px;
+}
+
+
+
+.scrollbar {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-width:69.2%;
+    max-height: 555px;
+    margin-left: 4px;
+}
+
+
+
+@media screen and (min-width : 769px) and (max-width: 800px) {
+
+    .bgbody  {
+        right: 12% !important;
+    }
+    .scrollbar{
+        max-width: 73%;
+    }
+ }
+ @media screen and (min-width : 801px) and (max-width: 900px) {
+
+    .bgbody  {
+        right: 12% !important;
+    }
+    .scrollbar{
+        max-width: 74%;
+    }
+ }
+ @media screen and (min-width : 901px) and (max-width: 1050px) {
+
+    .bgbody  {
+        right: 14% !important;
+    }
+    .scrollbar{
+        max-width: 75%;
+    }
+ }
+ @media screen and (min-width : 1051px) and (max-width: 1100px) {
+
+    .bgbody  {
+        right: 78px;
+    }
+    .scrollbar{
+        max-width: 76%;
+    }
+ }
+ @media screen and (min-width : 1101px) and (max-width: 1220px) {
+
+    .bgbody  {
+        right: 84px;
+    }
+    .scrollbar{
+        max-width: 76%;
+    }
+ }
+ @media screen and (min-width : 1221px) and (max-width: 1250px) {
+
+    .bgbody  {
+        right: 92px;
+    }
+    .scrollbar{
+        max-width: 76%;
+    }
+ }
+ @media screen and (min-width : 1251px) and (max-width: 1370px) {
+
+    .bgbody  {
+        right: 176px;
+    }
+    .scrollbar{
+        max-width: 68%;
+    }
+ }
+ @media screen and (min-width : 1371px) and (max-width: 1400px) {
+
+    .bgbody  {
+        right: 195px;
+    }
+    .scrollbar{
+        max-width: 68%;
+    }
+ }
+ @media screen and (min-width : 1401px) and (max-width: 1500px) {
+
+    .bgbody  {
+        right: 210px;
+    }
+    .scrollbar{
+        max-width: 68%;
+    }
+ }
+ @media screen and (min-width : 1501px) and (max-width: 1550px) {
+
+    .bgbody  {
+        right: 240px;
+    }
+    .scrollbar{
+        max-width: 69%;
+    }
+ }
+ @media screen and (min-width : 1551px) and (max-width: 1600px) {
+
+    .bgbody  {
+        right: 18% !important;
+    }
+    .scrollbar{
+        max-width: 69%;
+    }
+ }
+ @media screen and (min-width : 1601px) and (max-width: 1750px) {
+
+    .bgbody  {
+        right: 18% !important;
+    }
+    .scrollbar{
+        max-width: 72.5%;
+    }
+ }
+ @media screen and (min-width : 1751px) and (max-width: 1850px) {
+
+    .bgbody  {
+        right: 18% !important;
+    }
+    .scrollbar{
+        max-width: 75%;
+    }
+ }
+ @media screen and (min-width : 1851px) and (max-width: 1900px) {
+
+    .bgbody  {
+        right: 16% !important;
+    }
+    .scrollbar{
+        max-width: 76%;
+    }
+ }
+ @media screen and (min-width : 1901px) and (max-width: 1920px) {
+
+    .bgbody  {
+        right: 15% !important;
+    }
+    .scrollbar{
+        max-width: 76%;
+    }
+ }
+
+

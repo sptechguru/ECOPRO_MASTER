@@ -1,0 +1,134 @@
+<div class="sec-wrapper  d-flex align-items-center" 
+*ngIf="preferedProductList.length>=0">
+   <div class="container">
+      <div class="text-center " style="color: #F16A2A;" *ngIf="connectLoader">
+         <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+         </div>
+      </div>
+      <h2 class="sec-title text-center" *ngIf="notFound == 'blank'">Products not found</h2>
+   </div>
+</div>
+
+<div class="sec-wrapper" *ngIf="preferedProductList && preferedProductList.length>0" 
+   infinite-scroll
+   [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+   [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+   <!-- <div class="top-row py-4">
+      <div class="container container-large">
+         <div class="row align-items-center search-row px-4">
+            <div class="col-lg-8">
+             
+            </div>
+         </div>
+      </div>
+   </div> -->
+   <div class="container container-large">
+
+      <div class="row">
+         <div class="col-lg-12 col-md-12">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+               <h3 class="inner-sec-title my-3">{{categoryDetails?.product_category}}
+                  <span *ngIf="totalArrayLimit>0">{{totalArrayLimit}} Products found of <span class="search_text_after">{{this.currentCategoryName}}</span></span>
+               </h3>
+               <div class="d-flex flex-wrap align-items-center">
+                  <mat-form-field appearance="fill" class="pt-3">
+                     <mat-label>Sort by specific order</mat-label>
+                     <mat-select [value]="recordsSortBy" (selectionChange)="sortBySelectionChange($event)">
+                        <mat-option value="hstock">Ready Stock - High to Low</mat-option>
+                        <mat-option value="recent">Recent First</mat-option>
+                      <!--- <mat-option value="pou">Popularity</mat-option> -->
+                       <mat-option value="hl" >Price - High to Low</mat-option>
+                       <mat-option value="lh" >Price - Low to High</mat-option>
+                     </mat-select>
+                   </mat-form-field>
+                  <!---
+                  <button class="sort-btn" (click)="sort('base_price', 'high')"
+                  *ngIf="type=='low'">
+                     <strong>Low to High</strong><span class="material-icons">
+                        swap_vert
+                     </span>
+                  </button> 
+                  <button class="sort-btn" (click)="sort('base_price', 'low')"
+                  *ngIf="type=='high'">
+                  <strong>High to Low</strong><span class="material-icons">
+                     swap_vert
+                  </span>
+                  </button>
+               -->
+               </div>
+            </div>
+            <div class="content bg-white py-4 px-4 rounded-0">
+               <div class="text-center " style="color: #917467;" *ngIf="connectLoader">
+                  <div class="spinner-border" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+               <div class="justify-content-between d-flex" *ngIf="!connectLoader">
+                  <div>
+                     <mat-checkbox class="example-margin" (change)="setAllCheckbox($event)">Select All</mat-checkbox>
+                  </div>
+                  <div *ngIf="this.productCheckedList.length >0 && count > 0">
+                     <a href="javscript:void(0)"
+                     class="btn btn-red iot-btn-primary view-detail-btn" (click)="AddCatalogue()">Add Catalogue</a>     
+                  </div>
+                  </div>
+
+               <div class="category-list" *ngIf="!connectLoader">
+                  <div class="category-list-detail" *ngFor="let item of preferedProductList">
+                     <div>
+                        <mat-checkbox class="example-margin pr-2" (change)="setSingleCheckbox($event,item.id)" [checked]="this.checkedAll"></mat-checkbox>
+                     </div>
+                     <div class="product-category-info product-category-info-search">
+                        <span class="product-thumb-img">
+                           <a style="cursor: pointer;" (click)="productDetailDealsRoute(item?.category_id, item?.ids, item?.product_variants.id)">
+                              <img *ngIf="item.featured_image" src="{{item.featured_image}}" alt="Product"> 
+                           </a>
+                        </span>
+                        <div class="category-info-txt">
+                           <!--<h5><a class="text-dark-2 f-15 f-w-600">{{item.product_name}}</a></h5>
+                           <p><a class="text-dark-2 f-15">{{item.product_variants.variant_name}}</a></p>-->
+                           <h5>
+                              <a class="text-dark-2 f-15 f-w-600" style="cursor: pointer;"
+                              (click)="productDetailDealsRoute(item?.category_id, item?.ids, item?.product_variants.id)">
+                                 {{item.product_variants.variant_name}}
+                              </a>
+                           </h5>
+                           <p class="price-label">Offer Price: <span>Rs. {{item.product_variants.base_price |
+                                 number}}/-</span>
+                           </p>
+                           <p class="price-label price-label-small" *ngIf="item.product_variants.max_retail_price">
+                              MRP: <span>Rs. {{item.product_variants.max_retail_price | number}}/-</span>
+                           </p>
+                           <!--<p class="price-label price-label-small" *ngIf="item.product_variants.hsn_code">
+                              HSN Code: <span>{{item.product_variants.hsn_code}}</span>
+                           </p>
+                        -->
+                           <p *ngIf="item.product_variants.quantity >= 100">Available Quantity:
+                              
+                              <span
+                                 >{{item.product_variants.quantity}}</span>
+                           </p>
+                           <!--<p class="d-flex align-items-center mt-3 ships-title">
+                              <strong>Dispatch in {{item.product_variants.live_stock_dishpatch_time}} Days</strong>
+                               <span class="material-icons ml-3">
+                               local_shipping
+                               </span>
+                            </p>
+                           -->
+                        </div>
+                     </div>
+                     <a href="javscript:(void)"
+                        [routerLink]="['/categories', item.category_id,
+                        item.ids, item.product_variants.id]"
+                        class="btn btn-red iot-btn-primary view-detail-btn">View Detail</a>
+                  </div>
+                  <app-ngb-pagination *ngIf="preferedProductList.length>0" [collectionSize]="totalQueryableData" 
+                     [page]="page" (pageChange)="handlePageChange($event)" [isDisabled]="isListLoading">
+                  </app-ngb-pagination>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

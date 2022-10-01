@@ -1,0 +1,126 @@
+<div class="sec-common sec-bg sec-padding">
+    <div class="container">
+       <form [formGroup]="addressForm" (ngSubmit)="handleSubmit()" novalidate>
+            <div class="content mt-4 p-0 cart-content address-content">
+                <div class="row p-5">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>Is Default Address <span style="color:red">*</span></mat-label>
+                        <mat-select matInput formControlName="is_default" [disabled]="billingStatus">
+                          <mat-option value="yes">Yes</mat-option>
+                          <mat-option value="no">No</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="addressForm.get('is_default').touched && addressForm.get('is_default').errors?.required">
+                            Please select default address
+                        </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>Title <span style="color:red">*</span></mat-label>
+                        <input matInput formControlName="title">
+                        <mat-error *ngIf="addressForm.get('title').touched && addressForm.get('title').errors?.required">
+                            Please enter title
+                        </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>Address Line 1 <span style="color:red">*</span></mat-label>
+                        <input  matInput formControlName="address1">
+                        <mat-error *ngIf="addressForm.get('address1').touched && addressForm.get('address1').errors?.required">
+                            Please enter address
+                        </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>Address Line 2 <span style="color:red">*</span></mat-label>
+                        <input  matInput formControlName="address2">
+                        <mat-error *ngIf="addressForm.get('address2').touched && addressForm.get('address2').errors?.required">
+                            Please enter address
+                        </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>Country <span style="color:red">*</span></mat-label>
+                        <mat-select formControlName="country" placeholder="Country" (selectionChange)="countryChange($event)" 
+                            #singleSelect>
+                            <mat-option>
+                            <ngx-mat-select-search [formControl]="countryFilterCtrl" 
+                            placeholderLabel="Select Country" 
+                        noEntriesFoundLabel="No matching country found"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let country of filteredCountries | async" value="{{country.id}}">
+                            {{country.country}}
+                            </mat-option>
+                        </mat-select>  
+                        <mat-error *ngIf="addressForm.get('country').touched && addressForm.get('country').errors?.required">
+                            Please select country
+                        </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>State <span style="color:red">*</span></mat-label>
+                        <mat-select formControlName="state" placeholder="State" (selectionChange)="stateChange($event)" 
+                            #singleSelect>
+                            <mat-option>
+                            <ngx-mat-select-search [formControl]="stateFilterCtrl" 
+                            placeholderLabel="Select State" 
+                        noEntriesFoundLabel="No matching state found"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let state of filteredStates | async" value="{{state.id}}">
+                            {{state.state}}
+                            </mat-option>
+                        </mat-select>  
+                        <mat-error *ngIf="addressForm.get('state').touched && addressForm.get('state').errors?.required">
+                            Please select state
+                        </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>City <span style="color:red">*</span></mat-label>
+                        <mat-select formControlName="city" placeholder="City" #singleSelect>
+                            <mat-option>
+                            <ngx-mat-select-search [formControl]="cityFilterCtrl" 
+                            placeholderLabel="Select City" 
+                        noEntriesFoundLabel="No matching city found"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let city of filteredCities | async" value="{{city.id}}">
+                            {{city.city}}
+                            </mat-option>
+                        </mat-select>  
+                        <mat-error *ngIf="addressForm.get('city').touched && addressForm.get('city').errors?.required">
+                            Please select city
+                        </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mb-4">
+                        <mat-label>Pin Code <span style="color:red">*</span></mat-label>
+                        <input  matInput type="text" formControlName="pincode">
+                        <small *ngIf="addressForm.controls['pincode'].invalid 
+						&& (addressForm.controls['pincode'].dirty 
+						|| addressForm.controls['pincode'].touched)" class="error">
+							<mat-error *ngIf="addressForm.controls['pincode'].errors.required">
+                                Please enter Pin Code
+							</mat-error>
+							<mat-error *ngIf="addressForm.controls['pincode'].errors.pattern">
+                                Please enter 6 digit Pin Code
+							</mat-error>
+						</small>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="btm-btn-wrap">
+                    <button class="cart-btn">
+                       <span (click)="deliveryDetail()">Delivery Address</span>
+                    </button>
+                    <button mat-raised-button [disabled]="isProcessing || !addressForm.valid"
+                    class="cart-btn proceed-btn rounded-left-0">
+                    <mat-spinner *ngIf="isProcessing" [diameter]="20"></mat-spinner>
+                    <span *ngIf="!isProcessing">Save</span>
+                  </button>
+                </div>
+            </div>
+        </form>
+    </div>
+ </div>

@@ -1,0 +1,788 @@
+<title>
+    Ek Matra - B2B Platform for Institutional Resellers
+</title>
+
+<meta name="description"
+    content="Bulk Buy Corporate Gifting supplies, Promotional supplies, Customized supplies, Office Supplies in lowest price directly from Brands and Manufacturers">
+
+<!-- top-banner -->
+<div class="top-banner overlay-1">
+    <div class="banner-img">
+        <img src="assets/images/ekmatra-banner.jpg" alt="Exclusive Products" class="img-fluid">
+    </div>
+    <div class="banner-content-wrap">
+        <div class="container-fluid px-3 px-md-3 px-lg-5 ">
+            <div class="row align-items-center mx-0">
+                <!-- <div class="col-lg-6">
+                    <div class="banner-product-img">
+                        <img src="assets/images/home-appliances.png" class="img-fluid" alt="">
+                    </div>
+                </div> -->
+                <div class="col-md-12 col-lg-10 p-0">
+                    <div class="banner-content mt-5 pt-5">
+                        <h2 class="banner-titlemt-5">Making Businesses Happier</h2>
+                        <h3 style="margin-top: initial;"><span class="primary-color">India's Leading Platform for Corporate Gifts. Drive Customer
+                                <br>Loyalty and Employee Satisfaction via Smart Gifting</span></h3>
+                        <!-- <h4>Drive Customer Loyality and Employee satisfaction via smart gifting</h4> -->
+                        <!-- <h1 class="banner-title mt-5">India's leading closed loop<br> <span class="primary-color">B2B
+                                E-commerce</span>
+                            platform for institutional resellers to buy<br>
+                            products directly from brands<br> and
+                            manufacturers.</h1> -->
+                        <div class="">
+                            <a href="https://play.google.com/store/apps/details?id=com.iotreseller" target="_blank"
+                                class="play-store-btn">
+                                <img src="assets/images/google-play-new.png" alt="Google Play Store" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-5 px-0">
+                <form [formGroup]="contactForm"  novalidate autocomplete="off">
+                    <div class="form-group-wrap mt-4">
+                        <button type="submit" class="btn btn-red"  (click)="showSignup()" >                               
+                            <span *ngIf="!loader">Get Started Instantly </span>
+                        </button> 
+                        <div style="font-weight: bold;font-size: 20px;text-align: justify;padding: 5px;">OR</div>
+                        <div class="form-group request-group">
+                            <mat-form-field appearance="outline" style="flex: .6;" >
+                                <mat-label>Contact No</mat-label>
+                                <input matInput type='number' formControlName='phone'>
+                            </mat-form-field> 
+                                                    
+                            
+                            <button type="submit" class="btn btn-red" [disabled]="loader || !contactForm.valid" (click)="handleSubmit()" style="margin-left: 5px;">
+                                <mat-spinner *ngIf="loader" [diameter]="20"></mat-spinner>
+                                <span *ngIf="!loader">Request Call Back</span>
+                            </button>
+                           
+                            <div class="error-wrap">
+                                <mat-error
+                                    *ngIf="contactForm.get('phone').touched && contactForm.get('phone').errors?.required">
+                                    Please Enter Contact Number
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="contactForm.get('phone').touched && contactForm.get('phone').errors?.pattern">
+                                    Please Enter 10 digit Contact Number
+                                </mat-error>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- top-banner -->
+
+<!-- top-selling-catogries -->
+<div class="sec-padding top-seeling-categories bg-white">
+    <div class="container container-larges">
+        <div class="sec-heading-wrap text-center">
+            <h2 class="sec-title">Your Trust, Our Work</h2>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="work-col work-col-1">
+                    <span class="work-col-img">
+                        <img src="assets/images/client.svg" alt="Client" class="img-fluid">
+                    </span>
+                    <div class="work-content-inner">
+                        <h4>3000+</h4>
+                        <p>Clients</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="work-col work-col-2">
+                    <span class="work-col-img">
+                        <img src="assets/images/products.svg" alt="Products" class="img-fluid">
+                    </span>
+                    <div class="work-content-inner">
+                        <h4>7 million+</h4>
+                        <p>Units Delivered</p>
+                        <!-- <p>Products</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="work-col work-col-3">
+                    <span class="work-col-img">
+                        <img src="assets/images/order.svg" alt="Orders" class="img-fluid">
+                    </span>
+                    <div class="work-content-inner">
+                        <h4>12000+</h4>
+                        <p>Orders</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="work-col work-col-4">
+                    <span class="work-col-img">
+                        <img src="assets/images/brands.svg" alt="Brands" class="img-fluid">
+                    </span>
+                    <div class="work-content-inner">
+                        <h4>35+</h4>
+                        <p>Product Categories</p>
+                        <!-- <p>Brands</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- top-selling-catogries -->
+<!-- smart-device -->
+<!--<iframe class="embed-responsive-item" src="assets/video/Ekmatra-video.mp4"
+allowfullscreen></iframe>
+<iframe class="embed-responsive-item" [src]='safeUrl' [autoplay]='false'
+allowfullscreen></iframe>-->
+<!--<iframe class="embed-responsive-item" [src]='safeUrl' 
+allowfullscreen></iframe>-->
+<!-- <div class="what-sec">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="sec-heading-wrap">
+                    <h2 class="sec-title">Who Should Join Ek Matra?</h2>
+                    <p>Institutional resellers who are supplying or wish to supply products in Bulk to Corporate
+                        Companies, Hotels,
+                        Educational institutes, Government institutes, Hospitals etc.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="video-wrap">
+                    <div class="embed-responsive embed-responsive-16by9">
+                       
+                        <video class="embed-responsive-item" [src] = "safeUrl" controls="controls" pause auto="false">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- smart-device -->
+<!-- popular-categories -->
+<div class="sec-padding why-sec">
+    <div class="container container-large">
+        <div class="sec-heading-wrap text-center">
+            <h2 class="sec-title">Why Ek Matra?</h2>
+        </div>
+        <div class="row mt-5 why-row justify-content-center">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="why-col why-col-5">
+                    <div class="why-icon">
+                        <img src="assets/images/catalog.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Customizable Product
+                        Catalogue</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="why-col why-col-4">
+                    <div class="why-icon">
+                        <img src="assets/images/Product Stock.jpg" alt="" class="img-fluid">
+                    </div>
+                    <h4>Live Stock Check</h4>
+                </div>
+            </div>
+            <!-- <div class="col-md-6 col-lg-3 mb-4">
+                <div class="why-col why-col-1">
+                    <div class="why-icon">
+                        <img src="assets/images/b2b.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Only For B2B Reseller</h4>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-6 col-lg-3 mb-4">
+                <div class="why-col why-col-2">
+                    <div class="why-icon">
+                        <img src="assets/images/package.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Dedicated Account
+                        Manager</h4>
+                </div>
+            </div> -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="why-col why-col-6">
+                    <div class="why-icon">
+                        <img src="assets/images/package.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Get Sample Before Buying</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="why-col why-col-3">
+                    <div class="why-icon">
+                        <img src="assets/images/delivery-truck.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Door Step Delivery</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="why-col why-col-7">
+                    <div class="why-icon">
+                        <img src="assets/images/package.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Innovative & Customised Products</h4>
+                </div>
+            </div>
+
+
+            <!-- <div class="col-md-6 col-lg-3 mb-4">
+                <div class="why-col why-col-6">
+                    <div class="why-icon">
+                        <img src="assets/images/package.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Sample Availability</h4>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-6 col-lg-3 mb-4">
+                <div class="why-col why-col-7">
+                    <div class="why-icon">
+                        <img src="assets/images/package.png" alt="" class="img-fluid">
+                    </div>
+                    <h4>Hassle Free Direct
+                        Sourcing</h4>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- popular-categories -->
+<!--<div class="sec-padding testimonial-customer">
+    <div class="container">
+        <div class="sec-heading-wrap text-center">
+            <h2 class="sec-title">Testimonials - Customers</h2>
+        </div>
+        <div class="position-relative">
+            <ngx-slick-carousel class="carousel customer-feeback" #slickModal="slick-carousel" [config]="customerSlide">
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-1.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-2.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-3.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-4.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-5.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-6.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </div>
+</div>-->
+<!-- testimonial customer -->
+<!--Kitchen-Appliances -->
+<!-- <div class="sec-padding join-hand-sec bg-white position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-md-5 mb-lg-0">
+                <div class="col-img">
+                    <img src="assets/images/join-hands-img.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="sec-heading-wrap">
+                    <h2 class="sec-title">Join Hands - Customer</h2>
+
+                    <h4>Grow Your Business With Us. Master the Art Of Reselling</h4>
+                    <h4 class="my-4">
+                        Simply share your<br>
+                        mobile number<br>
+                        below to get started!<br>
+                    </h4>
+                    <div class="">
+                        <!-- <a href="javascript:(void)" class="btn btn-red mr-4">Contact Us</a>
+                        <a href="javascript:(void)" class="btn btn-red mr-4">Google Form Link</a> 
+                        <a href="javascript:(void)" (click)="showLogin()" class="btn btn-red mr-4">Login</a>
+                        <a href="javascript:(void)" (click)="showSignup()" class="btn btn-red mr-4">Register</a>
+                    </div>
+
+                    <form [formGroup]="contactForm1" (ngSubmit)="handleSubmit1()" novalidate
+                    autocomplete="off">
+                        <div class="form-group-wrap mt-4">
+                            <div class="form-group request-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Contact No</mat-label>
+                                    <input matInput type='number' formControlName='phone'>
+                                </mat-form-field>
+                                <button type="submit" class="btn btn-red" [disabled]="loader || !contactForm1.valid">
+                                    <mat-spinner *ngIf="loader" [diameter]="20"></mat-spinner>
+                                    <span *ngIf="!loader">Request Call Back</span>
+                                </button>
+                                <div class="error-wrap">
+                                    <mat-error
+                                        *ngIf="contactForm1.get('phone').touched && contactForm1.get('phone').errors?.required">
+                                        Please Enter Contact Number
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="contactForm1.get('phone').touched && contactForm1.get('phone').errors?.pattern">
+                                        Please Enter 10 digit Contact Number
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <mat-accordion class="request-quote">
+                        <mat-expansion-panel class="mt-3" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Request a Quote
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            
+                        </mat-expansion-panel>
+                    </mat-accordion> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="bg-white py-4">
+    <hr>
+</div> -->
+<!--Kitchen-Appliances -->
+<!-- download-app-now -->
+<!-- <div class="sec-padding brands-sec bg-white">
+    <div class="container">
+        <div class="sec-heading-wrap text-center">
+            <h2 class="sec-title mb-4">Top Brands</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-1.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-2.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-3.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-4.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-5.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-6.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-7.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-8.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-9.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-10.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-11.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3">
+                <div class="brands-img">
+                    <img src="assets/images/brand-img-12.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- download-app-now -->
+<div class="sec-padding populer-category">
+    <div class="container">
+        <div class="sec-heading-wrap text-center">
+            <h2 class="sec-title mb-5">Popular Categories</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4" *ngFor="let item of categoryList;let key=index;">
+                <div class="populer-col-wrap" *ngIf="isloging==false" style="cursor:pointer;">
+
+                    <span class="populer-thumb" >
+                        <img *ngIf="item.product_category_image_150x150" class="img-fluid" style="cursor:pointer;"
+                            [routerLink]="['/filtered-products',item.id]" src="{{item.product_category_image_150x150}}"
+                            alt="">
+                        <img *ngIf="item.product_category_image_150x150 == ''" class="img-fluid" style="cursor:pointer;"
+                            [routerLink]="['/filtered-products',item.id]" src="{{default_image}}" alt="">
+                    </span>
+                    <h4 class="flex-grow-1">
+                        <a *ngIf="item.product_category" [routerLink]="['/filtered-products',item.id]"
+                            class="text-dark-2">
+                            {{item.product_category}}
+                        </a>
+                    </h4>
+                </div>
+                <div class="populer-col-wrap" *ngIf="isloging==true"(click)="showSignup()" style="cursor:pointer;">
+
+                    <span class="populer-thumb" >
+                        <img *ngIf="item.product_category_image_150x150" class="img-fluid" style="cursor:pointer;"
+                            (click)="showSignup()" src="{{item.product_category_image_150x150}}"
+                            alt="">
+                        <img *ngIf="item.product_category_image_150x150 == ''" class="img-fluid" style="cursor:pointer;"
+                        (click)="showSignup()" src="{{default_image}}" alt="">
+                    </span>
+                    <h4 class="flex-grow-1">
+                        <a *ngIf="item.product_category"(click)="showSignup()"
+                            class="text-dark-2">
+                            {{item.product_category}}
+                        </a>
+                    </h4>
+                </div>
+            </div>
+            <!--<div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/populer-category-2.png" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Apparels</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/populer-category-3.png" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Bags/Luggage</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/populer-category-4.png" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Health/Fitness</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/populer-category-5.png" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Office/Stationary</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/populer-category-6.png" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Personal/Lifestyle</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/populer-category-7.png" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Medical</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/stock-clearence-img.jpg" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Stock Clearance</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="populer-col-wrap">
+                    <span class="populer-thumb">
+                        <img src="assets/images/populer-category-9.png" alt="" class="img-fluid">
+                    </span>
+                    <h4 class="flex-grow-1">Electronics</h4>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+<div class="sec-padding testimonial-customer">
+<div class="container">
+    <div class="sec-heading-wrap text-center">
+        <h2 class="sec-title mb-5">Testimonials</h2>
+    </div>
+    <div class="row">
+        <app-testimonial></app-testimonial>
+    </div>
+    <div class="sec-heading-wrap text-center">
+        <h2 class="sec-title-blog">Articles</h2>
+    </div>
+    <div class="row">
+        <app-blog [isHome]="true" ></app-blog>
+    </div>
+</div>
+</div>
+<!-- testimonial customer -->
+<!--<div class="sec-padding testimonial-customer">
+    <div class="container">
+        <div class="sec-heading-wrap text-center">
+            <h2 class="sec-title">Testimonials - Sellers</h2>
+        </div>
+        <div class="position-relative">
+            <ngx-slick-carousel class="carousel customer-feeback" #slickModal="slick-carousel" [config]="customerSlide">
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-1.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-2.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-3.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-4.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-5.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div ngxSlickItem class="slide">
+                    <div class="slide-col-2">
+                        <div class="client-img">
+                            <img src="assets/images/user-img-6.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="feedback-content">
+                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                            <h4>David Villa</h4>
+                            <span>Student</span>
+                        </div>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </div>
+</div>-->
+
+<!-- testimonial customer -->
+<!-- <div class="sec-padding partner-sec bg-white position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-md-5 mb-lg-0">
+                <div class="col-img text-right">
+                    <img src="assets/images/partner-img.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="sec-heading-wrap">
+                    <h2 class="sec-title">Sell On EK Matra !</h2>
+                    <h4>If You are a Manufacturer or a Brand Owner and want to sell your Products
+                        to Nation wide powerful network of Institutional Resellers</h4>
+                    <h4 class="my-4">
+                        Simply share your<br>
+                        mobile number<br>
+                        below to get started!
+                    </h4>
+                    <div class="">
+                       
+
+                    </div>
+                    
+
+                    <form [formGroup]="contactForm2" (ngSubmit)="handleSubmit2()" novalidate>
+                        <div class="form-group-wrap mt-4">
+                            <div class="form-group request-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Contact No</mat-label>
+                                    <input matInput type='number' formControlName='phone'>
+                                </mat-form-field>
+                                <button type="submit" class="btn btn-red" [disabled]="loader || !contactForm2.valid">
+                                    <mat-spinner *ngIf="loader" [diameter]="20"></mat-spinner>
+                                    <span *ngIf="!loader">Request Call Back</span>
+                                </button>
+                                <div class="error-wrap">
+                                    <mat-error
+                                        *ngIf="contactForm2.get('phone').touched && contactForm2.get('phone').errors?.required">
+                                        Please Enter Contact Number
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="contactForm2.get('phone').touched && contactForm2.get('phone').errors?.pattern">
+                                        Please Enter 10 digit Contact Number
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form> -->
+                    <!-- <mat-accordion class="request-quote">
+                        <mat-expansion-panel class="mt-3" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Request a Quote
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <form [formGroup]="contactForm1" (ngSubmit)="handleSubmits()" novalidate>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Contact No</mat-label>
+                                    <input matInput type='number' formControlName='phone'>
+                                    <mat-error
+                                        *ngIf="contactForm1.get('phone').touched && contactForm1.get('phone').errors?.required">
+                                        Please enter Contact Number
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="contactForm1.get('phone').touched && contactForm1.get('phone').errors?.pattern">
+                                        Please enter 10 digit Contact Number
+                                    </mat-error>
+                                </mat-form-field>
+                                <button type="submit" class="btn btn-red" [disabled]="loader || !contactForm1.valid">
+                                    <mat-spinner *ngIf="loader" [diameter]="20"></mat-spinner>
+                                    <span *ngIf="!loader">Submit</span>
+                                </button>
+                            </form>
+
+                        </mat-expansion-panel>
+                    </mat-accordion> -->
+                <!-- </div>
+            </div>
+        </div>
+    </div>
+</div> -->
